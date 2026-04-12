@@ -1,0 +1,215 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "Over ons",
+    "calendar": "Agenda",
+    "contact": "Contact",
+    "donateButton": "Doneer"
+  },
+  "home": {
+    "hero": {
+      "preTitle": "Studenten ondersteunen in Ghana sinds 2018",
+      "title": "De volgende generatie zorgverleners sterker maken",
+      "subtitle": "Pharma4Ghana is een Nederlandse stichting die studenten farmacie en gezondheidswetenschappen in Ghana ondersteunt met beurzen, mentorschap en studiematerialen.",
+      "ctaLearnMore": "Meer informatie",
+      "ctaDonate": "Doneer nu"
+    },
+    "mission": {
+      "title": "Onze Missie",
+      "body": "Wij geloven dat elk getalenteerd kind recht heeft op kwalitatief goed onderwijs. Pharma4Ghana overbrugt de kloof tussen ambitie en mogelijkheden voor studenten farmacie en gezondheidszorg in heel Ghana."
+    },
+    "stats": {
+      "scholars": "150+",
+      "scholarsLabel": "Studenten ondersteund",
+      "years": "8",
+      "yearsLabel": "Jaar actief",
+      "partners": "12",
+      "partnersLabel": "Partnerinstellingen"
+    },
+    "impact": {
+      "title": "Hoe wij impact maken",
+      "subtitle": "Drie pijlers die onze aanpak bepalen voor de ondersteuning van Ghanese studenten.",
+      "scholarship": {
+        "title": "Beurzen",
+        "body": "Financiële ondersteuning voor uitstekende studenten farmacie en gezondheidswetenschappen aan Ghanese universiteiten, inclusief collegegeld, boeken en levensonderhoud."
+      },
+      "mentorship": {
+        "title": "Mentorschap",
+        "body": "Ghanese studenten in contact brengen met ervaren apothekers en zorgprofessionals in Nederland en Ghana voor carrièrebegeleiding."
+      },
+      "resources": {
+        "title": "Studiematerialen",
+        "body": "Donatie van leerboeken, laboratoriumapparatuur en digitale leermiddelen aan farmacologiefaculteiten in heel Ghana."
+      }
+    },
+    "cta": {
+      "title": "Maak vandaag het verschil",
+      "body": "Uw bijdrage stelt de volgende generatie apothekers en zorgverleners in Ghana in staat hun volledige potentieel te bereiken.",
+      "button": "Raak betrokken"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "Over Pharma4Ghana",
+      "subtitle": "Een stichting opgericht op de overtuiging dat onderwijs het krachtigste middel is om levens te veranderen."
+    },
+    "story": {
+      "title": "Ons Verhaal",
+      "para1": "Pharma4Ghana werd in Nederland opgericht met een eenvoudige maar krachtige visie: ervoor zorgen dat financiële belemmeringen geen talentvolle Ghanese studenten tegenhouden in hun streven naar een carrière in farmacie of gezondheidszorg.",
+      "para2": "Wat begon als een bescheiden initiatief om een handvol studenten te sponsoren, is uitgegroeid tot een stichting die het leven van meer dan 150 studenten aan universiteiten in Accra, Kumasi en Cape Coast heeft veranderd. Wij werken nauw samen met Ghanese academische instellingen en de Nederlandse farmaceutische gemeenschap."
+    },
+    "values": {
+      "title": "Onze Waarden",
+      "education": {
+        "title": "Onderwijs Voorop",
+        "body": "Onderwijs is de hoeksteen van ontwikkeling. Elk initiatief dat wij ondernemen is gericht op het verbeteren van de onderwijsresultaten voor Ghanese studenten."
+      },
+      "community": {
+        "title": "Gemeenschapsgedreven",
+        "body": "Wij werken nauw samen met lokale universiteiten, gemeenschappen en gezinnen in Ghana om ervoor te zorgen dat onze steun duurzame en betekenisvolle verandering teweegbrengt."
+      },
+      "integrity": {
+        "title": "Integriteit",
+        "body": "Wij werken volledig transparant. Elke donatie wordt gevolgd en gerapporteerd, zodat middelen worden gebruikt waar ze het hardst nodig zijn."
+      },
+      "excellence": {
+        "title": "Excellentie",
+        "body": "Wij ondersteunen studenten die academische excellentie tonen en een inzet voor de dienstverlening aan hun gemeenschappen en de gezondheid van Ghana."
+      }
+    },
+    "team": {
+      "title": "Ons Team",
+      "subtitle": "Toegewijde mensen uit Nederland en Ghana, verenigd door een passie voor onderwijs.",
+      "members": {
+        "barbara": {
+          "name": "Barbara Maat",
+          "role": "Lid"
+        },
+        "hans": {
+          "name": "Hans Ros",
+          "role": "Lid"
+        },
+        "trea": {
+          "name": "Trea Keizer",
+          "role": "Lid"
+        },
+        "bjorn": {
+          "name": "Bjorn Brassé",
+          "role": "Lid"
+        }
+      }
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Neem contact op",
+      "subtitle": "Heeft u vragen of wilt u betrokken raken? Wij horen graag van u."
+    },
+    "form": {
+      "title": "Stuur ons een bericht",
+      "name": "Volledige naam",
+      "namePlaceholder": "Uw volledige naam",
+      "email": "E-mailadres",
+      "emailPlaceholder": "u@voorbeeld.nl",
+      "subject": "Onderwerp",
+      "subjectPlaceholder": "Hoe kunnen wij helpen?",
+      "message": "Bericht",
+      "messagePlaceholder": "Schrijf uw bericht hier...",
+      "submit": "Bericht versturen",
+      "success": "Dank u! Uw bericht is verzonden. Wij nemen binnen 5 werkdagen contact met u op."
+    },
+    "info": {
+      "title": "Contactgegevens",
+      "emailLabel": "E-mail",
+      "emailAddress": "info@pharma4ghana.nl",
+      "phoneLabel": "Telefoon",
+      "phoneNumber": "+31 20 123 4567",
+      "addressLabel": "Adres",
+      "address": "Amsterdam, Nederland",
+      "followUs": "Volg ons"
+    }
+  },
+  "donate": {
+    "meta": {
+      "title": "Doneer"
+    },
+    "hero": {
+      "title": "Steun een student in Ghana",
+      "subtitle": "Elke donatie helpt studiebeurzen, leermiddelen en mentorschap te financieren voor de volgende generatie apothekers en zorgprofessionals."
+    },
+    "status": {
+      "successTitle": "Dank voor uw steun",
+      "successBody": "Uw checkout is succesvol afgerond. Stripe bevestigt de betalingsgegevens rechtstreeks op de bon.",
+      "cancelTitle": "Checkout is geannuleerd",
+      "cancelBody": "Er is geen betaling uitgevoerd. U kunt het bedrag aanpassen en opnieuw proberen wanneer u wilt."
+    },
+    "panel": {
+      "title": "Kies uw donatie",
+      "subtitle": "Veilige checkout via Stripe. Kaarten en lokale betaalmethoden zoals iDEAL hangen af van wat op het Stripe-account is ingeschakeld.",
+      "secureTitle": "Veilige betaling",
+      "secureBody": "Stripe host de checkout-pagina, verwerkt de betaalgegevens veilig en verstuurt de uiteindelijke bevestiging.",
+      "notConfigured": "Stripe is nog niet geconfigureerd. Voeg STRIPE_SECRET_KEY toe om live checkout op deze pagina te activeren."
+    },
+    "form": {
+      "presetLabel": "Kies een bedrag",
+      "customLabel": "Of voer een eigen bedrag in",
+      "customPlaceholder": "Ander bedrag in EUR",
+      "submit": "Ga verder naar veilige checkout",
+      "processing": "Doorsturen naar Stripe...",
+      "validation": "Voer een bedrag in tussen €5 en €10.000.",
+      "genericError": "De checkout kon niet worden gestart. Probeer het opnieuw."
+    },
+    "impact": {
+      "title": "Wat uw gift mogelijk maakt",
+      "items": {
+        "scholarships": {
+          "title": "Studiebeurzen",
+          "body": "Helpt collegegeld te betalen voor getalenteerde studenten farmacie en gezondheidswetenschappen in Ghana."
+        },
+        "materials": {
+          "title": "Leermiddelen",
+          "body": "Financiert studieboeken, labmiddelen en digitale leermaterialen die studenten direct kunnen gebruiken."
+        },
+        "mentorship": {
+          "title": "Mentorschap",
+          "body": "Ondersteunt praktische begeleiding door apothekers en zorgprofessionals in Ghana en Nederland."
+        }
+      }
+    },
+    "trust": {
+      "title": "Waarom Stripe in Next.js",
+      "body": "Stripe is hier de pragmatische keuze: sterke TypeScript-ondersteuning, een eenvoudige server-side Checkout-flow en een goed bewezen integratiemodel voor Next.js route handlers.",
+      "methods": "Als u later een meer Nederland-gerichte betaalstack wilt, blijft Mollie een goede optie. Voor deze app is Stripe de snellere en minder risicovolle integratie."
+    }
+  },
+  "calendar": {
+    "hero": {
+      "title": "Evenementen & Activiteiten",
+      "subtitle": "Blijf op de hoogte van onze aankomende evenementen, beurzentermijnen en gemeenschapsactiviteiten."
+    },
+    "upcoming": "Aankomende evenementen",
+    "past": "Afgelopen evenementen",
+    "noUpcoming": "Momenteel zijn er geen aankomende evenementen gepland. Kom binnenkort terug.",
+    "noPast": "Geen afgelopen evenementen om weer te geven.",
+    "location": "Locatie",
+    "types": {
+      "scholarship": "Beurs",
+      "event": "Evenement",
+      "workshop": "Workshop",
+      "deadline": "Deadline"
+    }
+  },
+  "footer": {
+    "tagline": "De volgende generatie apothekers en zorgverleners in Ghana sterker maken.",
+    "quickLinks": "Snelle links",
+    "contactUs": "Contact",
+    "emailLabel": "E-mail",
+    "emailAddress": "info@pharma4ghana.nl",
+    "phoneLabel": "Telefoon",
+    "phoneNumber": "+31 20 123 4567",
+    "address": "Amsterdam, Nederland",
+    "followUs": "Volg ons",
+    "copyright": "© 2026 Pharma4Ghana. Alle rechten voorbehouden.",
+    "nonprofit": "Geregistreerde Non-Profit Stichting — KvK 12345678"
+  }
+}

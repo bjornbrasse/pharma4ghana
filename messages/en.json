@@ -1,0 +1,215 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "calendar": "Calendar",
+    "contact": "Contact",
+    "donateButton": "Donate"
+  },
+  "home": {
+    "hero": {
+      "preTitle": "Supporting Ghanaian Students Since 2018",
+      "title": "Empowering the Next Generation of Healthcare Leaders",
+      "subtitle": "Pharma4Ghana is a Dutch foundation dedicated to supporting pharmacy and health science students across Ghana with scholarships, mentorship, and resources.",
+      "ctaLearnMore": "Learn More",
+      "ctaDonate": "Donate Now"
+    },
+    "mission": {
+      "title": "Our Mission",
+      "body": "We believe every talented student deserves access to quality education. Pharma4Ghana bridges the gap between ambition and opportunity for students in pharmaceutical sciences and healthcare across Ghana."
+    },
+    "stats": {
+      "scholars": "150+",
+      "scholarsLabel": "Scholars Supported",
+      "years": "8",
+      "yearsLabel": "Years Active",
+      "partners": "12",
+      "partnersLabel": "Partner Institutions"
+    },
+    "impact": {
+      "title": "How We Make an Impact",
+      "subtitle": "Three pillars that define our approach to supporting Ghanaian students.",
+      "scholarship": {
+        "title": "Scholarships",
+        "body": "Providing financial support to outstanding pharmacy and health science students at Ghanaian universities, covering tuition, books, and living expenses."
+      },
+      "mentorship": {
+        "title": "Mentorship",
+        "body": "Connecting Ghanaian students with experienced pharmacists and healthcare professionals in the Netherlands and Ghana for career guidance."
+      },
+      "resources": {
+        "title": "Resources",
+        "body": "Donating textbooks, laboratory equipment, and digital learning tools to pharmacy faculties across Ghana."
+      }
+    },
+    "cta": {
+      "title": "Make a Difference Today",
+      "body": "Your contribution enables the next generation of pharmacists and healthcare workers in Ghana to reach their full potential.",
+      "button": "Get Involved"
+    }
+  },
+  "about": {
+    "hero": {
+      "title": "About Pharma4Ghana",
+      "subtitle": "A foundation built on the belief that education is the most powerful tool for transforming lives."
+    },
+    "story": {
+      "title": "Our Story",
+      "para1": "Pharma4Ghana was founded in the Netherlands with a simple yet powerful vision: to ensure that financial barriers do not prevent talented Ghanaian students from pursuing careers in pharmacy and healthcare.",
+      "para2": "What began as a small initiative to sponsor a handful of students has grown into a foundation that has touched the lives of over 150 students across universities in Accra, Kumasi, and Cape Coast. We work closely with Ghanaian academic institutions and the Dutch pharmaceutical community to create lasting educational opportunities."
+    },
+    "values": {
+      "title": "Our Values",
+      "education": {
+        "title": "Education First",
+        "body": "Education is the cornerstone of development. Every initiative we undertake is guided by improving educational outcomes for Ghanaian students."
+      },
+      "community": {
+        "title": "Community Driven",
+        "body": "We work closely with local universities, communities, and families in Ghana to ensure our support creates lasting and meaningful change."
+      },
+      "integrity": {
+        "title": "Integrity",
+        "body": "We operate with full transparency. Every donation is tracked and reported, ensuring funds are used where they matter most."
+      },
+      "excellence": {
+        "title": "Excellence",
+        "body": "We support students who demonstrate academic excellence and a commitment to serving their communities and the health of Ghana."
+      }
+    },
+    "team": {
+      "title": "Our Team",
+      "subtitle": "Dedicated individuals from both the Netherlands and Ghana, united by a passion for education.",
+      "members": {
+        "barbara": {
+          "name": "Barbara Maat",
+          "role": "Member"
+        },
+        "hans": {
+          "name": "Hans Ros",
+          "role": "Member"
+        },
+        "trea": {
+          "name": "Trea Keizer",
+          "role": "Member"
+        },
+        "bjorn": {
+          "name": "Bjorn Brassé",
+          "role": "Member"
+        }
+      }
+    }
+  },
+  "contact": {
+    "hero": {
+      "title": "Get in Touch",
+      "subtitle": "Have questions or want to get involved? We would love to hear from you."
+    },
+    "form": {
+      "title": "Send us a Message",
+      "name": "Full Name",
+      "namePlaceholder": "Your full name",
+      "email": "Email Address",
+      "emailPlaceholder": "you@example.com",
+      "subject": "Subject",
+      "subjectPlaceholder": "How can we help?",
+      "message": "Message",
+      "messagePlaceholder": "Write your message here...",
+      "submit": "Send Message",
+      "success": "Thank you! Your message has been sent. We will get back to you within 5 working days."
+    },
+    "info": {
+      "title": "Contact Information",
+      "emailLabel": "Email",
+      "emailAddress": "info@pharma4ghana.nl",
+      "phoneLabel": "Phone",
+      "phoneNumber": "+31 20 123 4567",
+      "addressLabel": "Address",
+      "address": "Amsterdam, The Netherlands",
+      "followUs": "Follow Us"
+    }
+  },
+  "donate": {
+    "meta": {
+      "title": "Donate"
+    },
+    "hero": {
+      "title": "Support a Student in Ghana",
+      "subtitle": "Every donation helps fund scholarships, learning materials, and mentorship for future pharmacists and healthcare professionals."
+    },
+    "status": {
+      "successTitle": "Thank you for your support",
+      "successBody": "Your checkout completed successfully. Stripe will confirm the payment details directly on the receipt.",
+      "cancelTitle": "Checkout was canceled",
+      "cancelBody": "No payment was made. You can review the amount and try again whenever you are ready."
+    },
+    "panel": {
+      "title": "Choose your donation",
+      "subtitle": "Secure checkout powered by Stripe. Card and local payment methods such as iDEAL depend on what is enabled on the Stripe account.",
+      "secureTitle": "Secure payment",
+      "secureBody": "Stripe hosts the checkout page, handles payment details securely, and sends you the final confirmation.",
+      "notConfigured": "Stripe is not configured yet. Add STRIPE_SECRET_KEY to enable live checkout from this page."
+    },
+    "form": {
+      "presetLabel": "Select an amount",
+      "customLabel": "Or enter a custom amount",
+      "customPlaceholder": "Other amount in EUR",
+      "submit": "Continue to secure checkout",
+      "processing": "Redirecting to Stripe...",
+      "validation": "Enter an amount between €5 and €10,000.",
+      "genericError": "We couldn't start the checkout. Please try again."
+    },
+    "impact": {
+      "title": "What your gift supports",
+      "items": {
+        "scholarships": {
+          "title": "Scholarships",
+          "body": "Helps cover tuition costs for talented pharmacy and health science students in Ghana."
+        },
+        "materials": {
+          "title": "Study materials",
+          "body": "Funds textbooks, lab tools, and digital learning resources that students can actually use."
+        },
+        "mentorship": {
+          "title": "Mentorship",
+          "body": "Supports practical guidance from pharmacists and healthcare professionals in Ghana and the Netherlands."
+        }
+      }
+    },
+    "trust": {
+      "title": "Why Stripe in Next.js",
+      "body": "Stripe is the cleaner choice here: strong TypeScript support, a simple server-side Checkout flow, and a well-tested integration model for Next.js route handlers.",
+      "methods": "If you later want a more Netherlands-first payment stack, Mollie is still a valid option. For this app, Stripe is the faster and lower-risk integration."
+    }
+  },
+  "calendar": {
+    "hero": {
+      "title": "Events & Activities",
+      "subtitle": "Stay up to date with our upcoming events, scholarship deadlines, and community activities."
+    },
+    "upcoming": "Upcoming Events",
+    "past": "Past Events",
+    "noUpcoming": "No upcoming events scheduled at this time. Check back soon.",
+    "noPast": "No past events to show.",
+    "location": "Location",
+    "types": {
+      "scholarship": "Scholarship",
+      "event": "Event",
+      "workshop": "Workshop",
+      "deadline": "Deadline"
+    }
+  },
+  "footer": {
+    "tagline": "Empowering the next generation of pharmacists and healthcare professionals in Ghana.",
+    "quickLinks": "Quick Links",
+    "contactUs": "Contact Us",
+    "emailLabel": "Email",
+    "emailAddress": "info@pharma4ghana.nl",
+    "phoneLabel": "Phone",
+    "phoneNumber": "+31 20 123 4567",
+    "address": "Amsterdam, The Netherlands",
+    "followUs": "Follow Us",
+    "copyright": "© 2026 Pharma4Ghana. All rights reserved.",
+    "nonprofit": "Registered Non-Profit Foundation — KvK 12345678"
+  }
+}
