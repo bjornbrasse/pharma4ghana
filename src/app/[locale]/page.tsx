@@ -7,8 +7,7 @@ export async function generateMetadata({
 }: {
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
-  const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "home.hero" });
+  await params;
   return { title: "Pharma4Ghana" };
 }
 
@@ -21,7 +20,6 @@ export default async function HomePage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "home" });
-  const nav = await getTranslations({ locale, namespace: "nav" });
 
   return (
     <>
@@ -36,7 +34,14 @@ export default async function HomePage({
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="max-w-2xl">
-            <p className="text-ghana-gold text-sm font-semibold uppercase tracking-widest mb-4">
+            <div className="-mt-4 mb-12">
+              <span className="text-5xl font-extrabold tracking-tight">
+                <span className="text-stone-800/90">Pharma</span>
+                <span className="text-ghana-gold">4</span>
+                <span className="text-stone-800/90">Ghana</span>
+              </span>
+            </div>
+            <p className="inline-flex items-center gap-2 text-ghana-gold text-sm font-semibold uppercase tracking-widest mb-4">
               {t("hero.preTitle")}
             </p>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
@@ -87,7 +92,7 @@ export default async function HomePage({
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-8 h-0.5 bg-ghana-gold" />
+            <div className="w-8 h-0.5 bg-ghana-red" />
             <span className="text-ghana-green text-sm font-semibold uppercase tracking-wider">
               {t("mission.title")}
             </span>
@@ -106,7 +111,7 @@ export default async function HomePage({
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               {t("impact.title")}
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto">{t("impact.subtitle")}</p>
+            <p className="text-ghana-red max-w-xl mx-auto">{t("impact.subtitle")}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
