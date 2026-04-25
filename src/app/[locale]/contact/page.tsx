@@ -75,7 +75,7 @@ export default async function ContactPage({
                     <div>
                       <p className="font-medium text-gray-700">{t("info.emailLabel")}</p>
                       <a
-                        href="mailto:info@pharma4ghana.nl"
+                        href="mailto:contact@pharma4ghana.nl"
                         className="text-ghana-green hover:underline"
                       >
                         {t("info.emailAddress")}
