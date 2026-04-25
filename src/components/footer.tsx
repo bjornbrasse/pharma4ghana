@@ -107,7 +107,7 @@ export default async function Footer({ locale }: FooterProps) {
                   />
                 </svg>
                 <a
-                  href="mailto:contact@pharma4ghana.nl"
+                  href="mailto:contact@pharma4ghana.com"
                   className="hover:text-ghana-gold transition-colors"
                 >
                   {t("emailAddress")}
