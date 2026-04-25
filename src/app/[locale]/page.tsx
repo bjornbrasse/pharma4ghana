@@ -35,7 +35,7 @@ export default async function HomePage({
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="max-w-2xl">
             <div className="-mt-4 mb-12">
-              <span className="text-2xl md:text-5xl font-extrabold tracking-tight">
+              <span className="text-3xl md:text-5xl font-extrabold tracking-tight">
                 <span className="text-stone-800/90">Pharma</span>
                 <span className="text-ghana-gold">4</span>
                 <span className="text-stone-800/90">Ghana</span>
