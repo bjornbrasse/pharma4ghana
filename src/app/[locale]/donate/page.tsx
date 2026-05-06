@@ -32,7 +32,7 @@ export default async function DonatePage({
       <section className="bg-ghana-green py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-ghana-gold text-sm font-semibold uppercase tracking-[0.2em] mb-4">
-            Stripe Checkout
+            {t("hero.header")}
           </p>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
             {t("hero.title")}
@@ -45,13 +45,6 @@ export default async function DonatePage({
 
       <section className="bg-gray-50 px-4 py-16 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-6xl space-y-8">
-          {status === "success" ? (
-            <div className="rounded-2xl border border-ghana-green/20 bg-ghana-green/5 px-6 py-5 text-ghana-green">
-              <p className="text-lg font-bold mb-1">{t("status.successTitle")}</p>
-              <p className="text-sm leading-relaxed">{t("status.successBody")}</p>
-            </div>
-          ) : null}
-
           {status === "cancel" ? (
             <div className="rounded-2xl border border-yellow-300 bg-yellow-50 px-6 py-5 text-yellow-900">
               <p className="text-lg font-bold mb-1">{t("status.cancelTitle")}</p>
@@ -60,7 +53,7 @@ export default async function DonatePage({
           ) : null}
 
           <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-            <div className="rounded-[2rem] border border-gray-100 bg-white p-8 shadow-sm sm:p-10">
+            <div className="rounded-4xl border border-gray-100 bg-white p-8 shadow-sm sm:p-10">
               <div className="mb-8">
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                   {t("panel.title")}
@@ -72,7 +65,7 @@ export default async function DonatePage({
             </div>
 
             <div className="space-y-6">
-              <div className="rounded-[2rem] bg-white p-8 shadow-sm border border-gray-100">
+              <div className="rounded-4xl bg-white p-8 shadow-sm border border-gray-100">
                 <h2 className="text-2xl font-bold text-gray-900 mb-5">{t("impact.title")}</h2>
                 <div className="space-y-4">
                   {([
@@ -92,11 +85,11 @@ export default async function DonatePage({
                 </div>
               </div>
 
-              <div className="rounded-[2rem] bg-ghana-gold p-8 text-gray-900 shadow-sm">
+              {/* <div className="rounded-[2rem] bg-ghana-gold p-8 text-gray-900 shadow-sm">
                 <h2 className="text-2xl font-bold mb-4">{t("trust.title")}</h2>
                 <p className="text-sm leading-relaxed mb-3">{t("trust.body")}</p>
                 <p className="text-sm leading-relaxed text-gray-700">{t("trust.methods")}</p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

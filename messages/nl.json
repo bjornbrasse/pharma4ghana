@@ -133,7 +133,11 @@
     "meta": {
       "title": "Doneer"
     },
+    "successMeta": {
+      "title": "Bedankt"
+    },
     "hero": {
+      "header": "Maak vandaag het verschil",
       "title": "Steun een student in Ghana",
       "subtitle": "Elke donatie helpt studiebeurzen, leermiddelen en mentorschap te financieren voor de volgende generatie apothekers en zorgprofessionals."
     },
@@ -174,6 +178,21 @@
           "title": "Mentorschap",
           "body": "Ondersteunt praktische begeleiding door apothekers en zorgprofessionals in Ghana en Nederland."
         }
+      }
+    },
+    "successPage": {
+      "eyebrow": "Donatie ontvangen",
+      "title": "Dank u voor uw bijdrage",
+      "subtitle": "Uw donatie helpt Pharma4Ghana direct te investeren in de volgende generatie apothekers en zorgprofessionals in Ghana.",
+      "messageTitle": "Wat er nu gebeurt",
+      "messageBody": "Bijdragen zoals die van u worden ingezet voor studiebeurzen, praktische leermiddelen en mentorschap dat studenten helpt hun opleiding met vertrouwen af te ronden.",
+      "impactTitle": "Uw donatie maakt dit mede mogelijk",
+      "receiptLabel": "Bewijs voor belastingaftrek",
+      "receiptUnavailable": "Het bewijs is tijdelijk niet beschikbaar. Neem contact met ons op en vermeld uw betaalbevestiging.",
+      "actions": {
+        "home": "Terug naar home",
+        "donate": "Nog een donatie doen",
+        "receipt": "Download bewijs"
       }
     },
     "trust": {

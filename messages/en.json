@@ -133,7 +133,11 @@
     "meta": {
       "title": "Donate"
     },
+    "successMeta": {
+      "title": "Thank You"
+    },
     "hero": {
+      "header": "Make a Difference Today",
       "title": "Support a Student in Ghana",
       "subtitle": "Every donation helps fund scholarships, learning materials, and mentorship for future pharmacists and healthcare professionals."
     },
@@ -174,6 +178,21 @@
           "title": "Mentorship",
           "body": "Supports practical guidance from pharmacists and healthcare professionals in Ghana and the Netherlands."
         }
+      }
+    },
+    "successPage": {
+      "eyebrow": "Donation received",
+      "title": "Thank you for your contribution",
+      "subtitle": "Your donation helps Pharma4Ghana invest directly in the next generation of pharmacists and healthcare professionals in Ghana.",
+      "messageTitle": "What happens next",
+      "messageBody": "We use contributions like yours to support scholarships, practical study materials, and mentorship that helps students complete their education with confidence.",
+      "impactTitle": "Your donation helps make this possible",
+      "receiptLabel": "Receipt for tax deduction",
+      "receiptUnavailable": "Receipt is temporarily unavailable. Please contact us and include your payment confirmation.",
+      "actions": {
+        "home": "Back to home",
+        "donate": "Make another donation",
+        "receipt": "Download receipt"
       }
     },
     "trust": {

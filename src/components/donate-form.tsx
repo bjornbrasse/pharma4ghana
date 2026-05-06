@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useTransition, type FormEvent } from "react";
+import { type SubmitEventHandler, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
 
-const PRESET_AMOUNTS = [10, 25, 50, 100] as const;
+const PRESET_AMOUNTS = [5, 10, 20, 30, 50] as const;
 
 interface DonateFormProps {
   locale: string;
@@ -13,7 +13,7 @@ interface DonateFormProps {
 export default function DonateForm({ locale, enabled }: DonateFormProps) {
   const t = useTranslations("donate.form");
   const panel = useTranslations("donate.panel");
-  const [selectedAmount, setSelectedAmount] = useState<number>(25);
+  const [selectedAmount, setSelectedAmount] = useState<number>(20);
   const [customAmount, setCustomAmount] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -26,7 +26,7 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
     return selectedAmount;
   }
 
-  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     setError(null);
 
@@ -67,7 +67,7 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
     <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <p className="text-sm font-semibold text-gray-900 mb-3">{t("presetLabel")}</p>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-5">
           {PRESET_AMOUNTS.map((amount) => {
             const isSelected = !customAmount && selectedAmount === amount;
 
@@ -137,7 +137,7 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
       <button
         type="submit"
         disabled={!enabled || isPending}
-        className="inline-flex w-full items-center justify-center rounded-xl bg-ghana-green px-6 py-4 text-base font-bold text-white transition-colors hover:bg-ghana-green-dark disabled:cursor-not-allowed disabled:bg-gray-400"
+        className="inline-flex w-full items-center justify-center rounded-xl bg-ghana-gold px-6 py-4 text-base font-bold text-ghana-green transition-colors hover:bg-ghana-gold-dark cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-400"
       >
         {isPending ? t("processing") : t("submit")}
       </button>
