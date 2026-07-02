@@ -11,13 +11,17 @@
     "hero": {
       "preTitle": "Studenten ondersteunen in Ghana sinds 2025",
       "title": "De volgende generatie zorgverleners sterker maken",
-      "subtitle": "Pharma4Ghana is een Nederlandse stichting die studenten farmacie en gezondheidswetenschappen in Ghana ondersteunt met beurzen, mentorschap en studiematerialen.",
+      "subtitle": "Stichting Pharma4Ghana heeft als doel het verbeteren van de kwaliteit en toegankelijkheid van praktijkgericht farmacie onderwijs in Ghana, zodat studenten optimaal worden voorbereid op hun rol in de gezondheidszorg.",
       "ctaLearnMore": "Meer informatie",
-      "ctaDonate": "Doneer nu"
+      "ctaDonate": "Doneer"
     },
     "mission": {
       "title": "Onze Missie",
-      "body": "Wij geloven dat elk getalenteerd kind recht heeft op kwalitatief goed onderwijs. Pharma4Ghana overbrugt de kloof tussen ambitie en mogelijkheden voor studenten farmacie en gezondheidszorg in heel Ghana."
+      "body": "Het verbeteren van de kwaliteit en toegankelijkheid van praktijkgericht farmacie onderwijs in Ghana, zodat studenten optimaal worden voorbereid op hun rol in de gezondheidszorg. Niet alleen vakinhoudelijk, maar ook bij het succesvol afronden van hun opleiding, ongeacht hun financiële achtergrond."
+    },
+    "vision": {
+      "title": "Onze Visie",
+      "body": "Een toekomst waarin iedere student met talent en motivatie de mogelijkheden krijgt om een opleiding tot apothekersassistent af te ronden. Door structurele samenwerking tussen de professionals uit Ghana en Nederland bouwt Stichting Pharma4Ghana aan duurzame kennisoverdracht en lokale ondersteuning. Stichting Pharma4Ghana ziet deze internationale samenwerking niet als tijdelijke hulp, maar als een partnerschap gebaseerd op gelijkwaardigheid, respect en lange termijn impact."
     },
     "stats": {
       "scholars": "150+",
@@ -225,9 +229,10 @@
     "contactUs": "Contact",
     "emailLabel": "E-mail",
     "emailAddress": "contact@pharma4ghana.com",
+    "RSIN": "12345678910",
     "phoneLabel": "Telefoon",
     "phoneNumber": "+31 20 123 4567",
-    "address": "Amsterdam, Nederland",
+    "address": "Vught, Nederland",
     "followUs": "Volg ons",
     "copyright": "© 2026 Pharma4Ghana. Alle rechten voorbehouden.",
     "nonprofit": "Geregistreerde Non-Profit Stichting — KvK 12345678"

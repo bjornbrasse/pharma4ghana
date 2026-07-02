@@ -46,7 +46,7 @@ export default async function Footer({ locale }: FooterProps) {
                   </svg>
                 </a>
                 <a
-                  href="https://instagram.com"
+                  href="https://instagram.com/pharma4ghana"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-8 h-8 rounded-full bg-ghana-green-light flex items-center justify-center hover:bg-white hover:text-ghana-green transition-colors"
@@ -152,6 +152,9 @@ export default async function Footer({ locale }: FooterProps) {
                 <span>{t("address")}</span>
               </li>
             </ul>
+            <div className="mt-8">
+              <span className="text-ghana-gold">RSIN: </span> {t("RSIN")}
+            </div>
           </div>
         </div>
 

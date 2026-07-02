@@ -89,7 +89,7 @@ export default async function HomePage({
       </section>
 
       {/* ── Mission ──────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="pt-20 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 mb-4">
             <div className="w-8 h-0.5 bg-ghana-red" />
@@ -100,6 +100,22 @@ export default async function HomePage({
           </div>
           <p className="text-gray-700 text-lg sm:text-xl leading-relaxed">
             {t("mission.body")}
+          </p>
+        </div>
+      </section>
+
+      {/* ── Vision ──────────────────────────────────────────────── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-3xl mx-auto text-center">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <div className="w-8 h-0.5 bg-ghana-red" />
+            <span className="text-ghana-green text-sm font-semibold uppercase tracking-wider">
+              {t("vision.title")}
+            </span>
+            <div className="w-8 h-0.5 bg-ghana-gold" />
+          </div>
+          <p className="text-gray-700 text-lg sm:text-xl leading-relaxed">
+            {t("vision.body")}
           </p>
         </div>
       </section>
