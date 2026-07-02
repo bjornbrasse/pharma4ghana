@@ -2,13 +2,14 @@
   "nav": {
     "home": "Home",
     "about": "Over ons",
+    "ghana": "Over Ghana",
     "calendar": "Agenda",
     "contact": "Contact",
     "donateButton": "Doneer"
   },
   "home": {
     "hero": {
-      "preTitle": "Studenten ondersteunen in Ghana sinds 2018",
+      "preTitle": "Studenten ondersteunen in Ghana sinds 2025",
       "title": "De volgende generatie zorgverleners sterker maken",
       "subtitle": "Pharma4Ghana is een Nederlandse stichting die studenten farmacie en gezondheidswetenschappen in Ghana ondersteunt met beurzen, mentorschap en studiematerialen.",
       "ctaLearnMore": "Meer informatie",
