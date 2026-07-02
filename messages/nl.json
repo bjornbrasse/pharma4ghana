@@ -56,8 +56,8 @@
     },
     "story": {
       "title": "Ons Verhaal",
-      "para1": "Stichting Pharma4Ghana is door ons, 4 Nederlandse apothekers, in 2026 opgericht. Onze drive om iets voor het onderwijs in Ghana betekenen, heeft ons samengebracht. Wat begon als een bescheiden initiatief om een handvol studenten financieel te ondersteunen, is uitgegroeid tot een stichting die fundamentele bijdrage levert aan de onderwijsmogelijkheden voor de farmaceutische zorg medewerkers van de toekomst.",
-      "para2": "Wij werken samen met het Health Access Institute te Accra. Deze onderwijsinstelling leidt apothekersassistenten op. Gezamenlijk versterken we het onderwijs, waarmee studenten worden opgeleid."
+      "para1": "Stichting Pharma4Ghana is door ons, 4 Nederlandse apothekers, in 2026 opgericht. Onze passie voor farmacie en onze drive om iets voor het onderwijs in Ghana te betekenen, hebben ons samengebracht. Wat begon als een bescheiden initiatief om een handvol studenten financieel te ondersteunen, is uitgegroeid tot een stichting die een fundamentele bijdrage levert aan de onderwijsmogelijkheden voor de farmaceutische zorgmedewerkers van de toekomst.",
+      "para2": "Wij werken samen met het Health Access Institute in Accra. Deze onderwijsinstelling leidt apothekersassistenten op. Gezamenlijk versterken wij dat onderwijs."
     },
     "values": {
       "title": "Onze Waarden",
@@ -84,15 +84,15 @@
       "members": {
         "barbara": {
           "name": "Barbara Maat",
-          "role": "Lid"
+          "role": "Voorzitter"
         },
         "hans": {
           "name": "Hans Ros",
-          "role": "Lid"
+          "role": "Secretaris"
         },
         "trea": {
           "name": "Trea Keizer",
-          "role": "Lid"
+          "role": "Penninsmeester"
         },
         "bjorn": {
           "name": "Bjorn Brassé",

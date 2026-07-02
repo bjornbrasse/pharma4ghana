@@ -1,6 +1,7 @@
 import { EarthIcon, HandshakeIcon, KeyRoundIcon, TabletsIcon } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import Image from "next/image.js";
 
 export async function generateMetadata({
   params,
@@ -143,6 +144,13 @@ export default async function AboutPage({
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+              {/* <div key={"123"} className="text-center">
+                <div
+                  className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4`}
+                >
+                 <Image width={24} height={24} src="../../../../public/barbara_photo.jpeg" alt="barbara_photo"/>
+                </div>
+              </div> */}
             {teamMembers.map(({ key, initial, color }) => (
               <div key={key} className="text-center">
                 <div
