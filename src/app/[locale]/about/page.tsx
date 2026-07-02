@@ -1,3 +1,4 @@
+import { EarthIcon } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
@@ -34,17 +35,18 @@ const values = [
     accent: "text-ghana-green bg-ghana-green/10",
   },
   {
-    key: "community" as const,
-    icon: (
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
-        />
-      </svg>
-    ),
+    key: "sustainability" as const,
+    icon: <EarthIcon />,
+    // icon: (
+    //   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    //     <path
+    //       strokeLinecap="round"
+    //       strokeLinejoin="round"
+    //       strokeWidth={2}
+    //       d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+    //     />
+    //   </svg>
+    // ),
     accent: "text-yellow-600 bg-ghana-gold/20",
   },
   {
@@ -92,10 +94,10 @@ export default async function AboutPage({
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section className="bg-ghana-green py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold text-green-100 mb-6">
             {t("hero.title")}
           </h1>
-          <p className="text-green-100 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
+          <p className="text-ghana-gold text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
             {t("hero.subtitle")}
           </p>
         </div>
