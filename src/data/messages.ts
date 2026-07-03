@@ -31,7 +31,7 @@ const messagePosts: MessagePostRecord[] = [
   {
     slug: "growing-our-scholar-network",
     publishedAt: "2026-06-28",
-    image: "/images/members/trea_avatar.jpg",
+    image: `${process.env.SITE_URL}/images/members/accra_avatar.jpg`,
     content: {
       en: {
         title: "Growing Our Scholar Network in Accra",
@@ -60,7 +60,7 @@ const messagePosts: MessagePostRecord[] = [
   {
     slug: "why-practice-based-teaching-matters",
     publishedAt: "2026-05-16",
-    image: "/images/members/barbara_avatar.jpg",
+    image: `${process.env.SITE_URL}/images/members/barbara_avatar.jpg`,
     content: {
       en: {
         title: "Why Practice-Based Teaching Matters",
@@ -89,7 +89,7 @@ const messagePosts: MessagePostRecord[] = [
   {
     slug: "small-donations-real-tools",
     publishedAt: "2026-03-04",
-    image: "/images/members/bjorn_avatar.jpg",
+    image: `${process.env.SITE_URL}/images/members/bjorn_avatar.jpg`,
     content: {
       en: {
         title: "Small Donations, Real Tools for Students",
