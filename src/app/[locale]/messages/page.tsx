@@ -83,7 +83,7 @@ export default async function MessagesPage({
                 <article className="grid gap-0 md:grid-cols-[220px_1fr]">
                   <div className="relative min-h-52 bg-gray-100">
                     <Image
-                      src={post.imagePath}
+                      src={post.image}
                       alt={post.imageAlt}
                       fill
                       className="object-cover"

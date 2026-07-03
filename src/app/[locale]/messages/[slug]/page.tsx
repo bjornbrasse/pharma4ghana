@@ -30,6 +30,7 @@ export async function generateMetadata({
   }
 
   const url = getAbsoluteSiteUrl(`/${appLocale}/messages/${post.slug}`);
+  const imageUrl = getAbsoluteSiteUrl(post.image);
   return {
     title: post.title,
     description: post.synopsis,
@@ -43,7 +44,7 @@ export async function generateMetadata({
       url,
       images: [
         {
-          url: post.image,
+          url: imageUrl,
           alt: post.imageAlt,
         },
       ],
@@ -52,7 +53,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.title,
       description: post.synopsis,
-      images: [post.image],
+      images: [imageUrl],
     },
   };
 }
@@ -99,7 +100,7 @@ export default async function MessagePostPage({
           <div className="overflow-hidden rounded-4xl border border-gray-100 bg-white shadow-sm">
             <div className="relative aspect-video w-full bg-gray-100">
               <Image
-                src={post.imagePath}
+                src={post.image}
                 alt={post.imageAlt}
                 fill
                 className="object-cover"

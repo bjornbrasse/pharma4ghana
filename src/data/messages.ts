@@ -18,20 +18,17 @@ export type LocalizedMessagePost = {
   slug: string;
   publishedAt: string;
   image: string;
-  imagePath: string;
   title: string;
   synopsis: string;
   imageAlt: string;
   body: string[];
 };
 
-import { getAbsoluteSiteUrl } from "@/lib/site-url";
-
 const messagePosts: MessagePostRecord[] = [
   {
     slug: "growing-our-scholar-network",
     publishedAt: "2026-06-28",
-    image: `${process.env.SITE_URL}/images/members/accra_avatar.jpg`,
+    image: "/images/members/trea_avatar.jpg",
     content: {
       en: {
         title: "Growing Our Scholar Network in Accra",
@@ -60,7 +57,7 @@ const messagePosts: MessagePostRecord[] = [
   {
     slug: "why-practice-based-teaching-matters",
     publishedAt: "2026-05-16",
-    image: `${process.env.SITE_URL}/images/members/barbara_avatar.jpg`,
+    image: "/images/members/barbara_avatar.jpg",
     content: {
       en: {
         title: "Why Practice-Based Teaching Matters",
@@ -89,7 +86,7 @@ const messagePosts: MessagePostRecord[] = [
   {
     slug: "small-donations-real-tools",
     publishedAt: "2026-03-04",
-    image: `${process.env.SITE_URL}/images/members/bjorn_avatar.jpg`,
+    image: "/images/members/bjorn_avatar.jpg",
     content: {
       en: {
         title: "Small Donations, Real Tools for Students",
@@ -132,8 +129,7 @@ export function getLocalizedMessagePosts(locale: AppLocale): LocalizedMessagePos
     messagePosts.map((post) => ({
       slug: post.slug,
       publishedAt: post.publishedAt,
-      image: getAbsoluteSiteUrl(post.image),
-      imagePath: post.image,
+      image: post.image,
       ...post.content[locale],
     })),
   );
@@ -152,8 +148,7 @@ export function getLocalizedMessagePost(
   return {
     slug: post.slug,
     publishedAt: post.publishedAt,
-    image: getAbsoluteSiteUrl(post.image),
-    imagePath: post.image,
+    image: post.image,
     ...post.content[locale],
   };
 }
