@@ -1,8 +1,8 @@
 {
   "nav": {
     "home": "Home",
-    "about": "About Us",
     "ghana": "About Ghana",
+    "about": "About Us",
     "messages": "Messages",
     "contact": "Contact",
     "donateButton": "Donate"
