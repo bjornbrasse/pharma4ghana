@@ -31,8 +31,8 @@ export async function submitContactForm(
     return { status: "error" };
   }
 
-  const from = process.env.CONTACT_FORM_FROM ?? "contact@pharma4ghana.com";
-  const to = process.env.CONTACT_FORM_TO ?? "contact@pharma4ghana.com";
+  const from = process.env.CONTACT_FORM_FROM;
+  const to = process.env.CONTACT_FORM_TO;
 
   console.info("[contact-form] Received submission", {
     hasName: Boolean(name),
