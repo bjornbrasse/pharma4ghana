@@ -8,6 +8,7 @@ import {
   type AppLocale,
 } from "@/data/messages";
 import { Link } from "@/i18n/navigation";
+import { getAbsoluteSiteUrl } from "@/lib/site-url";
 
 export async function generateMetadata({
   params,
@@ -16,6 +17,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "messagesPage.meta" });
+  const messagesUrl = getAbsoluteSiteUrl(`/${locale}/messages`);
 
   return {
     title: t("title"),
@@ -24,7 +26,7 @@ export async function generateMetadata({
       title: t("title"),
       description: t("description"),
       type: "website",
-      url: `/${locale}/messages`,
+      url: messagesUrl,
     },
     twitter: {
       card: "summary_large_image",
@@ -81,7 +83,7 @@ export default async function MessagesPage({
                 <article className="grid gap-0 md:grid-cols-[220px_1fr]">
                   <div className="relative min-h-52 bg-gray-100">
                     <Image
-                      src={post.image}
+                      src={post.imagePath}
                       alt={post.imageAlt}
                       fill
                       className="object-cover"

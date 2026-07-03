@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import { getSiteUrl } from "@/lib/site-url";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -26,7 +27,7 @@ export async function generateMetadata({
       locale === "nl"
         ? "Pharma4Ghana ondersteunt studenten farmacie in Ghana met beurzen en mentorschap."
         : "Pharma4Ghana supports pharmacy students in Ghana with scholarships and mentorship.",
-    metadataBase: new URL("https://pharma4ghana.nl"),
+    metadataBase: new URL(getSiteUrl()),
   };
 }
 

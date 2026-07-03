@@ -10,6 +10,7 @@ import {
   type AppLocale,
 } from "@/data/messages";
 import { Link } from "@/i18n/navigation";
+import { getAbsoluteSiteUrl } from "@/lib/site-url";
 
 export function generateStaticParams() {
   return getMessagePostSlugs().map((slug) => ({ slug }));
@@ -28,8 +29,7 @@ export async function generateMetadata({
     return {};
   }
 
-  const url = `/${appLocale}/messages/${post.slug}`;
-
+  const url = getAbsoluteSiteUrl(`/${appLocale}/messages/${post.slug}`);
   return {
     title: post.title,
     description: post.synopsis,
@@ -99,7 +99,7 @@ export default async function MessagePostPage({
           <div className="overflow-hidden rounded-4xl border border-gray-100 bg-white shadow-sm">
             <div className="relative aspect-video w-full bg-gray-100">
               <Image
-                src={post.image}
+                src={post.imagePath}
                 alt={post.imageAlt}
                 fill
                 className="object-cover"

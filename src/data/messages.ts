@@ -18,11 +18,14 @@ export type LocalizedMessagePost = {
   slug: string;
   publishedAt: string;
   image: string;
+  imagePath: string;
   title: string;
   synopsis: string;
   imageAlt: string;
   body: string[];
 };
+
+import { getAbsoluteSiteUrl } from "@/lib/site-url";
 
 const messagePosts: MessagePostRecord[] = [
   {
@@ -129,7 +132,8 @@ export function getLocalizedMessagePosts(locale: AppLocale): LocalizedMessagePos
     messagePosts.map((post) => ({
       slug: post.slug,
       publishedAt: post.publishedAt,
-      image: post.image,
+      image: getAbsoluteSiteUrl(post.image),
+      imagePath: post.image,
       ...post.content[locale],
     })),
   );
@@ -148,7 +152,8 @@ export function getLocalizedMessagePost(
   return {
     slug: post.slug,
     publishedAt: post.publishedAt,
-    image: post.image,
+    image: getAbsoluteSiteUrl(post.image),
+    imagePath: post.image,
     ...post.content[locale],
   };
 }
