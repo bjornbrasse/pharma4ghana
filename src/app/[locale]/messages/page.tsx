@@ -16,8 +16,11 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
+  const appLocale: AppLocale = locale === "nl" ? "nl" : "en";
   const t = await getTranslations({ locale, namespace: "messagesPage.meta" });
   const messagesUrl = getAbsoluteSiteUrl(`/${locale}/messages`);
+  const [featuredPost] = getLocalizedMessagePosts(appLocale);
+  const imageUrl = featuredPost ? getAbsoluteSiteUrl(featuredPost.image) : undefined;
 
   return {
     title: t("title"),
@@ -27,11 +30,20 @@ export async function generateMetadata({
       description: t("description"),
       type: "website",
       url: messagesUrl,
+      images: imageUrl
+        ? [
+            {
+              url: imageUrl,
+              alt: featuredPost.imageAlt,
+            },
+          ]
+        : undefined,
     },
     twitter: {
       card: "summary_large_image",
       title: t("title"),
       description: t("description"),
+      images: imageUrl ? [imageUrl] : undefined,
     },
   };
 }
