@@ -1,19 +1,24 @@
 "use client";
 
+import {
+  submitContactForm,
+  type ContactFormState,
+} from "@/app/[locale]/contact/actions";
 import { useTranslations } from "next-intl";
-import { useState, type FormEvent } from "react";
+import { useActionState } from "react";
+
+const initialState: ContactFormState = {
+  status: "idle",
+};
 
 export default function ContactForm() {
   const t = useTranslations("contact.form");
-  const [submitted, setSubmitted] = useState(false);
+  const [state, formAction, isPending] = useActionState(
+    submitContactForm,
+    initialState,
+  );
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    // TODO: Connect to a form provider (e.g. Formspree, Resend, or your own API)
-    setSubmitted(true);
-  }
-
-  if (submitted) {
+  if (state.status === "success") {
     return (
       <div className="bg-ghana-green/10 border border-ghana-green/30 rounded-xl p-8 text-center">
         <svg
@@ -35,7 +40,7 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-5">
+    <form action={formAction} className="space-y-5">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -89,11 +94,16 @@ export default function ContactForm() {
         />
       </div>
 
+      {state.status === "error" ? (
+        <p className="text-sm text-red-700">{t("error")}</p>
+      ) : null}
+
       <button
         type="submit"
+        disabled={isPending}
         className="w-full sm:w-auto px-8 py-3 rounded-lg bg-ghana-green text-white font-semibold hover:bg-ghana-green-dark transition-colors"
       >
-        {t("submit")}
+        {isPending ? t("sending") : t("submit")}
       </button>
     </form>
   );

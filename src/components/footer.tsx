@@ -69,8 +69,9 @@ export default async function Footer({ locale }: FooterProps) {
               {(
                 [
                   { href: "/", label: nav("home") },
+                  { href: "/ghana", label: nav("ghana") },
                   { href: "/about", label: nav("about") },
-                  { href: "/calendar", label: nav("calendar") },
+                  { href: "/messages", label: nav("messages") },
                   { href: "/contact", label: nav("contact") },
                 ] as { href: string; label: string }[]
               ).map((link) => (

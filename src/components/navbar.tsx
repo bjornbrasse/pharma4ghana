@@ -20,7 +20,7 @@ export default function Navbar({ locale }: NavbarProps) {
     { href: "/", label: t("home") },
     { href: "/ghana", label: t("ghana") },
     { href: "/about", label: t("about") },
-    { href: "/calendar", label: t("calendar") },
+    { href: "/messages", label: t("messages") },
     { href: "/contact", label: t("contact") },
   ];
 
@@ -78,15 +78,22 @@ export default function Navbar({ locale }: NavbarProps) {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="px-4 py-2.5 rounded-md text-base font-medium text-gray-600 hover:text-ghana-green hover:bg-green-50 transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = link.href === "/" ? pathname === "/" : pathname === link.href || pathname.startsWith(link.href + "/");
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`px-4 py-2.5 rounded-md text-base font-medium transition-colors ${
+                    isActive
+                      ? "text-ghana-green bg-green-50 font-semibold"
+                      : "text-gray-600 hover:text-ghana-green hover:bg-green-50"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Right actions */}
@@ -147,16 +154,23 @@ export default function Navbar({ locale }: NavbarProps) {
         {/* Mobile menu */}
         {menuOpen && (
           <div className="md:hidden pb-3 pt-1 border-t border-gray-100 space-y-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                className="block px-4 py-2.5 rounded-md text-base font-medium text-gray-600 hover:text-ghana-green hover:bg-green-50 transition-colors"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = link.href === "/" ? pathname === "/" : pathname === link.href || pathname.startsWith(link.href + "/");
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`block px-4 py-2.5 rounded-md text-base font-medium transition-colors ${
+                    isActive
+                      ? "text-ghana-green bg-green-50 font-semibold"
+                      : "text-gray-600 hover:text-ghana-green hover:bg-green-50"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <Link
               href="/donate"
               onClick={() => setMenuOpen(false)}

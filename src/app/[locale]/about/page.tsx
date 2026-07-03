@@ -14,10 +14,10 @@ export async function generateMetadata({
 }
 
 const teamMembers = [
-  { key: "barbara" as const, initial: "BM", color: "bg-ghana-green" },
-  { key: "hans" as const, initial: "HR", color: "bg-ghana-green-dark" },
-  { key: "trea" as const, initial: "TK", color: "bg-ghana-green-light" },
-  { key: "bjorn" as const, initial: "BB", color: "bg-ghana-green" },
+  { key: "barbara" as const, initial: "BM", color: "bg-ghana-green", image: "/images/members/barbara_avatar.jpg" },
+  { key: "hans" as const, initial: "HR", color: "bg-ghana-green-dark", image: "/images/members/hans_avatar.jpg" },
+  { key: "trea" as const, initial: "TK", color: "bg-ghana-green-light", image: "/images/members/trea_avatar.jpg" },
+  { key: "bjorn" as const, initial: "BB", color: "bg-ghana-green", image: "/images/members/bjorn_avatar.jpg" },
 ];
 
 const values = [
@@ -144,19 +144,17 @@ export default async function AboutPage({
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-              {/* <div key={"123"} className="text-center">
-                <div
-                  className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4`}
-                >
-                 <Image width={24} height={24} src="../../../../public/barbara_photo.jpeg" alt="barbara_photo"/>
-                </div>
-              </div> */}
-            {teamMembers.map(({ key, initial, color }) => (
+            {teamMembers.map(({ key, initial, color, image }) => (
               <div key={key} className="text-center">
-                <div
+                {/* <div
                   className={`w-20 h-20 rounded-full ${color} flex items-center justify-center mx-auto mb-4`}
                 >
                   <span className="text-white font-bold text-lg">{initial}</span>
+                </div> */}
+                <div
+                  className={`size-12 sm:size-24 rounded-full flex items-center justify-center overflow-hidden border-3 border-gray-300 mx-auto shadow mb-4`}
+                >
+                 <Image width={200} height={200} src={image} alt="barbara_photo" className="object-fill"/>
                 </div>
                 <h3 className="font-semibold text-gray-900 text-sm">
                   {t(`team.members.${key}.name`)}

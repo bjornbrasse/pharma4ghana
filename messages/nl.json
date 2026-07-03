@@ -1,9 +1,9 @@
 {
   "nav": {
     "home": "Home",
-    "about": "Over ons",
+    "about": "Wie wij zijn",
     "ghana": "Over Ghana",
-    "calendar": "Agenda",
+    "messages": "Berichten",
     "contact": "Contact",
     "donateButton": "Doneer"
   },
@@ -24,11 +24,11 @@
       "body": "Een toekomst waarin iedere student met talent en motivatie de mogelijkheden krijgt om een opleiding tot apothekersassistent af te ronden. Door structurele samenwerking tussen de professionals uit Ghana en Nederland bouwt Stichting Pharma4Ghana aan duurzame kennisoverdracht en lokale ondersteuning. Stichting Pharma4Ghana ziet deze internationale samenwerking niet als tijdelijke hulp, maar als een partnerschap gebaseerd op gelijkwaardigheid, respect en lange termijn impact."
     },
     "stats": {
-      "scholars": "150+",
+      "scholars": "8",
       "scholarsLabel": "Studenten ondersteund",
-      "years": "8",
-      "yearsLabel": "Jaar actief",
-      "partners": "12",
+      "years": "2025",
+      "yearsLabel": "Actief sinds",
+      "partners": "3",
       "partnersLabel": "Partnerinstellingen"
     },
     "impact": {
@@ -84,7 +84,7 @@
     },
     "team": {
       "title": "Ons Team",
-      "subtitle": "Toegewijde mensen uit Nederland en Ghana, verenigd door een passie voor onderwijs.",
+      "subtitle": "Toegewijde apothekers uit Nederland, verenigd door een passie voor onderwijs.",
       "members": {
         "barbara": {
           "name": "Barbara Maat",
@@ -96,11 +96,11 @@
         },
         "trea": {
           "name": "Trea Keizer",
-          "role": "Penninsmeester"
+          "role": "Penningmeester"
         },
         "bjorn": {
           "name": "Bjorn Brassé",
-          "role": "Lid"
+          "role": "Algmeen Lid"
         }
       }
     }
@@ -120,7 +120,9 @@
       "subjectPlaceholder": "Hoe kunnen wij helpen?",
       "message": "Bericht",
       "messagePlaceholder": "Schrijf uw bericht hier...",
+      "sending": "Verzenden...",
       "submit": "Bericht versturen",
+      "error": "We konden uw bericht nu niet verzenden. Probeer het later opnieuw.",
       "success": "Dank u! Uw bericht is verzonden. Wij nemen binnen 5 werkdagen contact met u op."
     },
     "info": {
@@ -206,21 +208,24 @@
       "methods": "Als u later een meer Nederland-gerichte betaalstack wilt, blijft Mollie een goede optie. Voor deze app is Stripe de snellere en minder risicovolle integratie."
     }
   },
-  "calendar": {
-    "hero": {
-      "title": "Evenementen & Activiteiten",
-      "subtitle": "Blijf op de hoogte van onze aankomende evenementen, beurzentermijnen en gemeenschapsactiviteiten."
+  "messagesPage": {
+    "meta": {
+      "title": "Berichten",
+      "description": "Lees de nieuwste berichten, reflecties en veldupdates van Pharma4Ghana in omgekeerde chronologische volgorde."
     },
-    "upcoming": "Aankomende evenementen",
-    "past": "Afgelopen evenementen",
-    "noUpcoming": "Momenteel zijn er geen aankomende evenementen gepland. Kom binnenkort terug.",
-    "noPast": "Geen afgelopen evenementen om weer te geven.",
-    "location": "Locatie",
-    "types": {
-      "scholarship": "Beurs",
-      "event": "Evenement",
-      "workshop": "Workshop",
-      "deadline": "Deadline"
+    "hero": {
+      "eyebrow": "Verhalen uit de praktijk",
+      "title": "Berichten & Updates",
+      "subtitle": "Korte reflecties uit ons werk, van onze partners en van de studenten die wij in Ghana ondersteunen."
+    },
+    "intro": "Op deze pagina verzamelen we onze nieuwste berichten op één plek. We plaatsen korte updates zodra er iets concreets te delen is uit het onderwijs, de samenwerking of de ondersteuning van studenten.",
+    "publishedOn": "Gepubliceerd op",
+    "readMore": "Lees artikel",
+    "back": "Terug naar alle berichten",
+    "donateBanner": {
+      "title": "Help deze updates om te zetten in blijvende vooruitgang",
+      "body": "Elke donatie helpt ons studenten te ondersteunen met studiebeurzen, studiematerialen en praktisch mentorschap dat dicht bij hun opleiding blijft.",
+      "button": "Doneer nu"
     }
   },
   "footer": {

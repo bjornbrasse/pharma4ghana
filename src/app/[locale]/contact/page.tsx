@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import ContactForm from "@/components/contact-form";
 
+export const runtime = "nodejs";
+
 export async function generateMetadata({
   params,
 }: {
@@ -25,9 +27,9 @@ export default async function ContactPage({
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────── */}
-      <section className="bg-ghana-green py-20 px-4 sm:px-6 lg:px-8">
+      <section className="bg-ghana-green py-10 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+          <h1 className="text-4xl sm:text-5xl font-bold text-ghana-gold mb-6">
             {t("hero.title")}
           </h1>
           <p className="text-green-100 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
