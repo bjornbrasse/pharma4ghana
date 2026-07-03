@@ -1,7 +1,7 @@
 const DEFAULT_SITE_URL = "http://localhost:3000";
 
 export function getSiteUrl() {
-  const configuredUrl = process.env.SITE_URL?.trim();
+  const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 
   if (!configuredUrl) {
     return DEFAULT_SITE_URL;
