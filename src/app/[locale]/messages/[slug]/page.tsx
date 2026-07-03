@@ -30,7 +30,7 @@ export async function generateMetadata({
   }
 
   const url = getAbsoluteSiteUrl(`/${appLocale}/messages/${post.slug}`);
-  const imageUrl = getAbsoluteSiteUrl(post.image);
+  const imageUrl = getAbsoluteSiteUrl(`/images/og/messages/${post.slug}.jpg`);
   return {
     title: post.title,
     description: post.synopsis,
@@ -45,6 +45,9 @@ export async function generateMetadata({
       images: [
         {
           url: imageUrl,
+          width: 1200,
+          height: 630,
+          type: "image/jpeg",
           alt: post.imageAlt,
         },
       ],
