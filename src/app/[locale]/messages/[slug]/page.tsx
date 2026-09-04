@@ -74,6 +74,7 @@ export default async function MessagePostPage({
   const appLocale: AppLocale = locale === "nl" ? "nl" : "en";
   const t = await getTranslations({ locale, namespace: "messagesPage" });
   const post = getLocalizedMessagePost(slug, appLocale);
+  const externalLinks = post?.externalLinks ?? (post?.externalLink ? [post.externalLink] : []);
 
   if (!post) {
     notFound();
@@ -120,17 +121,45 @@ export default async function MessagePostPage({
                 </p>
               ))}
 
-              {post.externalLink ? (
-                <p className="text-base font-medium text-ghana-green sm:text-lg">
-                  <a
-                    href={post.externalLink.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="underline decoration-2 underline-offset-4 hover:text-green-700"
-                  >
-                    {post.externalLink.label}
-                  </a>
-                </p>
+              {post.checklist?.length ? (
+                <ul className="space-y-3 rounded-3xl bg-green-50 px-5 py-5 text-base text-gray-700 sm:text-lg">
+                  {post.checklist.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="font-semibold text-ghana-green">✓</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+
+              {post.supportList?.length ? (
+                <ul className="space-y-2 pl-5 text-base leading-8 text-gray-700 sm:text-lg">
+                  {post.supportList.map((item) => (
+                    <li key={item} className="list-disc">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
+
+              {externalLinks.length ? (
+                <div className="flex flex-wrap gap-3 pt-1">
+                  {externalLinks.map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      target={link.href.startsWith("mailto:") ? undefined : "_blank"}
+                      rel={link.href.startsWith("mailto:") ? undefined : "noreferrer"}
+                      className="inline-flex items-center rounded-full border border-green-200 px-4 py-2 text-sm font-medium text-ghana-green transition-colors hover:border-green-300 hover:bg-green-50"
+                    >
+                      {link.href.startsWith("mailto:") ? <span className="mr-2">📩</span> : null}
+                      {link.href.startsWith("http://") || link.href.startsWith("https://") ? (
+                        <span className="mr-2">🌍</span>
+                      ) : null}
+                      {link.label}
+                    </a>
+                  ))}
+                </div>
               ) : null}
 
               {post.hashtags?.length ? (

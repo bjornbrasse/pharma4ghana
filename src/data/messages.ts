@@ -9,6 +9,12 @@ type MessagePostContent = {
     label: string;
     href: string;
   };
+  externalLinks?: {
+    label: string;
+    href: string;
+  }[];
+  checklist?: string[];
+  supportList?: string[];
   hashtags?: {
     label: string;
     href: string;
@@ -36,6 +42,12 @@ export type LocalizedMessagePost = {
     label: string;
     href: string;
   };
+  externalLinks?: {
+    label: string;
+    href: string;
+  }[];
+  checklist?: string[];
+  supportList?: string[];
   hashtags?: {
     label: string;
     href: string;
@@ -44,10 +56,178 @@ export type LocalizedMessagePost = {
 
 const messagePosts: MessagePostRecord[] = [
   {
+    slug: "educational-grant-first-round",
+    publishedAt: "2026-08-28",
+    image: "/images/posts/graduated_students_2026.jpeg",
+    ogImage: "/images/posts/graduated_students_2026.jpeg",
+    content: {
+      en: {
+        title: "Educational Grant: First Round Completed",
+        synopsis:
+          "Pharma4Ghana completed the first Educational Grant round, enabling ten HAI students in Accra to continue their Pharmacy Technician training with financial support made possible by Brocacef.",
+        imageAlt: "A group of graduating students celebrating outside the Health Access Institute in Accra",
+        body: [
+          "🎓 10 students. 10 opportunities. One step closer to sustainable pharmaceutical care in Ghana.",
+          "Pharma4Ghana is proud to share that the first round of our Educational Grant has been completed successfully. Ten students from the Health Access Institute (HAI) in Accra have been selected for financial support in their Pharmacy Technician training.",
+          "For many students in Ghana, paying tuition is a major challenge. Talent, ambition, and motivation are all there, but financial barriers can still stand in the way of successfully completing their education. That is why Pharma4Ghana supports students who stand out in motivation and academic performance with a contribution toward their training costs.",
+          "This first round of the Educational Grant programme was made possible thanks to the support of Brocacef. Thanks to this valuable contribution, ten motivated students can continue their education and work toward a future in pharmaceutical care. We are deeply grateful to Brocacef for this support.",
+          "Our mission is clear: every motivated student should have the opportunity to complete a pharmaceutical education, regardless of their financial situation. By investing in education, we also invest in the future of pharmaceutical care in Ghana.",
+          "To make this ambition possible, we need your help.",
+          "Interested in sponsoring or collaborating?",
+          "Together, we invest in education, opportunity, and better pharmaceutical care.",
+        ],
+        checklist: [
+          "First selection round completed successfully",
+          "10 students supported",
+          "Made possible by the support of Brocacef",
+          "Strong collaboration with the Health Access Institute in Accra",
+          "Ambition to continue the programme every year",
+        ],
+        supportList: [
+          "support more students",
+          "continue the Educational Grant programme structurally",
+          "contribute to sustainable strengthening of healthcare in Ghana",
+        ],
+        externalLinks: [
+          {
+            label: "Brocacef",
+            href: "https://www.linkedin.com/company/brocacef/",
+          },
+          {
+            label: "contact@pharma4ghana.com",
+            href: "mailto:contact@pharma4ghana.com",
+          },
+        ],
+        hashtags: [
+          {
+            label: "#Pharma4Ghana",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23pharma4ghana&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#GlobalHealth",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23globalhealth&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#Pharmacy",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23pharmacy&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#HealthcareEducation",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23healthcareeducation&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#Ghana",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23ghana&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#Education",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23education&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#CapacityBuilding",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23capacitybuilding&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#Healthcare",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23healthcare&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#Impact",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23impact&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#Brocacef",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23brocacef&origin=HASH_TAG_FROM_FEED",
+          },
+        ],
+      },
+      nl: {
+        title: "Educational Grant: eerste ronde afgerond",
+        synopsis:
+          "Pharma4Ghana heeft de eerste ronde van het Educational Grant-programma afgerond, waarmee tien HAI-studenten in Accra hun opleiding tot Pharmacy Technician kunnen voortzetten dankzij de steun van Brocacef.",
+        imageAlt: "Een groep afstuderende studenten die samen feestviert bij het Health Access Institute in Accra",
+        body: [
+          "🎓 10 studenten. 10 kansen. Eén stap dichter bij duurzame farmaceutische zorg in Ghana.",
+          "Met trots deelt Stichting Pharma4Ghana dat de eerste ronde van onze Educational Grant succesvol is afgerond. Tien studenten van het Health Access Institute (HAI) in Accra zijn geselecteerd voor financiele ondersteuning bij hun opleiding tot Pharmacy Technician.",
+          "Voor veel studenten in Ghana vormt het betalen van collegegeld een grote uitdaging. Talent, ambitie en motivatie zijn volop aanwezig, maar financiele barrières kunnen een succesvolle afronding van de opleiding in de weg staan. Daarom ondersteunt Pharma4Ghana studenten die uitblinken in motivatie en studieprestaties met een bijdrage aan hun opleidingskosten.",
+          "Deze eerste ronde van het Educational Grant-programma is mogelijk gemaakt dankzij de steun van Brocacef. Dankzij deze waardevolle bijdrage kunnen tien gemotiveerde studenten hun opleiding voortzetten en werken aan een toekomst in de farmaceutische zorg. Wij zijn Brocacef hiervoor zeer erkentelijk.",
+          "Onze missie is helder: iedere gemotiveerde student moet de kans krijgen een farmaceutische opleiding af te ronden, ongeacht zijn of haar financiele situatie. Door te investeren in onderwijs investeren we tegelijkertijd in de toekomst van de farmaceutische zorg in Ghana.",
+          "Om deze ambitie waar te maken, hebben wij uw hulp nodig.",
+          "Interesse in sponsoring of een samenwerking?",
+          "Samen investeren we in onderwijs, kansen en betere farmaceutische zorg.",
+        ],
+        checklist: [
+          "Eerste selectieronde succesvol afgerond",
+          "10 studenten ondersteund",
+          "Mogelijk gemaakt door de steun van Brocacef",
+          "Sterke samenwerking met het Health Access Institute in Accra",
+          "Ambitie om het programma jaarlijks voort te zetten",
+        ],
+        supportList: [
+          "meer studenten ondersteunen",
+          "het Educational Grant-programma structureel voortzetten",
+          "bijdragen aan duurzame versterking van de gezondheidszorg in Ghana",
+        ],
+        externalLinks: [
+          {
+            label: "Brocacef",
+            href: "https://www.linkedin.com/company/brocacef/",
+          },
+          {
+            label: "contact@pharma4ghana.com",
+            href: "mailto:contact@pharma4ghana.com",
+          },
+        ],
+        hashtags: [
+          {
+            label: "#Pharma4Ghana",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23pharma4ghana&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#GlobalHealth",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23globalhealth&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#Pharmacy",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23pharmacy&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#HealthcareEducation",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23healthcareeducation&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#Ghana",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23ghana&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#Education",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23education&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#CapacityBuilding",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23capacitybuilding&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#Healthcare",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23healthcare&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#Impact",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23impact&origin=HASH_TAG_FROM_FEED",
+          },
+          {
+            label: "#Brocacef",
+            href: "https://www.linkedin.com/search/results/all/?keywords=%23brocacef&origin=HASH_TAG_FROM_FEED",
+          },
+        ],
+      },
+    },
+  },
+  {
     slug: "marieke-liem-moolenaar-support",
     publishedAt: "2026-09-04",
-    image: "/images/books.jpeg",
-    ogImage: "/images/books.jpeg",
+    image: "/images/posts/books.jpeg",
+    ogImage: "/images/posts/books.jpeg",
     content: {
       en: {
         title: "Thank You to Marieke Liem-Moolenaar",
@@ -181,93 +361,9 @@ const messagePosts: MessagePostRecord[] = [
       },
     },
   },
-  {
-    slug: "growing-our-scholar-network",
-    publishedAt: "2026-06-28",
-    image: "/images/members/trea_avatar.jpg",
-    content: {
-      en: {
-        title: "Growing Our Scholar Network in Accra",
-        synopsis:
-          "A new round of student conversations in Accra made one thing clear: practical support matters most when it stays close to the classroom.",
-        imageAlt: "Pharma4Ghana team member portrait for the Accra scholarship update",
-        body: [
-          "During our latest visit in Accra, we met with students who are balancing demanding coursework, internships, and family responsibilities. Their stories were different, but the pattern was consistent: modest financial barriers still interrupt otherwise promising academic progress.",
-          "The most valuable part of the visit was not a formal presentation. It was the time spent listening to what students actually need right now: transport support for placements, access to dependable study materials, and mentoring that connects theory to practice.",
-          "These conversations are shaping how we prioritise the next round of support. We want every euro to remove a practical obstacle so students can keep moving toward graduation and professional practice with confidence.",
-        ],
-      },
-      nl: {
-        title: "Ons netwerk van studenten in Accra groeit",
-        synopsis:
-          "Een nieuwe ronde gesprekken met studenten in Accra maakte opnieuw duidelijk dat praktische ondersteuning het meeste effect heeft wanneer die dicht bij het onderwijs blijft.",
-        imageAlt: "Portret van een Pharma4Ghana-teamlid bij de update over studiebeurzen in Accra",
-        body: [
-          "Tijdens ons recente bezoek aan Accra spraken we met studenten die hun opleiding combineren met stages en verantwoordelijkheden thuis. Hun verhalen verschilden, maar het patroon was hetzelfde: relatief kleine financiële drempels verstoren nog steeds een studiepad met veel potentie.",
-          "Het waardevolste deel van het bezoek was geen formele presentatie, maar de tijd die we namen om te luisteren naar wat studenten nu echt nodig hebben: ondersteuning voor vervoer naar stageplekken, toegang tot betrouwbaar studiemateriaal en mentorschap dat theorie aan de praktijk koppelt.",
-          "Die gesprekken bepalen hoe wij de volgende ronde ondersteuning vormgeven. We willen dat iedere euro een concrete hindernis wegneemt, zodat studenten met vertrouwen verder kunnen richting afstuderen en hun werk in de zorgpraktijk.",
-        ],
-      },
-    },
-  },
-  {
-    slug: "why-practice-based-teaching-matters",
-    publishedAt: "2026-05-16",
-    image: "/images/members/barbara_avatar.jpg",
-    content: {
-      en: {
-        title: "Why Practice-Based Teaching Matters",
-        synopsis:
-          "The strongest feedback from our Ghanaian partners is also the clearest: students benefit most when lessons mirror the decisions they will face in real care settings.",
-        imageAlt: "Pharma4Ghana team member portrait for the practice-based teaching message",
-        body: [
-          "At Pharma4Ghana, we do not see education support as funding alone. Better outcomes come from combining scholarships with stronger teaching formats that prepare students for the decisions, constraints, and responsibilities of day-to-day pharmacy work.",
-          "That is why we continue to support practice-oriented learning, including case-based discussions, supervised exercises, and direct exchange between professionals in Ghana and the Netherlands. These methods help students connect knowledge to action.",
-          "For us, this is the long-term value of the foundation: not only helping students stay enrolled, but helping them become confident healthcare professionals who are ready to contribute from day one.",
-        ],
-      },
-      nl: {
-        title: "Waarom praktijkgericht onderwijs ertoe doet",
-        synopsis:
-          "De duidelijkste boodschap van onze Ghanese partners is ook de belangrijkste: studenten hebben het meeste aan onderwijs dat lijkt op de keuzes die zij later in de zorgpraktijk moeten maken.",
-        imageAlt: "Portret van een Pharma4Ghana-teamlid bij het bericht over praktijkgericht onderwijs",
-        body: [
-          "Bij Pharma4Ghana zien we onderwijsondersteuning niet als alleen financiering. Betere resultaten ontstaan wanneer studiebeurzen samengaan met sterkere onderwijsvormen die studenten voorbereiden op de beslissingen, beperkingen en verantwoordelijkheden van het dagelijkse werk in de farmacie.",
-          "Daarom blijven wij praktijkgericht leren ondersteunen, bijvoorbeeld via casusbesprekingen, begeleide oefeningen en directe uitwisseling tussen professionals uit Ghana en Nederland. Deze aanpak helpt studenten om kennis om te zetten in handelen.",
-          "Voor ons ligt daarin de duurzame waarde van de stichting: niet alleen studenten helpen om ingeschreven te blijven, maar hen ook laten uitgroeien tot zelfverzekerde zorgprofessionals die vanaf hun eerste werkdag kunnen bijdragen.",
-        ],
-      },
-    },
-  },
-  {
-    slug: "small-donations-real-tools",
-    publishedAt: "2026-03-04",
-    image: "/images/members/bjorn_avatar.jpg",
-    content: {
-      en: {
-        title: "Small Donations, Real Tools for Students",
-        synopsis:
-          "Support becomes tangible very quickly when it pays for the materials students use every week: books, protective equipment, and the basics that keep training on track.",
-        imageAlt: "Pharma4Ghana team member portrait for the study materials update",
-        body: [
-          "Not every barrier is dramatic. Sometimes progress depends on simple, practical items that students should be able to rely on without hesitation. Study guides, lab essentials, and basic equipment make a visible difference because they affect learning immediately.",
-          "This is one reason we communicate so directly about donations. Contributions do not disappear into abstraction. They become the tools, access, and continuity that help a student complete the next assignment, the next placement, and eventually the full programme.",
-          "When donors ask what their support changes, this is the clearest answer we can give: it helps turn talent and motivation into completed training and stronger local healthcare capacity.",
-        ],
-      },
-      nl: {
-        title: "Kleine donaties, echte hulpmiddelen voor studenten",
-        synopsis:
-          "Ondersteuning wordt snel concreet wanneer zij het studiemateriaal betaalt dat studenten elke week gebruiken: boeken, beschermingsmiddelen en andere basisvoorzieningen die hun opleiding op koers houden.",
-        imageAlt: "Portret van een Pharma4Ghana-teamlid bij de update over studiematerialen",
-        body: [
-          "Niet iedere drempel is groot of spectaculair. Soms hangt voortgang af van eenvoudige, praktische middelen waarop studenten zonder twijfel moeten kunnen rekenen. Studiehandleidingen, labbenodigdheden en basisuitrusting maken direct verschil omdat zij het leren meteen beïnvloeden.",
-          "Dat is ook waarom wij zo concreet communiceren over donaties. Bijdragen verdwijnen niet in iets abstracts. Ze worden omgezet in hulpmiddelen, toegang en continuïteit die een student helpen de volgende opdracht, de volgende stage en uiteindelijk de volledige opleiding af te ronden.",
-          "Wanneer donateurs vragen wat hun steun precies verandert, is dit het duidelijkste antwoord dat we kunnen geven: hun bijdrage helpt talent en motivatie om te zetten in een afgeronde opleiding en sterkere lokale zorgcapaciteit.",
-        ],
-      },
-    },
-  },
+  
+
+
 ];
 
 function sortNewestFirst<T extends { publishedAt: string }>(posts: T[]) {
