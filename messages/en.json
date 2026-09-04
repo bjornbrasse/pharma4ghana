@@ -222,6 +222,11 @@
     "publishedOn": "Published",
     "readMore": "Read article",
     "back": "Back to all messages",
+    "related": {
+      "eyebrow": "Continue reading",
+      "title": "Explore other messages",
+      "subtitle": "More updates from our work, our partners, and the students we support in Ghana."
+    },
     "donateBanner": {
       "title": "Help turn these updates into lasting progress",
       "body": "Every donation helps us support students with scholarships, study materials, and practical mentoring that stays close to their education.",

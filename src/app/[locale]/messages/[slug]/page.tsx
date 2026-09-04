@@ -6,11 +6,22 @@ import DonateCtaBanner from "@/components/donate-cta-banner";
 import {
   formatMessageDate,
   getLocalizedMessagePost,
+  getLocalizedMessagePosts,
   getMessagePostSlugs,
   type AppLocale,
 } from "@/data/messages";
 import { Link } from "@/i18n/navigation";
 import { getAbsoluteSiteUrl } from "@/lib/site-url";
+
+function getStableOrderValue(seed: string) {
+  let hash = 0;
+
+  for (const character of seed) {
+    hash = (hash * 31 + character.charCodeAt(0)) >>> 0;
+  }
+
+  return hash;
+}
 
 export function generateStaticParams() {
   return getMessagePostSlugs().map((slug) => ({ slug }));
@@ -75,6 +86,15 @@ export default async function MessagePostPage({
   const t = await getTranslations({ locale, namespace: "messagesPage" });
   const post = getLocalizedMessagePost(slug, appLocale);
   const externalLinks = post?.externalLinks ?? (post?.externalLink ? [post.externalLink] : []);
+  const relatedPosts = getLocalizedMessagePosts(appLocale)
+    .filter((entry) => entry.slug !== slug)
+    .map((entry) => ({
+      entry,
+      orderValue: getStableOrderValue(`${slug}:${locale}:${entry.slug}`),
+    }))
+    .sort((a, b) => a.orderValue - b.orderValue)
+    .slice(0, 3)
+    .map(({ entry }) => entry);
 
   if (!post) {
     notFound();
@@ -188,6 +208,62 @@ export default async function MessagePostPage({
           />
         </div>
       </section>
+
+      {relatedPosts.length ? (
+        <section className="bg-ghana-green px-4 py-16 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-6xl space-y-8">
+            <div className="max-w-3xl">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-ghana-gold">
+                {t("related.eyebrow")}
+              </p>
+              <h2 className="text-3xl font-bold text-white sm:text-4xl">
+                {t("related.title")}
+              </h2>
+              <p className="mt-4 text-lg leading-relaxed text-green-100">
+                {t("related.subtitle")}
+              </p>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-3">
+              {relatedPosts.map((relatedPost) => (
+                <Link
+                  key={relatedPost.slug}
+                  href={`/messages/${relatedPost.slug}`}
+                  locale={locale}
+                  className="group block overflow-hidden rounded-4xl border border-green-800/50 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                >
+                  <article className="h-full">
+                    <div className="relative aspect-4/3 w-full bg-gray-100">
+                      <Image
+                        src={relatedPost.image}
+                        alt={relatedPost.imageAlt}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 1024px) 100vw, 33vw"
+                      />
+                    </div>
+
+                    <div className="flex h-full flex-col p-6">
+                      <p className="mb-3 text-sm font-medium text-ghana-green">
+                        {t("publishedOn")} {formatMessageDate(appLocale, relatedPost.publishedAt)}
+                      </p>
+                      <h3 className="text-2xl font-bold text-gray-900 transition-colors group-hover:text-ghana-green">
+                        {relatedPost.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-7 text-gray-600 sm:text-base">
+                        {relatedPost.synopsis}
+                      </p>
+                      <span className="mt-5 inline-flex items-center text-sm font-semibold text-ghana-green">
+                        {t("readMore")}
+                      </span>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
     </>
   );
 }

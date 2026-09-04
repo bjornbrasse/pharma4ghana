@@ -222,6 +222,11 @@
     "publishedOn": "Gepubliceerd op",
     "readMore": "Lees artikel",
     "back": "Terug naar alle berichten",
+    "related": {
+      "eyebrow": "Lees verder",
+      "title": "Ontdek meer berichten",
+      "subtitle": "Meer updates uit ons werk, van onze partners en van de studenten die wij in Ghana ondersteunen."
+    },
     "donateBanner": {
       "title": "Help deze updates om te zetten in blijvende vooruitgang",
       "body": "Elke donatie helpt ons studenten te ondersteunen met studiebeurzen, studiematerialen en praktisch mentorschap dat dicht bij hun opleiding blijft.",
