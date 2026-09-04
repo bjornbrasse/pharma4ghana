@@ -30,7 +30,9 @@ export async function generateMetadata({
   }
 
   const url = getAbsoluteSiteUrl(`/${appLocale}/messages/${post.slug}`);
-  const imageUrl = getAbsoluteSiteUrl(`/images/og/messages/${post.slug}.jpg`);
+  const imageUrl = getAbsoluteSiteUrl(
+    post.ogImage ?? `/images/og/messages/${post.slug}.jpg`,
+  );
   return {
     title: post.title,
     description: post.synopsis,
@@ -117,6 +119,35 @@ export default async function MessagePostPage({
                   {paragraph}
                 </p>
               ))}
+
+              {post.externalLink ? (
+                <p className="text-base font-medium text-ghana-green sm:text-lg">
+                  <a
+                    href={post.externalLink.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline decoration-2 underline-offset-4 hover:text-green-700"
+                  >
+                    {post.externalLink.label}
+                  </a>
+                </p>
+              ) : null}
+
+              {post.hashtags?.length ? (
+                <div className="flex flex-wrap gap-3 pt-2">
+                  {post.hashtags.map((hashtag) => (
+                    <a
+                      key={hashtag.label}
+                      href={hashtag.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="rounded-full bg-green-50 px-3 py-1 text-sm font-medium text-ghana-green transition-colors hover:bg-green-100"
+                    >
+                      {hashtag.label}
+                    </a>
+                  ))}
+                </div>
+              ) : null}
             </article>
           </div>
 
