@@ -114,7 +114,7 @@ export default async function Footer({ locale }: FooterProps) {
                   {t("emailAddress")}
                 </a>
               </li>
-              <li className="flex gap-2">
+              {/* <li className="flex gap-2">
                 <svg
                   className="w-4 h-4 mt-0.5 shrink-0 text-ghana-gold"
                   fill="none"
@@ -129,7 +129,7 @@ export default async function Footer({ locale }: FooterProps) {
                   />
                 </svg>
                 <span>{t("phoneNumber")}</span>
-              </li>
+              </li> */}
               <li className="flex gap-2">
                 <svg
                   className="w-4 h-4 mt-0.5 shrink-0 text-ghana-gold"

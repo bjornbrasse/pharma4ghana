@@ -85,7 +85,7 @@ export default async function ContactPage({
                     </div>
                   </li>
 
-                  <li className="flex items-start gap-3">
+                  {/* <li className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-lg bg-ghana-green/10 flex items-center justify-center shrink-0 mt-0.5">
                       <svg
                         className="w-4 h-4 text-ghana-green"
@@ -105,7 +105,7 @@ export default async function ContactPage({
                       <p className="font-medium text-gray-700">{t("info.phoneLabel")}</p>
                       <p className="text-gray-600">{t("info.phoneNumber")}</p>
                     </div>
-                  </li>
+                  </li> */}
 
                   <li className="flex items-start gap-3">
                     <div className="w-8 h-8 rounded-lg bg-ghana-green/10 flex items-center justify-center shrink-0 mt-0.5">
@@ -138,7 +138,7 @@ export default async function ContactPage({
               </div>
 
               {/* Ghana office note */}
-              <div className="bg-ghana-green rounded-2xl p-6 text-white">
+              {/* <div className="bg-ghana-green rounded-2xl p-6 text-white">
                 <div className="flex items-center gap-2 mb-3">
                   <svg
                     className="w-5 h-5 text-ghana-gold"
@@ -163,7 +163,7 @@ export default async function ContactPage({
                     Contact via our Netherlands office for programme inquiries.
                   </span>
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

@@ -35,7 +35,7 @@ export const events: CalendarEvent[] = [
       "Join us for our annual fundraising gala in Amsterdam. An evening of networking, cultural exchange, and support for Ghanaian students. Black tie optional.",
     date: "2026-06-07",
     type: "event",
-    location: "Amsterdam, Netherlands",
+    location: "Vught, Netherlands",
   },
   {
     id: "scholarship-deadline-2026",

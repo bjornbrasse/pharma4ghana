@@ -18,8 +18,8 @@ export default function Navbar({ locale }: NavbarProps) {
 
   const navLinks = [
     { href: "/", label: t("home") },
-    { href: "/ghana", label: t("ghana") },
     { href: "/about", label: t("about") },
+    { href: "/ghana", label: t("ghana") },
     { href: "/messages", label: t("messages") },
     { href: "/contact", label: t("contact") },
   ];

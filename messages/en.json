@@ -24,7 +24,7 @@
       "body": "A future in which every student with talent and motivation has the opportunity to complete training as a pharmacy assistant. Through structured collaboration between professionals in Ghana and the Netherlands, Stichting Pharma4Ghana is building sustainable knowledge transfer and local support. Stichting Pharma4Ghana does not view this international collaboration as temporary aid, but as a partnership founded on equality, respect, and long-term impact."
     },
     "stats": {
-      "scholars": "8",
+      "scholars": "10",
       "scholarsLabel": "Scholars Supported",
       "years": "2025",
       "yearsLabel": "Active Since",
@@ -33,7 +33,7 @@
     },
     "impact": {
       "title": "How We Make an Impact",
-      "subtitle": "Three pillars that define our approach to supporting Ghanaian students.",
+      "subtitle": "Three pillars that define our approach to supporting pharmaceutical education, students and teachers in Ghana.",
       "scholarship": {
         "title": "Scholarships",
         "body": "Providing financial support to outstanding pharmacy and health science students at Ghanaian universities, covering tuition, books, and living expenses."
@@ -45,7 +45,11 @@
       "resources": {
         "title": "Resources",
         "body": "Donating textbooks, laboratory equipment, and digital learning tools to pharmacy faculties across Ghana."
-      }
+      },
+       "exchange": {
+          "title": "Students exchange",
+          "body": "A students exchange programme in collaboration with Rijksuniversiteit Groningen."
+        }
     },
     "cta": {
       "title": "Make a Difference Today",

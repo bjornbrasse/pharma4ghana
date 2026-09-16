@@ -130,7 +130,7 @@ export default async function HomePage({
             <p className="text-ghana-red max-w-xl mx-auto">{t("impact.subtitle")}</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="md:max-w-4xl md:mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Scholarships */}
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
               <div className="w-12 h-12 rounded-xl bg-ghana-green/10 flex items-center justify-center mb-6">
@@ -204,6 +204,29 @@ export default async function HomePage({
                 {t("impact.resources.title")}
               </h3>
               <p className="text-gray-600 leading-relaxed">{t("impact.resources.body")}</p>
+            </div>
+
+            {/* Exchange */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div className="w-12 h-12 rounded-xl bg-indigo-700/10 flex items-center justify-center mb-6">
+                <svg
+                  className="w-6 h-6 text-indigo-700"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">
+                {t("impact.exchange.title")}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">{t("impact.exchange.body")}</p>
             </div>
           </div>
         </div>

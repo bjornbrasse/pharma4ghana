@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import Link from "next/link.js";
 
 export async function generateMetadata({
   params,
@@ -35,10 +36,11 @@ export default async function GhanaPage({
             {t("hero.subtitle")}
           </p>
           <p>Introductie HAI</p>
+          <Link href="https://haighana.edu.gh" target="_blank">HAI</Link>
           <p>Meet the director</p>
-          <p>Meet the students</p>
+          <p>Meet a teacher</p>
+          <p>Meet a student</p>
           <p>Meet the teachers</p>
-          <p>Meet the director</p>
         </div>
       </section>
 

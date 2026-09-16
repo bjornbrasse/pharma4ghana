@@ -1,4 +1,4 @@
-import { EarthIcon, HandshakeIcon, KeyRoundIcon, TabletsIcon } from "lucide-react";
+import { ArrowDownToLine, EarthIcon, HandshakeIcon, KeyRoundIcon, TabletsIcon } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image.js";
@@ -167,6 +167,42 @@ export default async function AboutPage({
           </div>
         </div>
       </section>
+
+      {/* ── Governance ─────────────────────────────────────────────────── */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-3xl mx-auto flex flex-col gap-8 text-center">
+         <div className="text-center mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+              {t("governance.title")}
+            </h2>
+            <p className="text-gray-500 max-w-xl mx-auto">{t("team.subtitle")}</p>
+          </div>
+          <p className="text-gray-700 text-lg sm:text-xl leading-relaxed whitespace-pre-line">
+            {t("governance.general")}
+          </p>
+          <p className="text-gray-700 text-lg sm:text-xl leading-relaxed whitespace-pre-line">
+            {t("governance.finance")}
+          </p>
+        </div>
+        <div className="mt-12 max-w-3xl mx-auto text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+          <p>
+            Downloads
+            </p>
+          <div className="mt-8 flex justify-between items-center text-xl font-normal border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-3 pr-2">
+            Beleidsplan Stichting Pharma4Ghana
+            <ArrowDownToLine />
+          </div>
+          <div className="mt-8 flex justify-between items-center text-xl font-normal border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-3 pr-2">
+            Jaarverslag 2026
+            <ArrowDownToLine />
+          </div>
+          <div className="mt-8 flex justify-between items-center text-xl font-normal border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-3 pr-2">
+            Financiële verantwoording 2026
+            <ArrowDownToLine />
+          </div>
+        </div>
+      </section>
+
     </>
   );
 }

@@ -24,7 +24,7 @@
       "body": "Een toekomst waarin iedere student met talent en motivatie de mogelijkheden krijgt om een opleiding tot apothekersassistent af te ronden. Door structurele samenwerking tussen de professionals uit Ghana en Nederland bouwt Stichting Pharma4Ghana aan duurzame kennisoverdracht en lokale ondersteuning. Stichting Pharma4Ghana ziet deze internationale samenwerking niet als tijdelijke hulp, maar als een partnerschap gebaseerd op gelijkwaardigheid, respect en lange termijn impact."
     },
     "stats": {
-      "scholars": "8",
+      "scholars": "10",
       "scholarsLabel": "Studenten ondersteund",
       "years": "2025",
       "yearsLabel": "Actief sinds",
@@ -33,19 +33,23 @@
     },
     "impact": {
       "title": "Hoe wij impact maken",
-      "subtitle": "Drie pijlers die onze aanpak bepalen voor de ondersteuning van Ghanese studenten.",
+      "subtitle": "Drie pijlers die belangrijk zijn in onze ondersteuning van studenten, docenten en de organisatie van farmaceutisch onderwijs in Ghana.",
       "scholarship": {
         "title": "Beurzen",
-        "body": "Financiële ondersteuning voor uitstekende studenten farmacie en gezondheidswetenschappen aan Ghanese universiteiten, inclusief collegegeld, boeken en levensonderhoud."
+        "body": "Financiële ondersteuning voor studenten die het collegegeld niet kunnen opbrengen en om die reden hun opleiding niet kunnen afronden."
       },
       "mentorship": {
-        "title": "Mentorschap",
-        "body": "Ghanese studenten in contact brengen met ervaren apothekers en zorgprofessionals in Nederland en Ghana voor carrièrebegeleiding."
+        "title": "Kennisdeling",
+        "body": "Bijdragen aan theoretische en praktische vaardigheden van studenten en docenten door inzet van ervaren zorgprofessionals."
       },
       "resources": {
         "title": "Studiematerialen",
-        "body": "Donatie van leerboeken, laboratoriumapparatuur en digitale leermiddelen aan farmacologiefaculteiten in heel Ghana."
-      }
+        "body": "Donatie van leerboeken, vakliteratuur, laboratoriummaterialen en digitale leermiddelen."
+      },
+         "exchange": {
+          "title": "Studenten uitwisseling",
+          "body": "In samenwerking met de Rijksuniversiteit Groningen buitenlandstages voor studenten farmacie organiseren."
+        }
     },
     "cta": {
       "title": "Maak vandaag het verschil",
@@ -103,6 +107,12 @@
           "role": "Algmeen Lid"
         }
       }
+    },
+    "governance": {
+      "title": "Ons Beleid",
+      "subtitle": "Toegewijde apothekers uit Nederland, verenigd door een passie voor onderwijs.",
+      "general": "Het bestuur van Stichting Pharma4Ghana bestaat uit 4 personen.\nHet vermogen van de stichting wordt beheerd door het bestuur en uitsluitend ingezet voor het realiseren van de doelstelling. Bestuursleden ontvangen geen beloning voor hun werkzaamheden. Alleen een vergoeding voor gemaakte onkosten is mogelijk.",
+      "finance": "De stichting werft fondsen via donaties van particulieren en bedrijven, subsidies, fondsen, acties, campagnes, schenkingen en nalatenschappen.\nFondsen worden besteed aan beurzen voor studenten en directe ondersteuning van onderwijsactiviteiten in Ghana. Organisatorische kosten, zoals voor administratie en logistiek, worden tot een minimum beperkt."
     }
   },
   "contact": {
@@ -115,7 +125,7 @@
       "name": "Volledige naam",
       "namePlaceholder": "Uw volledige naam",
       "email": "E-mailadres",
-      "emailPlaceholder": "u@voorbeeld.nl",
+      "emailPlaceholder": "uw@adres.nl",
       "subject": "Onderwerp",
       "subjectPlaceholder": "Hoe kunnen wij helpen?",
       "message": "Bericht",
@@ -132,7 +142,7 @@
       "phoneLabel": "Telefoon",
       "phoneNumber": "+31 20 123 4567",
       "addressLabel": "Adres",
-      "address": "Amsterdam, Nederland",
+      "address": "Vught, Nederland",
       "followUs": "Volg ons"
     }
   },
