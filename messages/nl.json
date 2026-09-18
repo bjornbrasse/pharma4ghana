@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Home",
-    "ghana": "Over Ghana",
+    "ghana": "Even Voorstellen",
     "about": "Wie wij zijn",
     "messages": "Berichten",
     "contact": "Contact",
@@ -33,7 +33,7 @@
     },
     "impact": {
       "title": "Hoe wij impact maken",
-      "subtitle": "Drie pijlers die belangrijk zijn in onze ondersteuning van studenten, docenten en de organisatie van farmaceutisch onderwijs in Ghana.",
+      "subtitle": "De pijlers die belangrijk zijn in onze ondersteuning van studenten, docenten en de organisatie van farmaceutisch onderwijs in Ghana.",
       "scholarship": {
         "title": "Beurzen",
         "body": "Financiële ondersteuning voor studenten die het collegegeld niet kunnen opbrengen en om die reden hun opleiding niet kunnen afronden."
@@ -111,8 +111,13 @@
     "governance": {
       "title": "Ons Beleid",
       "subtitle": "Toegewijde apothekers uit Nederland, verenigd door een passie voor onderwijs.",
-      "general": "Het bestuur van Stichting Pharma4Ghana bestaat uit 4 personen.\nHet vermogen van de stichting wordt beheerd door het bestuur en uitsluitend ingezet voor het realiseren van de doelstelling. Bestuursleden ontvangen geen beloning voor hun werkzaamheden. Alleen een vergoeding voor gemaakte onkosten is mogelijk.",
-      "finance": "De stichting werft fondsen via donaties van particulieren en bedrijven, subsidies, fondsen, acties, campagnes, schenkingen en nalatenschappen.\nFondsen worden besteed aan beurzen voor studenten en directe ondersteuning van onderwijsactiviteiten in Ghana. Organisatorische kosten, zoals voor administratie en logistiek, worden tot een minimum beperkt."
+      "general": "Het bestuur van Stichting Pharma4Ghana bestaat uit 4 personen.\nDe stichting werft fondsen via donaties van particulieren en bedrijven, subsidies, fondsen, acties, campagnes, schenkingen en nalatenschappen.\nHet vermogen van de stichting wordt beheerd door het bestuur en uitsluitend ingezet voor het realiseren van de doelstelling.",
+      "finance": "Fondsen worden besteed aan beurzen voor studenten en directe ondersteuning van onderwijsactiviteiten in Ghana.\nOrganisatorische kosten, zoals voor administratie en logistiek, worden tot een minimum beperkt. Bestuursleden ontvangen geen beloning voor hun werkzaamheden. Alleen een vergoeding voor gemaakte onkosten is mogelijk.",
+      "documents": {
+        "annualReport": "Jaarverslag",
+        "financialStatements": "Jaarrekening",
+        "policyPlan": "Beleidsplan"
+      }
     }
   },
   "contact": {

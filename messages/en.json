@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Home",
-    "ghana": "About Ghana",
+    "ghana": "Meet Ghana",
     "about": "About Us",
     "messages": "Messages",
     "contact": "Contact",
@@ -20,7 +20,7 @@
       "body": "We believe every talented student deserves access to quality education. Pharma4Ghana bridges the gap between ambition and opportunity for students in pharmaceutical sciences and healthcare across Ghana."
     },
     "vision": {
-      "title": "Our VisionŒ",
+      "title": "Our Vision",
       "body": "A future in which every student with talent and motivation has the opportunity to complete training as a pharmacy assistant. Through structured collaboration between professionals in Ghana and the Netherlands, Stichting Pharma4Ghana is building sustainable knowledge transfer and local support. Stichting Pharma4Ghana does not view this international collaboration as temporary aid, but as a partnership founded on equality, respect, and long-term impact."
     },
     "stats": {
@@ -33,7 +33,7 @@
     },
     "impact": {
       "title": "How We Make an Impact",
-      "subtitle": "Three pillars that define our approach to supporting pharmaceutical education, students and teachers in Ghana.",
+      "subtitle": "The pillars that define our approach to supporting pharmaceutical education, students and teachers in Ghana.",
       "scholarship": {
         "title": "Scholarships",
         "body": "Providing financial support to outstanding pharmacy and health science students at Ghanaian universities, covering tuition, books, and living expenses."
@@ -106,6 +106,17 @@
           "name": "Bjorn Brassé",
           "role": "Member"
         }
+      }
+    },
+     "governance": {
+      "title": "Our Governance",
+      "subtitle": "Dedicated pharmacists from the Netherlands, united by a passion for education.",
+      "general": "The board of the Pharma4Ghana Foundation consists of four people.\nThe foundation raises funds through donations from individuals and companies, grants, funds, initiatives, campaigns, gifts, and legacies.\nThe foundation's assets are managed by the board and used exclusively to achieve its objectives.",
+      "finance": "Funds are spent on scholarships for students and direct support for educational activities in Ghana.\nOrganizational costs, such as administration and logistics, are kept to a minimum. Board members receive no remuneration for their work. Reimbursement is possible only for expenses incurred.",
+      "documents": {
+        "annualReport": "Annual Report",
+        "financialStatements": "Financial Statements",
+        "policyPlan": "Policy Plan"
       }
     }
   },
