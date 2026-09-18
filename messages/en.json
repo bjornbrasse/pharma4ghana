@@ -3,9 +3,13 @@
     "home": "Home",
     "ghana": "Meet Ghana",
     "about": "About Us",
+    "activities": "Activities",
     "messages": "Messages",
     "contact": "Contact",
-    "donateButton": "Donate"
+    "donateButton": "Donate",
+    "donateNoticeTitle": "Donations temporarily unavailable",
+    "donateNoticeBody": "This section is still under construction. If you wish to make a donation, please contact us at",
+    "donateNoticeClose": "Close donation notice"
   },
   "home": {
     "hero": {
@@ -21,7 +25,7 @@
     },
     "vision": {
       "title": "Our Vision",
-      "body": "A future in which every student with talent and motivation has the opportunity to complete training as a pharmacy assistant. Through structured collaboration between professionals in Ghana and the Netherlands, Stichting Pharma4Ghana is building sustainable knowledge transfer and local support. Stichting Pharma4Ghana does not view this international collaboration as temporary aid, but as a partnership founded on equality, respect, and long-term impact."
+      "body": "A future in which every student with talent and motivation has the opportunity to complete training as a pharmacy assistant. Through structured collaboration between professionals in Ghana and the Netherlands, Stichting Pharma4Ghana is building sustainable knowledge transfer and local support.\nStichting Pharma4Ghana does not view this international collaboration as temporary aid, but as a partnership founded on equality, respect, and long-term impact."
     },
     "stats": {
       "scholars": "10",
@@ -46,10 +50,10 @@
         "title": "Resources",
         "body": "Donating textbooks, laboratory equipment, and digital learning tools to pharmacy faculties across Ghana."
       },
-       "exchange": {
-          "title": "Students exchange",
-          "body": "A students exchange programme in collaboration with Rijksuniversiteit Groningen."
-        }
+      "exchange": {
+        "title": "Students exchange",
+        "body": "A students exchange programme in collaboration with Rijksuniversiteit Groningen."
+      }
     },
     "cta": {
       "title": "Make a Difference Today",
@@ -108,16 +112,125 @@
         }
       }
     },
-     "governance": {
+    "governance": {
       "title": "Our Governance",
       "subtitle": "Dedicated pharmacists from the Netherlands, united by a passion for education.",
-      "general": "The board of the Pharma4Ghana Foundation consists of four people.\nThe foundation raises funds through donations from individuals and companies, grants, funds, initiatives, campaigns, gifts, and legacies.\nThe foundation's assets are managed by the board and used exclusively to achieve its objectives.",
+      "general": "The board of the Pharma4Ghana Foundation consists of four people.\nThe foundation raises funds through donations from individuals and companies, grants, initiatives, campaigns, gifts, and legacies.\nThe foundation's assets are managed by the board and used exclusively to achieve its objectives.",
       "finance": "Funds are spent on scholarships for students and direct support for educational activities in Ghana.\nOrganizational costs, such as administration and logistics, are kept to a minimum. Board members receive no remuneration for their work. Reimbursement is possible only for expenses incurred.",
       "documents": {
         "annualReport": "Annual Report",
         "financialStatements": "Financial Statements",
         "policyPlan": "Policy Plan"
       }
+    }
+  },
+  "ghana": {
+    "meta": {
+      "title": "Meet Ghana",
+      "description": "Discover Ghana, our educational partner in Accra, and the people at the heart of Pharma4Ghana's work."
+    },
+    "hero": {
+      "eyebrow": "West Africa",
+      "title": "Meet Ghana",
+      "subtitle": "A country of warm hospitality, rich traditions and ambitious young people shaping the future of healthcare.",
+      "imageAlt": "Green Ghanaian landscape beneath a wide blue sky"
+    },
+    "intro": {
+      "eyebrow": "The country",
+      "title": "A strong country with a generous spirit",
+      "paragraph1": "Ghana lies on the Gulf of Guinea in West Africa, between Côte d'Ivoire, Burkina Faso and Togo. From its Atlantic coastline and tropical forests to the lively streets of Accra, the country brings together striking landscapes, many languages and a rich cultural heritage.",
+      "paragraph2": "Ghana is known for its hospitality, democratic tradition and energetic communities. Education, entrepreneurship and a strong sense of responsibility toward family and society are important strengths. That combination of openness and ambition makes Ghana a natural place for long-term educational partnerships."
+    },
+    "partner": {
+      "label": "Our partner in Accra",
+      "name": "Health Access Institute",
+      "body": "HAI trains pharmacy assistants with a strong focus on practical skills. Together, we connect local experience with educational support from the Netherlands.",
+      "link": "Visit HAI"
+    },
+    "profiles": {
+      "eyebrow": "People and perspectives",
+      "title": "Meet the people",
+      "subtitle": "Four perspectives on education, collaboration and the opportunities we want to build together.",
+      "items": {
+        "director": {
+          "label": "Meet the director",
+          "title": "Leadership rooted in local needs",
+          "body": "The institute's director connects educational ambition with the realities of healthcare in Ghana. By listening to students and teachers, the school can invest in the skills, materials and opportunities that matter most.",
+          "testimonial": "For the director, Pharma4Ghana is a committed partner that listens first and helps turn shared plans into lasting progress.",
+          "imageAlt": "Green landscape in Ghana"
+        },
+        "teacher": {
+          "label": "Meet a teacher",
+          "title": "Knowledge made practical",
+          "body": "Teachers help students translate pharmaceutical theory into confident daily practice. Current reference materials, practical exercises and contact with fellow professionals strengthen both their lessons and the wider learning environment.",
+          "testimonial": "For teachers, Pharma4Ghana creates access to resources and professional exchange that can be used directly in the classroom.",
+          "imageAlt": "Pharmaceutical reference books and study materials"
+        },
+        "student": {
+          "label": "Meet a student",
+          "title": "Talent with a clear purpose",
+          "body": "Students choose pharmaceutical care because they want to make a concrete difference in their communities. Their training demands perseverance, practical experience and access to resources that are not always within reach.",
+          "testimonial": "For students, Pharma4Ghana means an opportunity to continue learning and move toward a meaningful role in healthcare.",
+          "imageAlt": "Graduating students celebrating together in Ghana"
+        },
+        "exchangeStudents": {
+          "label": "Meet the exchange students",
+          "title": "Learning across borders",
+          "body": "Exchange students bring different professional perspectives into one learning environment. By observing, asking questions and working together, students from Ghana and the Netherlands gain insight that no textbook can provide on its own.",
+          "testimonial": "For exchange students, Pharma4Ghana makes mutual learning possible through relationships built on curiosity, equality and respect.",
+          "imageAlt": "The Pharma4Ghana team together in Ghana"
+        }
+      }
+    }
+  },
+  "activities": {
+    "meta": {
+      "title": "Activities",
+      "description": "Explore Pharma4Ghana's grants, student exchanges, webinars, and practical support for pharmaceutical education in Ghana."
+    },
+    "hero": {
+      "eyebrow": "What we do",
+      "title": "Our Activities",
+      "subtitle": "Four connected programmes that turn partnership into practical opportunities for students and educators in Ghana."
+    },
+    "menuLabel": "On this page",
+    "sectionLabel": "Activity {number}",
+    "downloadsLabel": "Downloads",
+    "sections": {
+      "grant": {
+        "title": "Grant",
+        "body": [
+          "Our Educational Grant helps motivated pharmacy students continue their training when tuition costs would otherwise prevent them from completing their studies.",
+          "Candidates are selected with our local education partners based on motivation, academic progress, and financial need. This keeps support transparent and close to the students who benefit from it."
+        ],
+        "imageAlt": "Graduating pharmacy students celebrating together in Ghana"
+      },
+      "exchange": {
+        "title": "Student Exchange",
+        "body": [
+          "We are developing student exchange opportunities with academic partners in Ghana and the Netherlands. These placements connect classroom knowledge with day-to-day pharmaceutical practice.",
+          "The programme is designed as a mutual exchange: students learn from another healthcare setting, share professional perspectives, and bring that experience back to their own institutions."
+        ]
+      },
+      "webinars": {
+        "title": "Webinars",
+        "body": [
+          "Online sessions make specialist knowledge accessible across distance. Pharmacists, lecturers, and other healthcare professionals share practical expertise with students and teaching staff.",
+          "Topics are selected together with our Ghanaian partners so each webinar responds to current educational needs and can be applied directly in the classroom or workplace.",
+          "If you wish to contribute to the webinars programme, please contact us for more information."
+        ]
+      },
+      "support": {
+        "title": "Support",
+        "body": [
+          "We support pharmaceutical education with textbooks, professional literature, learning tools, and practical materials that are difficult to access locally.",
+          "Support is coordinated with partner institutions to ensure every contribution is useful, sustainable, and suited to the curriculum."
+        ],
+        "imageAlt": "Pharmaceutical reference books and study materials"
+      }
+    },
+    "downloads": {
+      "policyPlan": "Policy Plan 2026–2029"
     }
   },
   "contact": {

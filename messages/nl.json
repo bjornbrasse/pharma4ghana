@@ -3,9 +3,13 @@
     "home": "Home",
     "ghana": "Even Voorstellen",
     "about": "Wie wij zijn",
+    "activities": "Activiteiten",
     "messages": "Berichten",
     "contact": "Contact",
-    "donateButton": "Doneer"
+    "donateButton": "Doneer",
+    "donateNoticeTitle": "Doneren tijdelijk niet beschikbaar",
+    "donateNoticeBody": "Deze pagina is nog in ontwikkeling. Wilt u een donatie doen, neem dan contact met ons op via",
+    "donateNoticeClose": "Donatiemelding sluiten"
   },
   "home": {
     "hero": {
@@ -21,7 +25,7 @@
     },
     "vision": {
       "title": "Onze Visie",
-      "body": "Een toekomst waarin iedere student met talent en motivatie de mogelijkheden krijgt om een opleiding tot apothekersassistent af te ronden. Door structurele samenwerking tussen de professionals uit Ghana en Nederland bouwt Stichting Pharma4Ghana aan duurzame kennisoverdracht en lokale ondersteuning. Stichting Pharma4Ghana ziet deze internationale samenwerking niet als tijdelijke hulp, maar als een partnerschap gebaseerd op gelijkwaardigheid, respect en lange termijn impact."
+      "body": "Een toekomst waarin iedere student met talent en motivatie de mogelijkheden krijgt om een opleiding tot apothekersassistent af te ronden. Door structurele samenwerking tussen de professionals uit Ghana en Nederland bouwt Stichting Pharma4Ghana aan duurzame kennisoverdracht en lokale ondersteuning.\nStichting Pharma4Ghana ziet deze internationale samenwerking niet als tijdelijke hulp, maar als een partnerschap gebaseerd op gelijkwaardigheid, respect en lange termijn impact."
     },
     "stats": {
       "scholars": "10",
@@ -46,10 +50,10 @@
         "title": "Studiematerialen",
         "body": "Donatie van leerboeken, vakliteratuur, laboratoriummaterialen en digitale leermiddelen."
       },
-         "exchange": {
-          "title": "Studenten uitwisseling",
-          "body": "In samenwerking met de Rijksuniversiteit Groningen buitenlandstages voor studenten farmacie organiseren."
-        }
+      "exchange": {
+        "title": "Studenten uitwisseling",
+        "body": "In samenwerking met de Rijksuniversiteit Groningen buitenlandstages voor studenten farmacie organiseren."
+      }
     },
     "cta": {
       "title": "Maak vandaag het verschil",
@@ -111,13 +115,122 @@
     "governance": {
       "title": "Ons Beleid",
       "subtitle": "Toegewijde apothekers uit Nederland, verenigd door een passie voor onderwijs.",
-      "general": "Het bestuur van Stichting Pharma4Ghana bestaat uit 4 personen.\nDe stichting werft fondsen via donaties van particulieren en bedrijven, subsidies, fondsen, acties, campagnes, schenkingen en nalatenschappen.\nHet vermogen van de stichting wordt beheerd door het bestuur en uitsluitend ingezet voor het realiseren van de doelstelling.",
+      "general": "Het bestuur van Stichting Pharma4Ghana bestaat uit 4 personen.\nDe stichting werft fondsen via donaties van particulieren en bedrijven, subsidies, acties, campagnes, schenkingen en nalatenschappen.\nHet vermogen van de stichting wordt beheerd door het bestuur en uitsluitend ingezet voor het realiseren van de doelstelling.",
       "finance": "Fondsen worden besteed aan beurzen voor studenten en directe ondersteuning van onderwijsactiviteiten in Ghana.\nOrganisatorische kosten, zoals voor administratie en logistiek, worden tot een minimum beperkt. Bestuursleden ontvangen geen beloning voor hun werkzaamheden. Alleen een vergoeding voor gemaakte onkosten is mogelijk.",
       "documents": {
         "annualReport": "Jaarverslag",
         "financialStatements": "Jaarrekening",
         "policyPlan": "Beleidsplan"
       }
+    }
+  },
+  "ghana": {
+    "meta": {
+      "title": "Ontmoet Ghana",
+      "description": "Ontdek Ghana, onze onderwijspartner in Accra en de mensen die centraal staan in het werk van Pharma4Ghana."
+    },
+    "hero": {
+      "eyebrow": "West-Afrika",
+      "title": "Ontmoet Ghana",
+      "subtitle": "Een land met warme gastvrijheid, rijke tradities en ambitieuze jonge mensen die bouwen aan de toekomst van de gezondheidszorg.",
+      "imageAlt": "Groen Ghanees landschap onder een weidse blauwe lucht"
+    },
+    "intro": {
+      "eyebrow": "Het land",
+      "title": "Een krachtig land met een gastvrije geest",
+      "paragraph1": "Ghana ligt aan de Golf van Guinee in West-Afrika, tussen Ivoorkust, Burkina Faso en Togo. Van de Atlantische kust en tropische bossen tot de levendige straten van Accra: het land verenigt indrukwekkende landschappen, vele talen en een rijk cultureel erfgoed.",
+      "paragraph2": "Ghana staat bekend om zijn gastvrijheid, democratische traditie en ondernemende gemeenschappen. Onderwijs, ondernemerschap en een sterk verantwoordelijkheidsgevoel voor familie en samenleving zijn belangrijke krachten. Die combinatie van openheid en ambitie maakt Ghana een natuurlijke plek voor duurzame onderwijssamenwerking."
+    },
+    "partner": {
+      "label": "Onze partner in Accra",
+      "name": "Health Access Institute",
+      "body": "HAI leidt apothekersassistenten op met veel aandacht voor praktische vaardigheden. Samen verbinden we lokale ervaring met onderwijsondersteuning vanuit Nederland.",
+      "link": "Bezoek HAI"
+    },
+    "profiles": {
+      "eyebrow": "Mensen en perspectieven",
+      "title": "Maak kennis met de mensen",
+      "subtitle": "Vier perspectieven op onderwijs, samenwerking en de kansen die we samen willen opbouwen.",
+      "items": {
+        "director": {
+          "label": "Maak kennis met de directeur",
+          "title": "Leiderschap vanuit lokale behoeften",
+          "body": "De directeur van het instituut verbindt onderwijsambities met de dagelijkse realiteit van de gezondheidszorg in Ghana. Door naar studenten en docenten te luisteren, kan de school investeren in de vaardigheden, materialen en kansen die het belangrijkst zijn.",
+          "testimonial": "Voor de directeur is Pharma4Ghana een betrokken partner die eerst luistert en gezamenlijke plannen helpt omzetten in blijvende vooruitgang.",
+          "imageAlt": "Groen landschap in Ghana"
+        },
+        "teacher": {
+          "label": "Maak kennis met een docent",
+          "title": "Kennis praktisch toepasbaar maken",
+          "body": "Docenten helpen studenten farmaceutische theorie te vertalen naar zelfverzekerd dagelijks handelen. Actuele vakliteratuur, praktische oefeningen en contact met collega-professionals versterken zowel hun lessen als de bredere leeromgeving.",
+          "testimonial": "Voor docenten biedt Pharma4Ghana toegang tot middelen en professionele uitwisseling die direct in de les kunnen worden ingezet.",
+          "imageAlt": "Farmaceutische naslagwerken en studiematerialen"
+        },
+        "student": {
+          "label": "Maak kennis met een student",
+          "title": "Talent met een duidelijk doel",
+          "body": "Studenten kiezen voor farmaceutische zorg omdat ze een concreet verschil willen maken in hun gemeenschap. Hun opleiding vraagt doorzettingsvermogen, praktijkervaring en toegang tot middelen die niet altijd binnen bereik liggen.",
+          "testimonial": "Voor studenten betekent Pharma4Ghana de kans om door te leren en toe te werken naar een betekenisvolle rol in de gezondheidszorg.",
+          "imageAlt": "Afgestudeerde studenten vieren samen hun diploma in Ghana"
+        },
+        "exchangeStudents": {
+          "label": "Maak kennis met de uitwisselingsstudenten",
+          "title": "Leren over grenzen heen",
+          "body": "Uitwisselingsstudenten brengen verschillende professionele perspectieven samen in één leeromgeving. Door te observeren, vragen te stellen en samen te werken, doen studenten uit Ghana en Nederland inzichten op die geen enkel studieboek op zichzelf kan bieden.",
+          "testimonial": "Voor uitwisselingsstudenten maakt Pharma4Ghana wederzijds leren mogelijk via relaties die zijn gebouwd op nieuwsgierigheid, gelijkwaardigheid en respect.",
+          "imageAlt": "Het team van Pharma4Ghana samen in Ghana"
+        }
+      }
+    }
+  },
+  "activities": {
+    "meta": {
+      "title": "Activiteiten",
+      "description": "Ontdek de beurzen, studentenuitwisseling, webinars en praktische ondersteuning van Pharma4Ghana voor farmaceutisch onderwijs in Ghana."
+    },
+    "hero": {
+      "eyebrow": "Wat wij doen",
+      "title": "Onze activiteiten",
+      "subtitle": "Vier verbonden programma's die samenwerking omzetten in praktische kansen voor studenten en docenten in Ghana."
+    },
+    "menuLabel": "Op deze pagina",
+    "sectionLabel": "Activiteit {number}",
+    "downloadsLabel": "Downloads",
+    "sections": {
+      "grant": {
+        "title": "Studiebeurs",
+        "body": [
+          "Onze Educational Grant helpt gemotiveerde farmaciestudenten hun opleiding voort te zetten wanneer het collegegeld hen anders zou verhinderen hun studie af te ronden.",
+          "Kandidaten worden samen met onze lokale onderwijspartners geselecteerd op motivatie, studievoortgang en financiële behoefte. Zo blijft de ondersteuning transparant en dicht bij de studenten voor wie zij bedoeld is."
+        ],
+        "imageAlt": "Afgestudeerde farmaciestudenten vieren samen hun diploma in Ghana"
+      },
+      "exchange": {
+        "title": "Studentenuitwisseling",
+        "body": [
+          "Wij ontwikkelen mogelijkheden voor studentenuitwisseling met academische partners in Ghana en Nederland. Deze stages verbinden kennis uit de collegezaal met de dagelijkse farmaceutische praktijk.",
+          "Het programma is opgezet als wederzijdse uitwisseling: studenten leren van een andere zorgomgeving, delen professionele perspectieven en nemen die ervaring mee terug naar hun eigen instelling."
+        ]
+      },
+      "webinars": {
+        "title": "Webinars",
+        "body": [
+          "Online sessies maken specialistische kennis over afstand toegankelijk. Apothekers, docenten en andere zorgprofessionals delen praktische expertise met studenten en onderwijzend personeel.",
+          "Onderwerpen worden samen met onze Ghanese partners gekozen, zodat ieder webinar aansluit bij actuele onderwijsbehoeften en direct toepasbaar is in de les of op de werkplek.",
+          "Als u wilt bijdragen aan een webinar, neem dan contact met ons op voor meer informatie."
+        ]
+      },
+      "support": {
+        "title": "Ondersteuning",
+        "body": [
+          "Wij ondersteunen farmaceutisch onderwijs met studieboeken, vakliteratuur, leermiddelen en praktische materialen die lokaal moeilijk verkrijgbaar zijn.",
+          "De ondersteuning wordt afgestemd met partnerinstellingen, zodat iedere bijdrage bruikbaar, duurzaam en passend bij het curriculum is."
+        ],
+        "imageAlt": "Farmaceutische naslagwerken en studiematerialen"
+      }
+    },
+    "downloads": {
+      "policyPlan": "Beleidsplan 2026–2029"
     }
   },
   "contact": {
