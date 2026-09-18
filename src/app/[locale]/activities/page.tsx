@@ -1,4 +1,3 @@
-import SmoothAnchorLink from "@/components/smooth-anchor-link";
 import { Download, GraduationCap, HandHeart, MonitorPlay, RefreshCw } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -62,44 +61,21 @@ export default async function ActivitiesPage({ params }: { params: Promise<{ loc
 
   return (
     <>
-      <section className="bg-ghana-green px-4 py-16 sm:px-6 lg:px-8">
+      <section className="bg-ghana-green px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-ghana-gold">
             {t("hero.eyebrow")}
           </p>
-          <h1 className="text-4xl font-bold text-white sm:text-5xl">{t("hero.title")}</h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-green-100 sm:text-xl">
+          <h1 className="text-3xl font-bold text-white sm:text-5xl">{t("hero.title")}</h1>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-green-100 sm:mt-6 sm:text-xl">
             {t("hero.subtitle")}
           </p>
         </div>
       </section>
 
-      <div className="bg-gray-50 px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16">
-          <aside className="self-start lg:sticky lg:top-28">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-gray-500">
-              {t("menuLabel")}
-            </p>
-            <nav aria-label={t("menuLabel")}>
-              <ul className="flex gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0">
-                {activitySections.map((section, index) => (
-                  <li key={section.key} className="shrink-0">
-                    <SmoothAnchorLink
-                      targetId={section.key}
-                      className="flex items-center gap-3 rounded-md border border-gray-200 bg-white px-4 py-3 text-sm font-semibold text-gray-700 transition-colors hover:border-ghana-green hover:text-ghana-green lg:w-full"
-                    >
-                      <span className="text-xs text-ghana-green">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      {t(`sections.${section.key}.title`)}
-                    </SmoothAnchorLink>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-          </aside>
-
-          <main className="min-w-0">
+      <div className="bg-gray-50 px-4 py-10 sm:px-6 sm:py-16 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <main>
             {activitySections.map((section) => {
               const paragraphs = t.raw(`sections.${section.key}.body`) as string[];
 
@@ -107,16 +83,16 @@ export default async function ActivitiesPage({ params }: { params: Promise<{ loc
                 <section
                   key={section.key}
                   id={section.key}
-                  className="scroll-mt-28 border-b border-gray-200 py-14 first:pt-0 last:border-0 last:pb-0"
+                  className="border-b border-gray-200 py-10 first:pt-0 last:border-0 last:pb-0 sm:py-14"
                 >
-                  <div className="mb-7 flex items-start gap-4">
+                  <div className="mb-6 flex items-start gap-3 sm:mb-7 sm:gap-4">
                     <div
-                      className={`flex size-12 shrink-0 items-center justify-center rounded-md border border-gray-200 [&>svg]:size-6 ${section.accent}`}
+                      className={`flex size-10 shrink-0 items-center justify-center rounded-md border border-gray-200 [&>svg]:size-5 sm:size-12 sm:[&>svg]:size-6 ${section.accent}`}
                     >
                       {section.icon}
                     </div>
-                    <div>
-                      <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">
+                    <div className="min-w-0">
+                      <h2 className="text-2xl font-bold text-gray-900 sm:text-4xl">
                         {t(`sections.${section.key}.title`)}
                       </h2>
                     </div>
@@ -127,7 +103,10 @@ export default async function ActivitiesPage({ params }: { params: Promise<{ loc
                   >
                     <div className="space-y-5">
                       {paragraphs.map((paragraph) => (
-                        <p key={paragraph} className="text-base leading-8 text-gray-700 sm:text-lg">
+                        <p
+                          key={paragraph}
+                          className="text-base leading-7 text-gray-700 sm:text-lg sm:leading-8"
+                        >
                           {paragraph}
                         </p>
                       ))}
@@ -157,9 +136,11 @@ export default async function ActivitiesPage({ params }: { params: Promise<{ loc
                             key={download.href}
                             href={download.href}
                             download
-                            className="flex items-center justify-between gap-4 rounded-md border border-gray-200 bg-white px-4 py-3 font-semibold text-gray-800 transition-colors hover:border-ghana-green hover:text-ghana-green"
+                            className="flex min-w-0 items-center justify-between gap-3 rounded-md border border-gray-200 bg-white px-4 py-3 font-semibold text-gray-800 transition-colors hover:border-ghana-green hover:text-ghana-green"
                           >
-                            {t(`downloads.${download.key}`)}
+                            <span className="min-w-0 wrap-break-word">
+                              {t(`downloads.${download.key}`)}
+                            </span>
                             <Download className="size-5 shrink-0" aria-hidden="true" />
                           </a>
                         ))}

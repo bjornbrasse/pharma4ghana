@@ -35,7 +35,7 @@ export default async function GhanaPage({ params }: { params: Promise<{ locale: 
           alt={t("hero.imageAlt")}
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-right sm:object-center"
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-black/50" />
