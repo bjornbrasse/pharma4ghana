@@ -7,6 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:e2e": "npm run test:e2e:dev && npm run test:e2e:production",
+    "test:e2e:dev": "playwright test --config playwright.config.ts",
+    "test:e2e:production": "playwright test --config playwright.production.config.ts",
+    "test:e2e:ui": "playwright test --ui",
     "format": "biome format --write .",
     "format:check": "biome format ."
   },
@@ -23,6 +27,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.14",
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.1",

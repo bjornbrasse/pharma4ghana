@@ -10,18 +10,12 @@ import {
 } from "@react-pdf/renderer";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-
-type Locale = "en" | "nl";
-
-interface DonationReceiptPdfData {
-  locale: Locale;
-  sessionId: string;
-  date: string;
-  amount: string;
-  paymentStatus: string;
-  paymentIntentId: string;
-  donorEmail: string;
-}
+import {
+  formatDonationAmount,
+  formatDonationDate,
+  type DonationLocale,
+  type DonationReceipt,
+} from "@/lib/donation-receipt";
 
 const styles = StyleSheet.create({
   page: {
@@ -89,28 +83,34 @@ const styles = StyleSheet.create({
   },
 });
 
-function getLabels(locale: Locale) {
+function getLabels(locale: DonationLocale) {
   if (locale === "nl") {
     return {
       title: "Pharma4Ghana - Donatiebewijs",
       subtitle: "Bewijs van vrijwillige gift",
-      orgSectionTitle: "Organisatiegegevens (testdata)",
+      orgSectionTitle: "Gegevens ontvanger",
+      donorSectionTitle: "Gegevens donateur",
       orgNameLabel: "Naam",
       orgAddressLabel: "Adres",
       orgCityLabel: "Postcode en plaats",
       orgCountryLabel: "Land",
       orgRegistrationLabel: "KvK",
-      orgTaxLabel: "Fiscaal nummer",
+      orgTaxLabel: "RSIN",
       receiptNumber: "Bewijsnummer",
       date: "Datum",
       amount: "Bedrag",
       paymentStatus: "Betaalstatus",
+      paid: "Betaald",
       transactionReference: "Transactiereferentie",
+      paymentMethod: "Betaalmethode",
+      donorName: "Naam",
       donorEmail: "Donateur e-mail",
+      donorAddress: "Adres",
+      beneficiary: "Begunstigde",
+      purpose: "Doel",
       paragraphOne:
         "Dit document bevestigt dat Pharma4Ghana een vrijwillige donatie heeft ontvangen ten behoeve van onderwijssteun in Ghana.",
-      paragraphTwo:
-        "Er zijn geen goederen of diensten geleverd in ruil voor deze bijdrage.",
+      paragraphTwo: "Er zijn geen goederen of diensten geleverd in ruil voor deze bijdrage.",
       generated: "Automatisch gegenereerd op basis van Stripe Checkout.",
     };
   }
@@ -118,49 +118,47 @@ function getLabels(locale: Locale) {
   return {
     title: "Pharma4Ghana - Donation Receipt",
     subtitle: "Record of voluntary contribution",
-    orgSectionTitle: "Organization details (test data)",
+    orgSectionTitle: "Recipient details",
+    donorSectionTitle: "Donor details",
     orgNameLabel: "Name",
     orgAddressLabel: "Address",
     orgCityLabel: "Postal code and city",
     orgCountryLabel: "Country",
     orgRegistrationLabel: "Registration no.",
-    orgTaxLabel: "Tax number",
+    orgTaxLabel: "RSIN",
     receiptNumber: "Receipt number",
     date: "Date",
     amount: "Amount",
     paymentStatus: "Payment status",
+    paid: "Paid",
     transactionReference: "Transaction reference",
+    paymentMethod: "Payment method",
+    donorName: "Name",
     donorEmail: "Donor email",
+    donorAddress: "Address",
+    beneficiary: "Beneficiary",
+    purpose: "Purpose",
     paragraphOne:
       "This document confirms that Pharma4Ghana received a voluntary donation in support of education in Ghana.",
-    paragraphTwo:
-      "No goods or services were provided in exchange for this contribution.",
+    paragraphTwo: "No goods or services were provided in exchange for this contribution.",
     generated: "Automatically generated from Stripe Checkout data.",
   };
 }
 
 async function getLogoDataUri() {
   try {
-    const logoPath = join(process.cwd(), "public", "logo-cropped.jpg");
+    const logoPath = join(process.cwd(), "public", "images", "logo.png");
     const logoBuffer = await readFile(logoPath);
 
-    return `data:image/jpeg;base64,${logoBuffer.toString("base64")}`;
+    return `data:image/png;base64,${logoBuffer.toString("base64")}`;
   } catch {
     return null;
   }
 }
 
-export async function renderDonationReceiptPdf(data: DonationReceiptPdfData): Promise<Buffer> {
-  const labels = getLabels(data.locale);
+export async function renderDonationReceiptPdf(receipt: DonationReceipt): Promise<Buffer> {
+  const labels = getLabels(receipt.locale);
   const logoDataUri = await getLogoDataUri();
-  const fakeOrgData = {
-    name: "Pharma4Ghana Foundation (Demo)",
-    address: "Example Street 123",
-    city: "1234 AB Exampletown",
-    country: data.locale === "nl" ? "Nederland" : "Netherlands",
-    registration: "KvK 00000000 (FAKE)",
-    taxNumber: "RSIN 999999999 (FAKE)",
-  };
 
   const document = (
     <Document title={labels.title}>
@@ -180,54 +178,81 @@ export async function renderDonationReceiptPdf(data: DonationReceiptPdfData): Pr
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>{labels.orgNameLabel}</Text>
-            <Text style={styles.value}>{fakeOrgData.name}</Text>
+            <Text style={styles.value}>{receipt.organization.name}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>{labels.orgAddressLabel}</Text>
-            <Text style={styles.value}>{fakeOrgData.address}</Text>
+            <Text style={styles.value}>{receipt.organization.address}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>{labels.orgCityLabel}</Text>
-            <Text style={styles.value}>{fakeOrgData.city}</Text>
+            <Text style={styles.value}>{receipt.organization.postalCity}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>{labels.orgCountryLabel}</Text>
-            <Text style={styles.value}>{fakeOrgData.country}</Text>
+            <Text style={styles.value}>{receipt.organization.country}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>{labels.orgRegistrationLabel}</Text>
-            <Text style={styles.value}>{fakeOrgData.registration}</Text>
+            <Text style={styles.value}>{receipt.organization.registrationNumber}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>{labels.orgTaxLabel}</Text>
-            <Text style={styles.value}>{fakeOrgData.taxNumber}</Text>
+            <Text style={styles.value}>{receipt.organization.rsin}</Text>
           </View>
         </View>
 
         <View style={styles.section}>
           <View style={styles.row}>
             <Text style={styles.label}>{labels.receiptNumber}</Text>
-            <Text style={styles.value}>{data.sessionId}</Text>
+            <Text style={styles.value}>{receipt.receiptNumber}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>{labels.date}</Text>
-            <Text style={styles.value}>{data.date}</Text>
+            <Text style={styles.value}>{formatDonationDate(receipt)}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>{labels.amount}</Text>
-            <Text style={styles.value}>{data.amount}</Text>
+            <Text style={styles.value}>{formatDonationAmount(receipt)}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>{labels.paymentStatus}</Text>
-            <Text style={styles.value}>{data.paymentStatus}</Text>
+            <Text style={styles.value}>{labels.paid}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>{labels.transactionReference}</Text>
-            <Text style={styles.value}>{data.paymentIntentId}</Text>
+            <Text style={styles.value}>{receipt.paymentIntentId}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>{labels.paymentMethod}</Text>
+            <Text style={styles.value}>{receipt.paymentMethod}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>{labels.beneficiary}</Text>
+            <Text style={styles.value}>{receipt.beneficiary}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>{labels.purpose}</Text>
+            <Text style={styles.value}>{receipt.purpose}</Text>
+          </View>
+        </View>
+
+        <View style={styles.section}>
+          <View style={styles.row}>
+            <Text style={styles.label}>{labels.donorSectionTitle}</Text>
+            <Text style={styles.value}></Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>{labels.donorName}</Text>
+            <Text style={styles.value}>{receipt.donorName}</Text>
           </View>
           <View style={styles.row}>
             <Text style={styles.label}>{labels.donorEmail}</Text>
-            <Text style={styles.value}>{data.donorEmail}</Text>
+            <Text style={styles.value}>{receipt.donorEmail}</Text>
+          </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>{labels.donorAddress}</Text>
+            <Text style={styles.value}>{receipt.donorAddress.join(", ") || "-"}</Text>
           </View>
         </View>
 

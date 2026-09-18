@@ -269,7 +269,7 @@
       "title": "Doneer"
     },
     "successMeta": {
-      "title": "Bedankt"
+      "title": "Donatiebewijs"
     },
     "hero": {
       "header": "Maak vandaag het verschil",
@@ -316,9 +316,33 @@
       }
     },
     "successPage": {
-      "eyebrow": "Donatie ontvangen",
+      "eyebrow": "Betaling bevestigd",
       "title": "Dank u voor uw bijdrage",
-      "subtitle": "Uw donatie helpt Pharma4Ghana direct te investeren in de volgende generatie apothekers en zorgprofessionals in Ghana.",
+      "subtitle": "Uw betaling is geverifieerd bij Stripe. Hieronder staat uw donatiebewijs.",
+      "receiptTitle": "Donatiebewijs",
+      "receiptSubtitle": "Bewijs van een vrijwillige gift",
+      "receiptNumber": "Bewijsnummer",
+      "issuer": "Ontvanger",
+      "donor": "Donateur",
+      "name": "Naam",
+      "email": "E-mail",
+      "address": "Adres",
+      "notProvided": "Niet opgegeven",
+      "kvk": "KvK-nummer",
+      "rsin": "RSIN",
+      "donationDetails": "Donatiegegevens",
+      "issuedOn": "Betaaldatum",
+      "amount": "Bedrag",
+      "status": "Betaalstatus",
+      "paid": "Betaald",
+      "paymentMethod": "Betaalmethode",
+      "beneficiary": "Begunstigde",
+      "purpose": "Doel",
+      "transactionReference": "Stripe-transactiereferentie",
+      "taxNote": "Bewaar dit bewijs bij uw belastingadministratie. Of de gift aftrekbaar is, hangt af van uw situatie en de toepasselijke fiscale status van de stichting.",
+      "noConsideration": "Voor deze vrijwillige bijdrage zijn geen goederen of diensten geleverd.",
+      "downloadPdf": "Download PDF",
+      "home": "Terug naar home",
       "messageTitle": "Wat er nu gebeurt",
       "messageBody": "Bijdragen zoals die van u worden ingezet voor studiebeurzen, praktische leermiddelen en mentorschap dat studenten helpt hun opleiding met vertrouwen af te ronden.",
       "impactTitle": "Uw donatie maakt dit mede mogelijk",

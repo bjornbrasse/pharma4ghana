@@ -269,7 +269,7 @@
       "title": "Donate"
     },
     "successMeta": {
-      "title": "Thank You"
+      "title": "Donation Receipt"
     },
     "hero": {
       "header": "Make a Difference Today",
@@ -316,9 +316,33 @@
       }
     },
     "successPage": {
-      "eyebrow": "Donation received",
+      "eyebrow": "Payment confirmed",
       "title": "Thank you for your contribution",
-      "subtitle": "Your donation helps Pharma4Ghana invest directly in the next generation of pharmacists and healthcare professionals in Ghana.",
+      "subtitle": "Your payment was verified with Stripe. Your donation receipt is shown below.",
+      "receiptTitle": "Donation receipt",
+      "receiptSubtitle": "Receipt for a voluntary contribution",
+      "receiptNumber": "Receipt number",
+      "issuer": "Recipient",
+      "donor": "Donor",
+      "name": "Name",
+      "email": "Email",
+      "address": "Address",
+      "notProvided": "Not provided",
+      "kvk": "KvK number",
+      "rsin": "RSIN",
+      "donationDetails": "Donation details",
+      "issuedOn": "Payment date",
+      "amount": "Amount",
+      "status": "Payment status",
+      "paid": "Paid",
+      "paymentMethod": "Payment method",
+      "beneficiary": "Beneficiary",
+      "purpose": "Purpose",
+      "transactionReference": "Stripe transaction reference",
+      "taxNote": "Keep this receipt with your tax records. Eligibility for a deduction depends on your circumstances and the foundation's applicable tax status.",
+      "noConsideration": "No goods or services were supplied in exchange for this voluntary contribution.",
+      "downloadPdf": "Download PDF",
+      "home": "Back to home",
       "messageTitle": "What happens next",
       "messageBody": "We use contributions like yours to support scholarships, practical study materials, and mentorship that helps students complete their education with confidence.",
       "impactTitle": "Your donation helps make this possible",

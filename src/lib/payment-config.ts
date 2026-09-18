@@ -1,1 +1,1 @@
-export const paymentFunctionAvailable = false;
+export const paymentFunctionAvailable = process.env.NEXT_PUBLIC_DONATIONS_ENABLED === "true";

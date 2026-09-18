@@ -26,7 +26,7 @@ export default async function DonatePage({
   const { status } = await searchParams;
   setRequestLocale(locale);
 
-  if (!paymentFunctionAvailable) {
+  if (process.env.NODE_ENV === "production" && !paymentFunctionAvailable) {
     redirect(`/${locale}`);
   }
 

@@ -39,16 +39,39 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 The app includes a localized donation flow at `/en/donate` and `/nl/donate` using Stripe Checkout.
 
-Add the required environment variable before testing payments:
+Copy the environment template before testing payments:
 
 ```bash
 cp .env.example .env.local
 ```
 
-Then set:
+Configure a Stripe test secret, one Stripe Price ID for every preset amount, and the legal
+organization details used on donation receipts. Keep donations disabled until those values have
+been verified:
 
 ```bash
 STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+NEXT_PUBLIC_DONATIONS_ENABLED=false
 ```
 
-Without that secret, the donation page still renders but checkout stays disabled.
+Set `NEXT_PUBLIC_DONATIONS_ENABLED=true` only when the Stripe and receipt configuration is ready.
+Successful Checkout Sessions are retrieved directly from Stripe, so this flow does not require a
+database. The receipt page and PDF are available only when Stripe reports the donation as paid.
+In development, the donation page remains accessible when donations are disabled so the interface
+can be reviewed; checkout remains disabled. In production, the disabled donation page redirects to
+the localized home page and the checkout API returns `503`.
+
+## Testing payments
+
+Use **Vitest** for unit tests around amount validation, environment configuration, and paid-session
+receipt mapping. Use **Playwright** for the localized donation form, redirect, receipt page, and PDF
+download. Run the end-to-end flow against Stripe test mode; use the Stripe CLI when webhook-driven
+fulfilment is added later.
+
+The Playwright suites use an isolated Next.js output directory and a local Stripe API fixture:
+
+```bash
+npm run test:e2e:dev
+npm run test:e2e:production
+npm run test:e2e
+```

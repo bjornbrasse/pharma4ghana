@@ -7,9 +7,13 @@
 
 # testing
 /coverage
+/playwright-report/
+/test-results/
 
 # next.js
 /.next/
+/.next-playwright/
+/.next-playwright-production/
 /out/
 
 # production
