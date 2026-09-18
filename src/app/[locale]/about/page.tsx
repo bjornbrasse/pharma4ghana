@@ -101,7 +101,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
 
             {/* Visual: Ghana flag-inspired graphic */}
             <div className="relative hidden lg:block">
-              <div className="rounded-2xl overflow-hidden h-80 bg-gradient-to-br from-ghana-green via-ghana-gold to-ghana-red flex items-center justify-center">
+              <div className="rounded-2xl overflow-hidden h-80 bg-linear-to-br from-ghana-green via-ghana-gold to-ghana-red flex items-center justify-center">
                 <div className="text-center text-white">
                   <svg
                     viewBox="0 0 100 100"
@@ -122,7 +122,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{t("team.title")}</h2>
-            <p className="text-gray-500 max-w-xl mx-auto">{t("team.subtitle")}</p>
+            <p className="text-gray-500 max-w-2xl mx-auto">{t("team.subtitle")}</p>
           </div>
 
           <div className="mx-auto grid max-w-56 grid-cols-1 gap-8 sm:max-w-none sm:grid-cols-4 sm:gap-6">
@@ -150,7 +150,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       {/* ── Values ───────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -158,14 +158,14 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12">
             {values.map(({ key, icon, accent }) => (
               <div
                 key={key}
-                className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                className="bg-white rounded-2xl p-8 shadow-md border border-gray-200 hover:shadow-md transition-shadow"
               >
                 <div
-                  className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${accent}`}
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${accent} border border-gray-200`}
                 >
                   {icon}
                 </div>
@@ -178,13 +178,12 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       {/* ── Governance ─────────────────────────────────────────────────── */}
-      <section className="py-8 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-xs sm:max-w-xl mx-auto flex flex-col gap-8 text-center">
+      <section className="py-8 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-xs sm:max-w-3xl mx-auto flex flex-col gap-6 text-center">
           <div className="mb-4">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               {t("governance.title")}
             </h2>
-            <p className="text-gray-500 max-w-xl mx-auto">{t("team.subtitle")}</p>
           </div>
           <p className="text-left sm:text-lg text-gray-600 leading-relaxed whitespace-pre-line">
             {t("governance.general")}
@@ -193,21 +192,33 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             {t("governance.finance")}
           </p>
         </div>
-        <div className="mt-12 max-w-3xl mx-auto text-xl sm:text-2xl font-bold text-gray-900 mb-4">
+        <div className="mt-12 max-w-xs sm:max-w-3xl mx-auto text-xl sm:text-2xl font-bold text-gray-900 mb-4">
           <p>Downloads</p>
           <div className="mt-8 flex flex-col gap-8 text-lg font-normal">
-            <div className="flex justify-between items-center border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-2 pr-2">
+            <a
+              href="/documents/Policy_Plan_Pharma4Ghana_2026-2029.docx"
+              download
+              className="flex justify-between items-center border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-2 pr-2"
+            >
               {t("governance.documents.policyPlan")}
               <ArrowDownToLine />
-            </div>
-            <div className="flex justify-between items-center border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-2 pr-2">
+            </a>
+            {/* <a
+              // href="/documents"
+              download
+              className="flex justify-between items-center border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-2 pr-2"
+            >
               {t("governance.documents.annualReport")}
               <ArrowDownToLine />
-            </div>
-            <div className="flex justify-between items-center border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-2 pr-2">
+            </a>
+            <a
+              // href="/documents"
+              download
+              className="flex justify-between items-center border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-2 pr-2"
+            >
               {t("governance.documents.financialStatements")}
               <ArrowDownToLine />
-            </div>
+            </a> */}
           </div>
         </div>
       </section>

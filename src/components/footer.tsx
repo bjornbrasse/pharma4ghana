@@ -16,18 +16,23 @@ export default async function Footer({ locale }: FooterProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <div className="flex items-center">
+            <div className="size-16 relative flex items-center">
               <Image
-                src="/logo-cropped.jpg"
+                src="/images/logo.png"
                 alt="Pharma4Ghana"
                 width={180}
                 height={198}
-                className="h-16 w-auto object-contain brightness-0 invert"
+                className="h-18 absolute top-0 w-auto object-contain brightness-0 invert"
+              />
+              <Image
+                src="/images/logo.png"
+                alt="Pharma4Ghana"
+                width={180}
+                height={198}
+                className="h-14 absolute top-2 left-1 w-auto object-contain"
               />
             </div>
-            <p className="text-green-100 text-sm leading-relaxed max-w-xs">
-              {t("tagline")}
-            </p>
+            <p className="text-green-100 text-sm leading-relaxed max-w-xs">{t("tagline")}</p>
             {/* Social links (placeholder) */}
             <div>
               <p className="text-xs font-semibold text-green-200 uppercase tracking-wide mb-2">
@@ -71,6 +76,7 @@ export default async function Footer({ locale }: FooterProps) {
                   { href: "/", label: nav("home") },
                   { href: "/ghana", label: nav("ghana") },
                   { href: "/about", label: nav("about") },
+                  { href: "/activities", label: nav("activities") },
                   { href: "/messages", label: nav("messages") },
                   { href: "/contact", label: nav("contact") },
                 ] as { href: string; label: string }[]
@@ -153,16 +159,16 @@ export default async function Footer({ locale }: FooterProps) {
                 <span>{t("address")}</span>
               </li>
             </ul>
-            <div className="mt-8">
+            {/* <div className="mt-8">
               <span className="text-ghana-gold">RSIN: </span> {t("RSIN")}
-            </div>
+            </div> */}
           </div>
         </div>
 
         {/* Bottom bar */}
         <div className="mt-10 pt-6 border-t border-ghana-green-light flex flex-col sm:flex-row justify-between items-center gap-2">
           <p className="text-green-200 text-xs">{t("copyright")}</p>
-          <p className="text-green-300 text-xs">{t("nonprofit")}</p>
+          {/* <p className="text-green-300 text-xs">{t("nonprofit")}</p> */}
         </div>
       </div>
     </footer>

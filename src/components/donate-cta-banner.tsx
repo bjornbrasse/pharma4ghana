@@ -1,5 +1,5 @@
 import { HeartHandshakeIcon } from "lucide-react";
-import { Link } from "@/i18n/navigation";
+import DonationNoticeButton from "@/components/donation-notice-button";
 
 export default function DonateCtaBanner({
   locale,
@@ -25,13 +25,12 @@ export default function DonateCtaBanner({
           </p>
         </div>
 
-        <Link
-          href="/donate"
+        <DonationNoticeButton
           locale={locale}
           className="inline-flex items-center justify-center rounded-full bg-ghana-gold px-6 py-3 text-sm font-semibold text-gray-900 transition-colors hover:bg-yellow-300"
         >
           {ctaLabel}
-        </Link>
+        </DonationNoticeButton>
       </div>
     </section>
   );

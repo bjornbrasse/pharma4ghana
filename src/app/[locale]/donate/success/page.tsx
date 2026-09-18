@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import DonationNoticeButton from "@/components/donation-notice-button";
 import { Link } from "@/i18n/navigation";
 
 export async function generateMetadata({
@@ -89,12 +90,11 @@ export default async function DonateSuccessPage({
               >
                 {t("successPage.actions.home")}
               </Link>
-              <Link
-                href="/donate"
+              <DonationNoticeButton
                 className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-6 py-3 text-base font-semibold text-gray-800 transition-colors hover:border-ghana-green hover:text-ghana-green"
               >
                 {t("successPage.actions.donate")}
-              </Link>
+              </DonationNoticeButton>
             </div>
           </div>
 

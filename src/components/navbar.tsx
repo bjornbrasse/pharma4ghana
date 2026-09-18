@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 import { Link } from "@/i18n/navigation";
 import { useState } from "react";
 import Image from "next/image";
+import DonationNoticeButton from "@/components/donation-notice-button";
 
 interface NavbarProps {
   locale: string;
@@ -20,6 +21,7 @@ export default function Navbar({ locale }: NavbarProps) {
     { href: "/", label: t("home") },
     { href: "/about", label: t("about") },
     { href: "/ghana", label: t("ghana") },
+    { href: "/activities", label: t("activities") },
     { href: "/messages", label: t("messages") },
     { href: "/contact", label: t("contact") },
   ];
@@ -63,15 +65,16 @@ export default function Navbar({ locale }: NavbarProps) {
   return (
     <header className="bg-white border-b border-gray-100 sticky top-0 z-50 shadow-sm">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0">
             <Image
-              src="/logo-cropped.jpg"
+              // src="/logo-cropped.jpg"
+              src="/images/logo.png"
               alt="Pharma4Ghana"
               width={180}
               height={198}
-              className="h-14 w-auto object-contain"
+              className="h-10 sm:h-14 w-auto object-contain"
               priority
             />
           </Link>
@@ -79,14 +82,17 @@ export default function Navbar({ locale }: NavbarProps) {
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
-              const isActive = link.href === "/" ? pathname === "/" : pathname === link.href || pathname.startsWith(link.href + "/");
+              const isActive =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname === link.href || pathname.startsWith(link.href + "/");
               return (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={`px-4 py-2.5 rounded-md text-base font-medium transition-colors ${
                     isActive
-                      ? "text-ghana-green bg-green-50 font-semibold"
+                      ? "text-ghana-green bg-ghana-green/10 font-semibold"
                       : "text-gray-600 hover:text-ghana-green hover:bg-green-50"
                   }`}
                 >
@@ -111,12 +117,12 @@ export default function Navbar({ locale }: NavbarProps) {
             </button>
 
             {/* Donate button (desktop) */}
-            <Link
-              href="/donate"
+            <DonationNoticeButton
               className="hidden md:inline-flex items-center px-6 py-2 text-sm font-semibold rounded-md bg-ghana-green text-white hover:bg-ghana-green-dark transition-colors"
+              unavailableClassName="hidden md:inline-flex items-center px-6 py-2 text-sm font-semibold rounded-md bg-gray-300 text-gray-600 hover:bg-gray-200 transition-colors"
             >
               {t("donateButton")}
-            </Link>
+            </DonationNoticeButton>
 
             {/* Hamburger (mobile) */}
             <button
@@ -125,12 +131,7 @@ export default function Navbar({ locale }: NavbarProps) {
               aria-label="Toggle menu"
               aria-expanded={menuOpen}
             >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {menuOpen ? (
                   <path
                     strokeLinecap="round"
@@ -155,7 +156,10 @@ export default function Navbar({ locale }: NavbarProps) {
         {menuOpen && (
           <div className="md:hidden pb-3 pt-1 border-t border-gray-100 space-y-1">
             {navLinks.map((link) => {
-              const isActive = link.href === "/" ? pathname === "/" : pathname === link.href || pathname.startsWith(link.href + "/");
+              const isActive =
+                link.href === "/"
+                  ? pathname === "/"
+                  : pathname === link.href || pathname.startsWith(link.href + "/");
               return (
                 <Link
                   key={link.href}
@@ -171,13 +175,12 @@ export default function Navbar({ locale }: NavbarProps) {
                 </Link>
               );
             })}
-            <Link
-              href="/donate"
-              onClick={() => setMenuOpen(false)}
+            <DonationNoticeButton
               className="block mt-2 px-6 py-2 text-sm font-semibold rounded-md bg-ghana-green text-white text-center hover:bg-ghana-green-dark transition-colors"
+              unavailableClassName="block w-full mt-2 px-6 py-2 text-sm font-semibold rounded-md bg-gray-300 text-gray-600 text-center hover:bg-gray-200 transition-colors"
             >
               {t("donateButton")}
-            </Link>
+            </DonationNoticeButton>
           </div>
         )}
       </nav>

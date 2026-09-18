@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import DonateForm from "@/components/donate-form";
+import { redirect } from "next/navigation";
+import { paymentFunctionAvailable } from "@/lib/payment-config";
 
 export async function generateMetadata({
   params,
@@ -24,6 +26,10 @@ export default async function DonatePage({
   const { status } = await searchParams;
   setRequestLocale(locale);
 
+  if (!paymentFunctionAvailable) {
+    redirect(`/${locale}`);
+  }
+
   const t = await getTranslations({ locale, namespace: "donate" });
   const stripeEnabled = Boolean(process.env.STRIPE_SECRET_KEY);
 
@@ -34,9 +40,7 @@ export default async function DonatePage({
           <p className="text-ghana-gold text-sm font-semibold uppercase tracking-[0.2em] mb-4">
             {t("hero.header")}
           </p>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            {t("hero.title")}
-          </h1>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">{t("hero.title")}</h1>
           <p className="text-green-100 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
             {t("hero.subtitle")}
           </p>
@@ -68,11 +72,7 @@ export default async function DonatePage({
               <div className="rounded-4xl bg-white p-8 shadow-sm border border-gray-100">
                 <h2 className="text-2xl font-bold text-gray-900 mb-5">{t("impact.title")}</h2>
                 <div className="space-y-4">
-                  {([
-                    "scholarships",
-                    "materials",
-                    "mentorship",
-                  ] as const).map((key) => (
+                  {(["scholarships", "materials", "mentorship"] as const).map((key) => (
                     <div key={key} className="rounded-2xl bg-gray-50 p-5 border border-gray-100">
                       <h3 className="text-base font-bold text-gray-900 mb-2">
                         {t(`impact.items.${key}.title`)}

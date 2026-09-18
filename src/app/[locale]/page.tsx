@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import DonationNoticeButton from "@/components/donation-notice-button";
 import { Link } from "@/i18n/navigation";
 
 export async function generateMetadata({
@@ -11,11 +13,7 @@ export async function generateMetadata({
   return { title: "Pharma4Ghana" };
 }
 
-export default async function HomePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
@@ -57,12 +55,9 @@ export default async function HomePage({
               >
                 {t("hero.ctaLearnMore")}
               </Link>
-              <Link
-                href="/donate"
-                className="px-6 py-3 rounded-lg bg-ghana-gold text-gray-900 font-semibold hover:bg-yellow-300 transition-colors"
-              >
+              <DonationNoticeButton className="px-6 py-3 rounded-lg bg-ghana-gold text-gray-900 font-semibold hover:bg-yellow-300 transition-colors">
                 {t("hero.ctaDonate")}
-              </Link>
+              </DonationNoticeButton>
             </div>
           </div>
         </div>
@@ -78,9 +73,7 @@ export default async function HomePage({
               { value: t("stats.partners"), label: t("stats.partnersLabel") },
             ].map((stat) => (
               <div key={stat.label} className="py-8 text-center">
-                <p className="text-3xl sm:text-4xl font-bold text-ghana-gold mb-1">
-                  {stat.value}
-                </p>
+                <p className="text-3xl sm:text-4xl font-bold text-ghana-gold mb-1">{stat.value}</p>
                 <p className="text-green-200 text-sm font-medium">{stat.label}</p>
               </div>
             ))}
@@ -88,40 +81,50 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* ── Mission ──────────────────────────────────────────────── */}
-      <section className="pt-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-8 h-0.5 bg-ghana-red" />
-            <span className="text-ghana-green text-sm font-semibold uppercase tracking-wider">
-              {t("mission.title")}
-            </span>
-            <div className="w-8 h-0.5 bg-ghana-gold" />
-          </div>
-          <p className="text-gray-700 text-lg sm:text-xl leading-relaxed">
-            {t("mission.body")}
-          </p>
-        </div>
-      </section>
-
-      {/* ── Vision ──────────────────────────────────────────────── */}
+      {/* ── Mission & Vision ────────────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 mb-4">
-            <div className="w-8 h-0.5 bg-ghana-red" />
-            <span className="text-ghana-green text-sm font-semibold uppercase tracking-wider">
-              {t("vision.title")}
-            </span>
-            <div className="w-8 h-0.5 bg-ghana-gold" />
+        <div className="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[minmax(0,1fr)_28rem]">
+          <div className="space-y-14 text-center lg:text-left">
+            <div>
+              <div className="inline-flex items-center gap-2 mb-4">
+                <div className="w-8 h-0.5 bg-ghana-red" />
+                <span className="text-ghana-green text-sm font-semibold uppercase tracking-wider">
+                  {t("mission.title")}
+                </span>
+                <div className="w-8 h-0.5 bg-ghana-gold" />
+              </div>
+              <p className="text-gray-700 text-lg sm:text-xl leading-relaxed">
+                {t("mission.body")}
+              </p>
+            </div>
+
+            <div>
+              <div className="inline-flex items-center gap-2 mb-4">
+                <div className="w-8 h-0.5 bg-ghana-red" />
+                <span className="text-ghana-green text-sm font-semibold uppercase tracking-wider">
+                  {t("vision.title")}
+                </span>
+                <div className="w-8 h-0.5 bg-ghana-gold" />
+              </div>
+              <p className="text-gray-700 text-lg sm:text-xl leading-relaxed whitespace-pre-line">
+                {t("vision.body")}
+              </p>
+            </div>
           </div>
-          <p className="text-gray-700 text-lg sm:text-xl leading-relaxed">
-            {t("vision.body")}
-          </p>
+          <div className="relative hidden aspect-square w-full overflow-hidden lg:block">
+            <Image
+              src="/images/Pharma4Ghana.png"
+              alt="Pharma4Ghana"
+              fill
+              className="object-contain"
+              sizes="448px"
+            />
+          </div>
         </div>
       </section>
 
       {/* ── Impact cards ─────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -133,7 +136,7 @@ export default async function HomePage({
           <div className="md:max-w-4xl md:mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Scholarships */}
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-ghana-green/10 flex items-center justify-center mb-6">
+              <div className="w-12 h-12 rounded-xl border border-gray-200 bg-ghana-green/10 flex items-center justify-center mb-6">
                 <svg
                   className="w-6 h-6 text-ghana-green"
                   fill="none"
@@ -162,7 +165,7 @@ export default async function HomePage({
 
             {/* Mentorship */}
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-ghana-gold/20 flex items-center justify-center mb-6">
+              <div className="w-12 h-12 rounded-xl border border-gray-200 bg-ghana-gold/20 flex items-center justify-center mb-6">
                 <svg
                   className="w-6 h-6 text-yellow-600"
                   fill="none"
@@ -185,7 +188,7 @@ export default async function HomePage({
 
             {/* Resources */}
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-ghana-red/10 flex items-center justify-center mb-6">
+              <div className="w-12 h-12 rounded-xl border border-gray-200 bg-ghana-red/10 flex items-center justify-center mb-6">
                 <svg
                   className="w-6 h-6 text-ghana-red"
                   fill="none"
@@ -208,7 +211,7 @@ export default async function HomePage({
 
             {/* Exchange */}
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-indigo-700/10 flex items-center justify-center mb-6">
+              <div className="w-12 h-12 rounded-xl border border-gray-200 bg-indigo-700/10 flex items-center justify-center mb-6">
                 <svg
                   className="w-6 h-6 text-indigo-700"
                   fill="none"
@@ -223,9 +226,7 @@ export default async function HomePage({
                   />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">
-                {t("impact.exchange.title")}
-              </h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">{t("impact.exchange.title")}</h3>
               <p className="text-gray-600 leading-relaxed">{t("impact.exchange.body")}</p>
             </div>
           </div>
@@ -235,16 +236,20 @@ export default async function HomePage({
       {/* ── CTA Banner ───────────────────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-ghana-gold">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            {t("cta.title")}
-          </h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{t("cta.title")}</h2>
           <p className="text-gray-700 text-lg mb-8">{t("cta.body")}</p>
-          <Link
-            href="/donate"
-            className="inline-flex items-center px-8 py-4 rounded-xl bg-ghana-green text-white font-bold text-lg hover:bg-ghana-green-dark transition-colors shadow-lg"
-          >
-            {t("cta.button")}
-          </Link>
+          <div className="flex flex-wrap justify-center gap-4">
+            <DonationNoticeButton className="inline-flex items-center px-4 py-2 sm:px-8 sm:py-4 rounded-xl bg-ghana-green text-white font-bold text-lg hover:bg-ghana-green-dark transition-colors shadow-lg">
+              {t("cta.button")}
+            </DonationNoticeButton>
+            <Link
+              href="/about"
+              scroll
+              className="inline-flex items-center px-4 py-2 sm:px-8 md:py-4 rounded-xl bg-gray-200 text-gray-800 font-bold text-lg hover:bg-gray-300 transition-colors"
+            >
+              {t("hero.ctaLearnMore")}
+            </Link>
+          </div>
         </div>
       </section>
     </>

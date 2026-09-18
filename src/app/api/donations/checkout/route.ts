@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { paymentFunctionAvailable } from "@/lib/payment-config";
 
 export const runtime = "nodejs";
 
@@ -29,6 +30,10 @@ function getStripeClient() {
 }
 
 export async function POST(request: NextRequest) {
+  if (!paymentFunctionAvailable) {
+    return NextResponse.json({ error: "Donations are temporarily unavailable." }, { status: 503 });
+  }
+
   try {
     const body = (await request.json()) as {
       amount?: unknown;
