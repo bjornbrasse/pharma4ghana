@@ -1,7 +1,7 @@
 import { ArrowDownToLine, EarthIcon, HandshakeIcon, KeyRoundIcon, TabletsIcon } from "lucide-react";
 import type { Metadata } from "next";
-import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image.js";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -14,10 +14,30 @@ export async function generateMetadata({
 }
 
 const teamMembers = [
-  { key: "barbara" as const, initial: "BM", color: "bg-ghana-green", image: "/images/members/barbara_avatar.jpg" },
-  { key: "hans" as const, initial: "HR", color: "bg-ghana-green-dark", image: "/images/members/hans_avatar.jpg" },
-  { key: "trea" as const, initial: "TK", color: "bg-ghana-green-light", image: "/images/members/trea_avatar.jpg" },
-  { key: "bjorn" as const, initial: "BB", color: "bg-ghana-green", image: "/images/members/bjorn_avatar.jpg" },
+  {
+    key: "barbara" as const,
+    initial: "BM",
+    color: "bg-ghana-green",
+    image: "/images/members/barbara_avatar.jpg",
+  },
+  {
+    key: "hans" as const,
+    initial: "HR",
+    color: "bg-ghana-green-dark",
+    image: "/images/members/hans_avatar.jpg",
+  },
+  {
+    key: "trea" as const,
+    initial: "TK",
+    color: "bg-ghana-green-light",
+    image: "/images/members/trea_avatar.jpg",
+  },
+  {
+    key: "bjorn" as const,
+    initial: "BB",
+    color: "bg-ghana-green",
+    image: "/images/members/bjorn_avatar.jpg",
+  },
 ];
 
 const values = [
@@ -43,11 +63,7 @@ const values = [
   },
 ];
 
-export default async function AboutPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
@@ -58,9 +74,7 @@ export default async function AboutPage({
       {/* ── Hero ─────────────────────────────────────────────────── */}
       <section className="bg-ghana-green py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold text-green-100 mb-6">
-            {t("hero.title")}
-          </h1>
+          <h1 className="text-4xl sm:text-5xl font-bold text-green-100 mb-6">{t("hero.title")}</h1>
           <p className="text-ghana-gold text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
             {t("hero.subtitle")}
           </p>
@@ -68,7 +82,7 @@ export default async function AboutPage({
       </section>
 
       {/* ── Our Story ────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -103,6 +117,38 @@ export default async function AboutPage({
         </div>
       </section>
 
+      {/* ── Team ─────────────────────────────────────────────────── */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{t("team.title")}</h2>
+            <p className="text-gray-500 max-w-xl mx-auto">{t("team.subtitle")}</p>
+          </div>
+
+          <div className="mx-auto grid max-w-56 grid-cols-1 gap-8 sm:max-w-none sm:grid-cols-4 sm:gap-6">
+            {teamMembers.map(({ key, image }) => (
+              <div key={key} className="flex items-center gap-4 sm:flex-col sm:gap-0">
+                <div className="size-24 shrink-0 rounded-full flex items-center justify-center overflow-hidden border-3 border-gray-300 shadow sm:mx-auto sm:mb-4">
+                  <Image
+                    width={200}
+                    height={200}
+                    src={image}
+                    alt={t(`team.members.${key}.name`)}
+                    className="object-fill"
+                  />
+                </div>
+                <div className="flex min-w-0 flex-col text-left">
+                  <h3 className="font-semibold text-gray-900 text-sm">
+                    {t(`team.members.${key}.name`)}
+                  </h3>
+                  <p className="text-gray-500 text-xs mt-1">{t(`team.members.${key}.role`)}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── Values ───────────────────────────────────────────────── */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-7xl mx-auto">
@@ -118,50 +164,13 @@ export default async function AboutPage({
                 key={key}
                 className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
               >
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${accent}`}>
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center mb-5 ${accent}`}
+                >
                   {icon}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
-                  {t(`values.${key}.title`)}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {t(`values.${key}.body`)}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── Team ─────────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              {t("team.title")}
-            </h2>
-            <p className="text-gray-500 max-w-xl mx-auto">{t("team.subtitle")}</p>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {teamMembers.map(({ key, initial, color, image }) => (
-              <div key={key} className="text-center">
-                {/* <div
-                  className={`w-20 h-20 rounded-full ${color} flex items-center justify-center mx-auto mb-4`}
-                >
-                  <span className="text-white font-bold text-lg">{initial}</span>
-                </div> */}
-                <div
-                  className={`size-12 sm:size-24 rounded-full flex items-center justify-center overflow-hidden border-3 border-gray-300 mx-auto shadow mb-4`}
-                >
-                 <Image width={200} height={200} src={image} alt="barbara_photo" className="object-fill"/>
-                </div>
-                <h3 className="font-semibold text-gray-900 text-sm">
-                  {t(`team.members.${key}.name`)}
-                </h3>
-                <p className="text-gray-500 text-xs mt-1">
-                  {t(`team.members.${key}.role`)}
-                </p>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{t(`values.${key}.title`)}</h3>
+                <p className="text-gray-600 leading-relaxed">{t(`values.${key}.body`)}</p>
               </div>
             ))}
           </div>
@@ -169,40 +178,39 @@ export default async function AboutPage({
       </section>
 
       {/* ── Governance ─────────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-3xl mx-auto flex flex-col gap-8 text-center">
-         <div className="text-center mb-4">
+      <section className="py-8 sm:py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div className="max-w-xs sm:max-w-xl mx-auto flex flex-col gap-8 text-center">
+          <div className="mb-4">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               {t("governance.title")}
             </h2>
             <p className="text-gray-500 max-w-xl mx-auto">{t("team.subtitle")}</p>
           </div>
-          <p className="text-gray-700 text-lg sm:text-xl leading-relaxed whitespace-pre-line">
+          <p className="text-left sm:text-lg text-gray-600 leading-relaxed whitespace-pre-line">
             {t("governance.general")}
           </p>
-          <p className="text-gray-700 text-lg sm:text-xl leading-relaxed whitespace-pre-line">
+          <p className="text-left sm:text-lg text-gray-600 leading-relaxed whitespace-pre-line">
             {t("governance.finance")}
           </p>
         </div>
         <div className="mt-12 max-w-3xl mx-auto text-xl sm:text-2xl font-bold text-gray-900 mb-4">
-          <p>
-            Downloads
-            </p>
-          <div className="mt-8 flex justify-between items-center text-xl font-normal border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-3 pr-2">
-            Beleidsplan Stichting Pharma4Ghana
-            <ArrowDownToLine />
-          </div>
-          <div className="mt-8 flex justify-between items-center text-xl font-normal border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-3 pr-2">
-            Jaarverslag 2026
-            <ArrowDownToLine />
-          </div>
-          <div className="mt-8 flex justify-between items-center text-xl font-normal border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-3 pr-2">
-            Financiële verantwoording 2026
-            <ArrowDownToLine />
+          <p>Downloads</p>
+          <div className="mt-8 flex flex-col gap-8 text-lg font-normal">
+            <div className="flex justify-between items-center border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-2 pr-2">
+              {t("governance.documents.policyPlan")}
+              <ArrowDownToLine />
+            </div>
+            <div className="flex justify-between items-center border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-2 pr-2">
+              {t("governance.documents.annualReport")}
+              <ArrowDownToLine />
+            </div>
+            <div className="flex justify-between items-center border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-2 pr-2">
+              {t("governance.documents.financialStatements")}
+              <ArrowDownToLine />
+            </div>
           </div>
         </div>
       </section>
-
     </>
   );
 }
