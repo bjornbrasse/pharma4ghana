@@ -45,9 +45,8 @@ Copy the environment template before testing payments:
 cp .env.example .env.local
 ```
 
-Configure a Stripe test secret, one Stripe Price ID for every preset amount, and the legal
-organization details used on donation receipts. Keep donations disabled until those values have
-been verified:
+Configure a Stripe test secret and one Stripe Price ID for every preset amount. Keep donations
+disabled until those values have been verified:
 
 ```bash
 STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key

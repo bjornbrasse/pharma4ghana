@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import ReceiptLeaveGuard from "@/components/receipt-leave-guard";
 import {
   formatDonationAmount,
   formatDonationDate,
@@ -61,6 +62,7 @@ export default async function DonateSuccessPage({
 
   return (
     <>
+      <ReceiptLeaveGuard downloadUrl={receiptDownloadUrl} />
       <section className="bg-ghana-green px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-ghana-gold">

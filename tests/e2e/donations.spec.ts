@@ -41,8 +41,27 @@ test.describe("donation checkout", () => {
     await expect(page.getByRole("heading", { level: 2, name: "Donation receipt" })).toBeVisible();
     await expect(page.getByText("€20.00")).toBeVisible();
     await expect(page.getByText("Test Donor")).toBeVisible();
-    await expect(page.getByText("123456789")).toBeVisible();
+    await expect(page.getByText("RSIN number")).toBeVisible();
     await expect(page.getByText("Pharma4Ghana - supporting pharmacy education")).toBeVisible();
+
+    await page.getByRole("link", { name: "Back to home" }).click();
+
+    const leaveWarning = page.getByRole("dialog", {
+      name: "Download your receipt before leaving",
+    });
+    await expect(leaveWarning).toBeVisible();
+    await expect(leaveWarning.getByRole("button", { name: "I don't need a receipt" })).toHaveClass(
+      /text-red-700/,
+    );
+
+    await leaveWarning.getByRole("button", { name: "Stay on this page" }).click();
+    await expect(leaveWarning).toHaveCount(0);
+
+    await page.getByRole("link", { name: "Back to home" }).click();
+    const download = page.waitForEvent("download");
+    await leaveWarning.getByRole("button", { name: "Download receipt" }).click();
+    await download;
+    await expect(page).toHaveURL(/\/en$/);
   });
 });
 

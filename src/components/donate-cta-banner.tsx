@@ -13,7 +13,7 @@ export default function DonateCtaBanner({
   ctaLabel: string;
 }) {
   return (
-    <section className="rounded-[2rem] bg-ghana-green px-6 py-8 text-white shadow-sm sm:px-8 sm:py-10">
+    <section className="rounded-4xl bg-ghana-green px-6 py-8 text-white shadow-sm sm:px-8 sm:py-10">
       <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div className="max-w-2xl">
           <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-ghana-gold">

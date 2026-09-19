@@ -343,6 +343,13 @@
       "noConsideration": "No goods or services were supplied in exchange for this voluntary contribution.",
       "downloadPdf": "Download PDF",
       "home": "Back to home",
+      "leaveWarning": {
+        "title": "Download your receipt before leaving",
+        "body": "Your donation receipt is generated only once. Download it now for your records before leaving this page.",
+        "download": "Download receipt",
+        "decline": "I don't need a receipt",
+        "close": "Stay on this page"
+      },
       "messageTitle": "What happens next",
       "messageBody": "We use contributions like yours to support scholarships, practical study materials, and mentorship that helps students complete their education with confidence.",
       "impactTitle": "Your donation helps make this possible",

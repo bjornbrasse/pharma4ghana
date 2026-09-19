@@ -343,6 +343,13 @@
       "noConsideration": "Voor deze vrijwillige bijdrage zijn geen goederen of diensten geleverd.",
       "downloadPdf": "Download PDF",
       "home": "Terug naar home",
+      "leaveWarning": {
+        "title": "Download uw donatiebewijs voordat u vertrekt",
+        "body": "Uw donatiebewijs wordt slechts eenmalig gegenereerd. Download het nu voor uw administratie voordat u deze pagina verlaat.",
+        "download": "Download donatiebewijs",
+        "decline": "Ik heb geen donatiebewijs nodig",
+        "close": "Blijf op deze pagina"
+      },
       "messageTitle": "Wat er nu gebeurt",
       "messageBody": "Bijdragen zoals die van u worden ingezet voor studiebeurzen, praktische leermiddelen en mentorschap dat studenten helpt hun opleiding met vertrouwen af te ronden.",
       "impactTitle": "Uw donatie maakt dit mede mogelijk",
