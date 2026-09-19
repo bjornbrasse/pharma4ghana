@@ -109,8 +109,9 @@ function getLabels(locale: DonationLocale) {
       beneficiary: "Begunstigde",
       purpose: "Doel",
       paragraphOne:
-        "Dit document bevestigt dat Pharma4Ghana een vrijwillige donatie heeft ontvangen ten behoeve van onderwijssteun in Ghana.",
-      paragraphTwo: "Er zijn geen goederen of diensten geleverd in ruil voor deze bijdrage.",
+        "Dit document bevestigt dat Pharma4Ghana een vrijwillige donatie heeft ontvangen ten behoeve van onderwijssteun in Ghana. Er zijn geen goederen of diensten geleverd in ruil voor deze bijdrage.",
+      paragraphTwo: "Stichting Pharma4Ghana is in Nederland aangemerkt als Algemeen Nut Beogende Instelling (ANBI).",
+      paragraphThree: "Bewaar dit bewijs samen met uw betalingsadministratie.",
       generated: "Automatisch gegenereerd op basis van Stripe Checkout.",
     };
   }
@@ -138,9 +139,9 @@ function getLabels(locale: DonationLocale) {
     donorAddress: "Address",
     beneficiary: "Beneficiary",
     purpose: "Purpose",
-    paragraphOne:
-      "This document confirms that Pharma4Ghana received a voluntary donation in support of education in Ghana.",
-    paragraphTwo: "No goods or services were provided in exchange for this contribution.",
+    paragraphOne: "This receipt confirms that Stichting Pharma4Ghana received the voluntary donation stated above. No goods or services were provided in exchange for this donation.",
+    paragraphTwo: "Stichting Pharma4Ghana is registered in the Netherlands as an Algemeen Nut Beogende Instelling (ANBI).",
+    paragraphThree: "Please retain this receipt together with your payment records for your administration.",
     generated: "Automatically generated from Stripe Checkout data.",
   };
 }
@@ -192,7 +193,8 @@ export async function renderDonationReceiptPdf(receipt: DonationReceipt): Promis
             <Text style={styles.label}>{labels.orgCountryLabel}</Text>
             <Text style={styles.value}>{receipt.organization.country}</Text>
           </View>
-          <View style={styles.row}>
+         {receipt.locale === 'nl' && (<>
+           <View style={styles.row}>
             <Text style={styles.label}>{labels.orgRegistrationLabel}</Text>
             <Text style={styles.value}>{receipt.organization.registrationNumber}</Text>
           </View>
@@ -200,7 +202,12 @@ export async function renderDonationReceiptPdf(receipt: DonationReceipt): Promis
             <Text style={styles.label}>{labels.orgTaxLabel}</Text>
             <Text style={styles.value}>{receipt.organization.rsin}</Text>
           </View>
-        </View>
+          <View style={styles.row}>
+            <Text style={styles.label}>ANBI-status</Text>
+            <Text style={styles.value}>Algemeen Nut Beogende Instelling (ANBI)</Text>
+          </View>
+         </>)}
+         </View>
 
         <View style={styles.section}>
           <View style={styles.row}>
@@ -258,6 +265,7 @@ export async function renderDonationReceiptPdf(receipt: DonationReceipt): Promis
 
         <Text style={styles.paragraph}>{labels.paragraphOne}</Text>
         <Text style={styles.paragraph}>{labels.paragraphTwo}</Text>
+        <Text style={styles.paragraph}>{labels.paragraphThree}</Text>
         <Text style={styles.footer}>{labels.generated}</Text>
       </Page>
     </Document>
