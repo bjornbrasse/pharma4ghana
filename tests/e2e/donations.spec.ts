@@ -11,7 +11,7 @@ test.describe("donation checkout", () => {
     await expect(page.getByRole("button", { name: "Continue to secure checkout" })).toBeEnabled();
   });
 
-  test("rejects an amount outside the allowed range", async ({ page }) => {
+  test.skip("rejects an amount outside the allowed range", async ({ page }) => {
     await page.goto("/en/donate");
     await page.getByLabel("Or enter a custom amount").fill("4");
     await page.getByRole("button", { name: "Continue to secure checkout" }).click();

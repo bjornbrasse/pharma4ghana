@@ -1,0 +1,47 @@
+# .github/workflows/deploy.yml
+
+name: Test and Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Playwright E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Run Playwright tests
+        run: pnpm test:e2e
+
+  deploy:
+    name: Deploy to Netlify
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger Netlify deploy
+        run: curl -X POST -d '{}' "${{ secrets.NETLIFY_BUILD_HOOK }}"
