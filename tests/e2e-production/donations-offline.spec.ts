@@ -1,4 +1,24 @@
 import { expect, test } from "@playwright/test";
+import { donationPages } from "../donation-ctas";
+
+test("shows the unavailable notice from every donation button", async ({ page }) => {
+  for (const { path, ctas } of donationPages) {
+    await page.goto(path);
+
+    for (const { name, count } of ctas) {
+      const donationButtons = page.getByRole("button", { name, exact: true });
+      await expect(donationButtons).toHaveCount(count);
+
+      for (let index = 0; index < count; index += 1) {
+        await donationButtons.nth(index).click();
+        await expect(
+          page.getByRole("dialog", { name: "Donations temporarily unavailable" }),
+        ).toBeVisible();
+        await page.getByRole("button", { name: "Close donation notice" }).click();
+      }
+    }
+  }
+});
 
 test("redirects the donation page when payments are offline in production", async ({ page }) => {
   await page.goto("/en/donate");

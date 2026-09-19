@@ -1,4 +1,17 @@
 import { expect, test } from "@playwright/test";
+import { donationPages } from "../donation-ctas";
+
+test("does not show the unavailable notice when donations are available", async ({ page }) => {
+  for (const { path, ctas } of donationPages) {
+    await page.goto(path);
+
+    for (const { name, count } of ctas) {
+      await expect(page.getByRole("link", { name, exact: true })).toHaveCount(count);
+    }
+
+    await expect(page.getByText("Donations temporarily unavailable")).toHaveCount(0);
+  }
+});
 
 test.describe("donation checkout", () => {
   test("opens the donation route in development", async ({ page }) => {

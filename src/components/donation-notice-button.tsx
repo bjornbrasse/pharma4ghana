@@ -64,7 +64,6 @@ export default function DonationNoticeButton({
     <>
       <button
         type="button"
-        aria-disabled="true"
         aria-haspopup="dialog"
         aria-expanded={open}
         onClick={openNotice}
