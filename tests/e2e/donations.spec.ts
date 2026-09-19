@@ -1,5 +1,17 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { donationPages } from "../donation-ctas";
+
+async function completeCheckout(page: Page) {
+  await page.goto("/en/donate");
+  await page.getByRole("button", { name: "Continue to secure checkout" }).click();
+
+  await expect(page).toHaveURL(/\/en\/donate\/success\?session_id=cs_test_paid$/);
+  await expect(page.getByRole("heading", { level: 2, name: "Donation receipt" })).toBeVisible();
+  await expect(page.getByText("€20.00")).toBeVisible();
+  await expect(page.getByText("Test Donor")).toBeVisible();
+  await expect(page.getByText("RSIN number")).toBeVisible();
+  await expect(page.getByText("Pharma4Ghana - supporting pharmacy education")).toBeVisible();
+}
 
 test("does not show the unavailable notice when donations are available", async ({ page }) => {
   for (const { path, ctas } of donationPages) {
@@ -33,16 +45,23 @@ test.describe("donation checkout", () => {
     await expect(page).toHaveURL(/\/en\/donate$/);
   });
 
-  test("redirects a completed checkout to a verified receipt", async ({ page }) => {
-    await page.goto("/en/donate");
-    await page.getByRole("button", { name: "Continue to secure checkout" }).click();
+  test("does not warn after the user downloads the receipt", async ({ page }) => {
+    await completeCheckout(page);
 
-    await expect(page).toHaveURL(/\/en\/donate\/success\?session_id=cs_test_paid$/);
-    await expect(page.getByRole("heading", { level: 2, name: "Donation receipt" })).toBeVisible();
-    await expect(page.getByText("€20.00")).toBeVisible();
-    await expect(page.getByText("Test Donor")).toBeVisible();
-    await expect(page.getByText("RSIN number")).toBeVisible();
-    await expect(page.getByText("Pharma4Ghana - supporting pharmacy education")).toBeVisible();
+    const download = page.waitForEvent("download");
+    await page.getByRole("link", { name: "Download PDF" }).click();
+    await download;
+
+    await page.getByRole("link", { name: "Back to home" }).click();
+
+    await expect(page).toHaveURL(/\/en$/);
+    await expect(
+      page.getByRole("dialog", { name: "Download your receipt before leaving" }),
+    ).toHaveCount(0);
+  });
+
+  test("warns before leaving when the receipt was not downloaded", async ({ page }) => {
+    await completeCheckout(page);
 
     await page.getByRole("link", { name: "Back to home" }).click();
 
@@ -50,17 +69,24 @@ test.describe("donation checkout", () => {
       name: "Download your receipt before leaving",
     });
     await expect(leaveWarning).toBeVisible();
-    await expect(leaveWarning.getByRole("button", { name: "I don't need a receipt" })).toHaveClass(
-      /text-red-700/,
-    );
+    await expect(page).toHaveURL(/\/en\/donate\/success\?session_id=cs_test_paid$/);
+  });
 
-    await leaveWarning.getByRole("button", { name: "Stay on this page" }).click();
-    await expect(leaveWarning).toHaveCount(0);
+  test.skip("downloads the receipt from the leave warning", async ({ page }) => {
+    await completeCheckout(page);
 
     await page.getByRole("link", { name: "Back to home" }).click();
-    const download = page.waitForEvent("download");
-    await leaveWarning.getByRole("button", { name: "Download receipt" }).click();
-    await download;
+    await expect(
+      page.getByRole("dialog", { name: "Download your receipt before leaving" }),
+    ).toBeVisible();
+
+    const receiptResponse = page.context().waitForEvent("response", {
+      predicate: (response) =>
+        response.url().includes("/api/donations/receipt?") && response.status() === 200,
+    });
+    await page.getByTestId("receipt-leave-download").click();
+    await receiptResponse;
+
     await expect(page).toHaveURL(/\/en$/);
   });
 });

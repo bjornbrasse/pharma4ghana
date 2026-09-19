@@ -125,6 +125,7 @@ export default function ReceiptLeaveGuard({ downloadUrl }: ReceiptLeaveGuardProp
           <button
             type="button"
             onClick={downloadAndLeave}
+            data-testid="receipt-leave-download"
             className="inline-flex items-center justify-center gap-2 rounded-md bg-ghana-gold px-5 py-3 text-sm font-bold text-ghana-green hover:bg-ghana-gold-dark"
           >
             <Download className="size-4" aria-hidden="true" />
