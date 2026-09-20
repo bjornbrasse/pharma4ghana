@@ -129,7 +129,7 @@ export default async function ActivitiesPage({ params }: { params: Promise<{ loc
 
                   {section.downloads?.length ? (
                     <div className="mt-4 pt-6">
-                      <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-gray-500">
+                      <h3 className="mb-3 ml-1 text-sm font-semibold uppercase tracking-[0.15em] text-gray-500">
                         {t("downloadsLabel")}
                       </h3>
                       <div className="flex flex-col gap-3">

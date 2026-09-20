@@ -193,8 +193,8 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <p className="text-left sm:text-lg text-gray-600 leading-relaxed whitespace-pre-line">
             {t("governance.finance")}
           </p>
-          <div className="mt-9 border-t border-gray-200 text-left pt-6">
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-gray-500">
+          <div className="mt-2 border-t border-gray-200 text-left pt-6">
+            <h3 className="mb-3 ml-1 text-sm font-semibold uppercase tracking-[0.15em] text-gray-500">
               Downloads
             </h3>
             <div className="flex flex-col gap-3">
