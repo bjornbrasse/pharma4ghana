@@ -121,6 +121,9 @@ export default async function MessagePostPage({
             {t("publishedOn")} {formatMessageDate(appLocale, post.publishedAt)}
           </p>
           <h1 className="text-4xl font-bold text-white sm:text-5xl">{post.title}</h1>
+          {post.author && (
+            <p className="mt-4 text-xl sm:text-xl leading-7 text-green-400">{post.author}</p>
+          )}
           <p className="mt-6 max-w-3xl text-lg leading-relaxed text-green-100 sm:text-xl">
             {post.synopsis}
           </p>

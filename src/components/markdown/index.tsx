@@ -53,7 +53,6 @@ export function Markdown({ children }: MarkdownProps) {
           <strong className="font-semibold text-gray-900">{children}</strong>
         ),
         em: ({ children }) => <em>{children}</em>,
-        ins: ({ children }) => <span className="underline underline-offset-2">{children}</span>,
         a: ({ href, children }) => {
           if (!href) {
             return <>{children}</>;
@@ -67,7 +66,7 @@ export function Markdown({ children }: MarkdownProps) {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-medium text-ghana-green underline underline-offset-2"
+                className="font-medium text-ghana-green/80 hover:text-ghana-green underline underline-offset-2"
               >
                 {children}
               </a>
@@ -105,6 +104,12 @@ export function Markdown({ children }: MarkdownProps) {
             </span>
           );
         },
+        code: ({ children }) => (
+          <span className="text-base font-mono sm:text-lg leading-8 bg-gray-200/70 text-gray-700 px-1 py-0.5 rounded-sm">
+            {children}
+          </span>
+        ),
+        ins: ({ children }) => <span className="underline underline-offset-2">{children}</span>,
       }}
     >
       {children}

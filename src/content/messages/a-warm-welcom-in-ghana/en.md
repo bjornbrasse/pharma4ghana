@@ -7,12 +7,12 @@ imageAlt: "HAI students in class"
 
 ## Our first weeks
 
-At the Health Access Institute (HAI), students are trained to become Pharmacy Technicians (comparable to a pharmacy assistant in The Netherlands) over three years. Many students also combine their studies with a job. They work after their classes from 3:00 PM to 10:00 PM, which we admire a lot. We mainly work on assignments to contribute to the organization of and around the lessons.
-Today, we were also allowed to give a lesson to the first-year students about ++gastrointestinal medicines++. The students had covered this topic in the past two weeks, and our task was to test their knowledge. The students participated enthusiastically and were eager to answer as many questions correctly as possible (and win Dutch *stroopwafels*!). It was very enjoyable to contribute to the education in this way. We hope that Kahoots will be included in many more lessons!
+At the Health Access Institute (HAI), students are trained to become Pharmacy Technicians (comparable to a pharmacy assistant in The Netherlands) over three years. Many students also combine their studies with a job. They work after their classes from 3 to 10 PM, which we admire a lot. We mainly work on assignments to contribute to the organization of and around the lessons.
+Today, we were also allowed to give a lesson to the first-year students about `gastrointestinal medicines`. The students had covered this topic in the past two weeks, and our task was to test their knowledge. The students participated enthusiastically and were eager to answer as many questions correctly as possible (and win Dutch *stroopwafels* !). It was very enjoyable to contribute to the education in this way. We hope that Kahoots will be included in many more lessons!
 
 ![Jasmijn en Jasmijn teach the students](/images/Jasmijn_en_Jasmijn_voor_klas_HAI2.jpg)
 
-We are under the guidance of Dr. Charles Allotey. He pays a lot of attention to establishing and maintaining contacts. Therefore, we have already made various trips to different pharmacies, the National Vaccines Institute (NVI), Die Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ), the Food and Drugs Authority (FDA), and much more.
+We are under the guidance of Dr. Charles Allotey. He pays a lot of attention to establishing and maintaining contacts. Therefore, we have already made various trips to different pharmacies, the National Vaccines Institute (NVI), [Die Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ)](https://www.giz.de/de), the Food and Drugs Authority (FDA), and many more.
 
 ## Warm welcome
 
