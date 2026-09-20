@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import DonateCtaBanner from "@/components/donate-cta-banner";
-import { formatMessageDate, getLocalizedMessagePosts, type AppLocale } from "@/data/messages";
+import { AppLocale, formatMessageDate, getLocalizedMessagePosts } from "@/lib/messages";
 import { Link } from "@/i18n/navigation";
 import { getAbsoluteSiteUrl } from "@/lib/site-url";
 

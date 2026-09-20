@@ -3,15 +3,23 @@ import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import DonateCtaBanner from "@/components/donate-cta-banner";
+// import {
+//   getLocalizedMessagePost,
+//   getLocalizedMessagePosts,
+//   getMessagePostSlugs,
+//   type AppLocale,
+// } from "@/data/messages";
+import { Link } from "@/i18n/navigation";
+import { getAbsoluteSiteUrl } from "@/lib/site-url";
+import { Markdown } from "@/components/markdown";
 import {
+  AppLocale,
   formatMessageDate,
+  getLinkedInHashtagUrl,
   getLocalizedMessagePost,
   getLocalizedMessagePosts,
   getMessagePostSlugs,
-  type AppLocale,
-} from "@/data/messages";
-import { Link } from "@/i18n/navigation";
-import { getAbsoluteSiteUrl } from "@/lib/site-url";
+} from "@/lib/messages";
 
 function getStableOrderValue(seed: string) {
   let hash = 0;
@@ -41,9 +49,7 @@ export async function generateMetadata({
   }
 
   const url = getAbsoluteSiteUrl(`/${appLocale}/messages/${post.slug}`);
-  const imageUrl = getAbsoluteSiteUrl(
-    post.ogImage ?? `/images/og/messages/${post.slug}.jpg`,
-  );
+  const imageUrl = getAbsoluteSiteUrl(post.ogImage ?? `/images/og/messages/${post.slug}.jpg`);
   return {
     title: post.title,
     description: post.synopsis,
@@ -85,7 +91,7 @@ export default async function MessagePostPage({
   const appLocale: AppLocale = locale === "nl" ? "nl" : "en";
   const t = await getTranslations({ locale, namespace: "messagesPage" });
   const post = getLocalizedMessagePost(slug, appLocale);
-  const externalLinks = post?.externalLinks ?? (post?.externalLink ? [post.externalLink] : []);
+  const externalLinks = post?.externalLinks;
   const relatedPosts = getLocalizedMessagePosts(appLocale)
     .filter((entry) => entry.slug !== slug)
     .map((entry) => ({
@@ -135,13 +141,9 @@ export default async function MessagePostPage({
             </div>
 
             <article className="space-y-6 px-6 py-8 sm:px-10 sm:py-10">
-              {post.body.map((paragraph) => (
-                <p key={paragraph} className="text-base leading-8 text-gray-700 sm:text-lg">
-                  {paragraph}
-                </p>
-              ))}
+              <Markdown>{post.content}</Markdown>
 
-              {post.checklist?.length ? (
+              {/* {post.checklist?.length ? (
                 <ul className="space-y-3 rounded-3xl bg-green-50 px-5 py-5 text-base text-gray-700 sm:text-lg">
                   {post.checklist.map((item) => (
                     <li key={item} className="flex gap-3">
@@ -150,9 +152,9 @@ export default async function MessagePostPage({
                     </li>
                   ))}
                 </ul>
-              ) : null}
+              ) : null} */}
 
-              {post.supportList?.length ? (
+              {/* {post.supportList?.length ? (
                 <ul className="space-y-2 pl-5 text-base leading-8 text-gray-700 sm:text-lg">
                   {post.supportList.map((item) => (
                     <li key={item} className="list-disc">
@@ -160,7 +162,7 @@ export default async function MessagePostPage({
                     </li>
                   ))}
                 </ul>
-              ) : null}
+              ) : null} */}
 
               {externalLinks.length ? (
                 <div className="flex flex-wrap gap-3 pt-1">
@@ -186,13 +188,13 @@ export default async function MessagePostPage({
                 <div className="flex flex-wrap gap-3 pt-2">
                   {post.hashtags.map((hashtag) => (
                     <a
-                      key={hashtag.label}
-                      href={hashtag.href}
+                      key={hashtag}
+                      href={getLinkedInHashtagUrl(hashtag)}
                       target="_blank"
                       rel="noreferrer"
                       className="rounded-full bg-green-50 px-3 py-1 text-sm font-medium text-ghana-green transition-colors hover:bg-green-100"
                     >
-                      {hashtag.label}
+                      {hashtag}
                     </a>
                   ))}
                 </div>
@@ -216,12 +218,8 @@ export default async function MessagePostPage({
               <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-ghana-gold">
                 {t("related.eyebrow")}
               </p>
-              <h2 className="text-3xl font-bold text-white sm:text-4xl">
-                {t("related.title")}
-              </h2>
-              <p className="mt-4 text-lg leading-relaxed text-green-100">
-                {t("related.subtitle")}
-              </p>
+              <h2 className="text-3xl font-bold text-white sm:text-4xl">{t("related.title")}</h2>
+              <p className="mt-4 text-lg leading-relaxed text-green-100">{t("related.subtitle")}</p>
             </div>
 
             <div className="grid gap-6 lg:grid-cols-3">
