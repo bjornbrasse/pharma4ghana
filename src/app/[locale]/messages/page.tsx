@@ -2,11 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import DonateCtaBanner from "@/components/donate-cta-banner";
-import {
-  formatMessageDate,
-  getLocalizedMessagePosts,
-  type AppLocale,
-} from "@/data/messages";
+import { formatMessageDate, getLocalizedMessagePosts, type AppLocale } from "@/data/messages";
 import { Link } from "@/i18n/navigation";
 import { getAbsoluteSiteUrl } from "@/lib/site-url";
 
@@ -48,11 +44,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function MessagesPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function MessagesPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   setRequestLocale(locale);
 
@@ -67,9 +59,7 @@ export default async function MessagesPage({
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-ghana-gold">
             {t("hero.eyebrow")}
           </p>
-          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            {t("hero.title")}
-          </h1>
+          <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">{t("hero.title")}</h1>
           <p className="text-green-100 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
             {t("hero.subtitle")}
           </p>
@@ -79,9 +69,7 @@ export default async function MessagesPage({
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="mx-auto max-w-5xl space-y-10">
           <div className="max-w-3xl">
-            <p className="text-base leading-8 text-gray-600 sm:text-lg">
-              {t("intro")}
-            </p>
+            <p className="text-base leading-8 text-gray-600 sm:text-lg">{t("intro")}</p>
           </div>
 
           <div className="space-y-5">
@@ -90,7 +78,7 @@ export default async function MessagesPage({
                 key={post.slug}
                 href={`/messages/${post.slug}`}
                 locale={locale}
-                className="group block overflow-hidden rounded-[2rem] border border-gray-100 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                className="group block overflow-hidden rounded-4xl border border-gray-100 bg-white shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
               >
                 <article className="grid gap-0 md:grid-cols-[220px_1fr]">
                   <div className="relative min-h-52 bg-gray-100">
@@ -98,7 +86,7 @@ export default async function MessagesPage({
                       src={post.image}
                       alt={post.imageAlt}
                       fill
-                      className="object-cover"
+                      className={"object-cover " + post.imageClasses}
                       sizes="(max-width: 768px) 100vw, 220px"
                     />
                   </div>
@@ -110,6 +98,11 @@ export default async function MessagesPage({
                     <h2 className="text-2xl font-bold text-gray-900 transition-colors group-hover:text-ghana-green">
                       {post.title}
                     </h2>
+                    {post.author && (
+                      <p className="text-sm leading-7 text-ghana-green/50 sm:text-base">
+                        {post.author}
+                      </p>
+                    )}
                     <p className="mt-3 text-sm leading-7 text-gray-600 sm:text-base">
                       {post.synopsis}
                     </p>

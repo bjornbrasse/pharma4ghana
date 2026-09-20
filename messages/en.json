@@ -233,6 +233,31 @@
       "policyPlan": "Policy Plan 2026–2029"
     }
   },
+  "messagesPage": {
+    "meta": {
+      "title": "Messages",
+      "description": "Read the latest Pharma4Ghana messages, reflections, and field updates in reverse chronological order."
+    },
+    "hero": {
+      "eyebrow": "Stories from the field",
+      "title": "Messages & Updates",
+      "subtitle": "Short reflections from our work, our partners, and the students we support in Ghana."
+    },
+    "intro": "This page collects our latest messages in one place. We publish short updates whenever there is something concrete to share from the classroom, the partnership, or the students we support.",
+    "publishedOn": "Published",
+    "readMore": "Read article",
+    "back": "Back to all messages",
+    "related": {
+      "eyebrow": "Continue reading",
+      "title": "Explore other messages",
+      "subtitle": "More updates from our work, our partners, and the students we support in Ghana."
+    },
+    "donateBanner": {
+      "title": "Help turn these updates into lasting progress",
+      "body": "Every donation helps us support students with scholarships, study materials, and practical mentoring that stays close to their education.",
+      "button": "Donate now"
+    }
+  },
   "contact": {
     "hero": {
       "title": "Get in Touch",
@@ -365,31 +390,6 @@
       "title": "Why Stripe in Next.js",
       "body": "Stripe is the cleaner choice here: strong TypeScript support, a simple server-side Checkout flow, and a well-tested integration model for Next.js route handlers.",
       "methods": "If you later want a more Netherlands-first payment stack, Mollie is still a valid option. For this app, Stripe is the faster and lower-risk integration."
-    }
-  },
-  "messagesPage": {
-    "meta": {
-      "title": "Messages",
-      "description": "Read the latest Pharma4Ghana messages, reflections, and field updates in reverse chronological order."
-    },
-    "hero": {
-      "eyebrow": "Stories from the field",
-      "title": "Messages & Updates",
-      "subtitle": "Short reflections from our work, our partners, and the students we support in Ghana."
-    },
-    "intro": "This page collects our latest messages in one place. We publish short updates whenever there is something concrete to share from the classroom, the partnership, or the students we support.",
-    "publishedOn": "Published",
-    "readMore": "Read article",
-    "back": "Back to all messages",
-    "related": {
-      "eyebrow": "Continue reading",
-      "title": "Explore other messages",
-      "subtitle": "More updates from our work, our partners, and the students we support in Ghana."
-    },
-    "donateBanner": {
-      "title": "Help turn these updates into lasting progress",
-      "body": "Every donation helps us support students with scholarships, study materials, and practical mentoring that stays close to their education.",
-      "button": "Donate now"
     }
   },
   "footer": {

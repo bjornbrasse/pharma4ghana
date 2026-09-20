@@ -34,6 +34,7 @@ export default async function GhanaPage({ params }: { params: Promise<{ locale: 
           src="/taking the large.jpg"
           alt={t("hero.imageAlt")}
           fill
+          preload
           priority
           className="object-cover object-right sm:object-center"
           sizes="100vw"

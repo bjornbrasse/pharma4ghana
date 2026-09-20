@@ -233,6 +233,31 @@
       "policyPlan": "Beleidsplan 2026–2029"
     }
   },
+  "messagesPage": {
+    "meta": {
+      "title": "Berichten",
+      "description": "Lees de nieuwste berichten, reflecties en veldupdates van Pharma4Ghana in omgekeerde chronologische volgorde."
+    },
+    "hero": {
+      "eyebrow": "Verhalen uit de praktijk",
+      "title": "Berichten & Updates",
+      "subtitle": "Korte reflecties uit ons werk, van onze partners en van de studenten die wij in Ghana ondersteunen."
+    },
+    "intro": "Op deze pagina verzamelen we onze nieuwste berichten op één plek. We plaatsen korte updates zodra er iets concreets te delen is uit het onderwijs, de samenwerking of de ondersteuning van studenten.",
+    "publishedOn": "Gepubliceerd op",
+    "readMore": "Lees artikel",
+    "back": "Terug naar alle berichten",
+    "related": {
+      "eyebrow": "Lees verder",
+      "title": "Ontdek meer berichten",
+      "subtitle": "Meer updates uit ons werk, van onze partners en van de studenten die wij in Ghana ondersteunen."
+    },
+    "donateBanner": {
+      "title": "Help deze updates om te zetten in blijvende vooruitgang",
+      "body": "Elke donatie helpt ons studenten te ondersteunen met studiebeurzen, studiematerialen en praktisch mentorschap dat dicht bij hun opleiding blijft.",
+      "button": "Doneer nu"
+    }
+  },
   "contact": {
     "hero": {
       "title": "Neem contact op",
@@ -365,31 +390,6 @@
       "title": "Waarom Stripe in Next.js",
       "body": "Stripe is hier de pragmatische keuze: sterke TypeScript-ondersteuning, een eenvoudige server-side Checkout-flow en een goed bewezen integratiemodel voor Next.js route handlers.",
       "methods": "Als u later een meer Nederland-gerichte betaalstack wilt, blijft Mollie een goede optie. Voor deze app is Stripe de snellere en minder risicovolle integratie."
-    }
-  },
-  "messagesPage": {
-    "meta": {
-      "title": "Berichten",
-      "description": "Lees de nieuwste berichten, reflecties en veldupdates van Pharma4Ghana in omgekeerde chronologische volgorde."
-    },
-    "hero": {
-      "eyebrow": "Verhalen uit de praktijk",
-      "title": "Berichten & Updates",
-      "subtitle": "Korte reflecties uit ons werk, van onze partners en van de studenten die wij in Ghana ondersteunen."
-    },
-    "intro": "Op deze pagina verzamelen we onze nieuwste berichten op één plek. We plaatsen korte updates zodra er iets concreets te delen is uit het onderwijs, de samenwerking of de ondersteuning van studenten.",
-    "publishedOn": "Gepubliceerd op",
-    "readMore": "Lees artikel",
-    "back": "Terug naar alle berichten",
-    "related": {
-      "eyebrow": "Lees verder",
-      "title": "Ontdek meer berichten",
-      "subtitle": "Meer updates uit ons werk, van onze partners en van de studenten die wij in Ghana ondersteunen."
-    },
-    "donateBanner": {
-      "title": "Help deze updates om te zetten in blijvende vooruitgang",
-      "body": "Elke donatie helpt ons studenten te ondersteunen met studiebeurzen, studiematerialen en praktisch mentorschap dat dicht bij hun opleiding blijft.",
-      "button": "Doneer nu"
     }
   },
   "footer": {
