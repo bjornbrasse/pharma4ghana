@@ -82,7 +82,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* ── Mission & Vision ────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="px-4 sm:px-6 py-8 sm:py-16 lg:px-8 bg-white border-b border-gray-200">
         <div className="mx-auto grid max-w-6xl items-center gap-8 lg:grid-cols-[minmax(0,1fr)_28rem]">
           <div className="space-y-14 text-center lg:text-left">
             <div>
@@ -124,7 +124,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* ── Impact cards ────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100">
+      <section className="px-4 sm:px-6 py-8 sm:py-16 lg:px-8 bg-gray-100">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -234,7 +234,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       {/* ── CTA Banner ───────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-ghana-gold">
+      <section className="px-4 sm:px-6 lg:px-8 py-8 sm:py-16 bg-ghana-gold">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{t("cta.title")}</h2>
           <p className="text-gray-700 text-lg mb-8">{t("cta.body")}</p>

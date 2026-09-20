@@ -54,21 +54,21 @@ export default async function MessagesPage({ params }: { params: Promise<{ local
 
   return (
     <>
-      <section className="bg-ghana-green px-4 py-16 sm:px-6 lg:px-8">
+      <section className="bg-ghana-green px-4 sm:px-6 py-8 sm:py-16 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-ghana-gold">
             {t("hero.eyebrow")}
           </p>
           <h1 className="text-4xl sm:text-5xl font-bold text-white mb-6">{t("hero.title")}</h1>
-          <p className="text-green-100 text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
+          <p className="text-green-100 text-md sm:text-xl leading-relaxed max-w-2xl mx-auto">
             {t("hero.subtitle")}
           </p>
         </div>
       </section>
 
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <section className="py-10 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="mx-auto max-w-5xl space-y-10">
-          <div className="max-w-3xl">
+          <div className="space-y-2">
             <p className="text-base leading-8 text-gray-600 sm:text-lg">{t("intro")}</p>
           </div>
 

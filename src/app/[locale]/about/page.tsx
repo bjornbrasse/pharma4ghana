@@ -1,7 +1,8 @@
-import { ArrowDownToLine, EarthIcon, HandshakeIcon, KeyRoundIcon, TabletsIcon } from "lucide-react";
+import { DownloadItem } from "@/components/download-item";
+import { EarthIcon, HandshakeIcon, KeyRoundIcon, TabletsIcon } from "lucide-react";
 import type { Metadata } from "next";
-import Image from "next/image.js";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import Image from "next/image.js";
 
 export async function generateMetadata({
   params,
@@ -75,7 +76,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       <section className="bg-ghana-green py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-4xl sm:text-5xl font-bold text-green-100 mb-6">{t("hero.title")}</h1>
-          <p className="text-ghana-gold text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
+          <p className="text-ghana-gold text-lg sm:text-xl leading-relaxed max-w-3xl mx-auto">
             {t("hero.subtitle")}
           </p>
         </div>
@@ -87,10 +88,11 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <div className="inline-flex items-center gap-2 mb-4">
-                <div className="w-8 h-0.5 bg-ghana-gold" />
+                <div className="w-8 h-0.5 bg-ghana-red" />
                 <span className="text-ghana-green text-sm font-semibold uppercase tracking-wider">
                   {t("story.title")}
                 </span>
+                <div className="w-8 h-0.5 bg-ghana-gold" />
               </div>
               <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
                 {t("story.title")}
@@ -118,17 +120,17 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       {/* ── Team ─────────────────────────────────────────────────── */}
-      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="px-4 sm:px-6 lg:px-8 py-8 sm:py-16 bg-white border-y border-gray-200">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">{t("team.title")}</h2>
             <p className="text-gray-500 max-w-2xl mx-auto">{t("team.subtitle")}</p>
           </div>
 
-          <div className="mx-auto grid max-w-56 grid-cols-1 gap-8 sm:max-w-none sm:grid-cols-4 sm:gap-6">
+          <div className="mx-auto grid max-w-54 sm:max-w-4xl grid-cols-1  sm:grid-cols-4 gap-8 sm:gap-6">
             {teamMembers.map(({ key, image }) => (
               <div key={key} className="flex items-center gap-4 sm:flex-col sm:gap-0">
-                <div className="size-24 shrink-0 rounded-full flex items-center justify-center overflow-hidden border-3 border-gray-300 shadow sm:mx-auto sm:mb-4">
+                <div className="size-24 sm:size-36 shrink-0 rounded-full flex items-center justify-center overflow-hidden border-3 border-gray-300 shadow sm:mx-auto sm:mb-4">
                   <Image
                     width={200}
                     height={200}
@@ -150,7 +152,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       {/* ── Values ───────────────────────────────────────────────── */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-100">
+      <section className="bg-gray-100 py-8 sm:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -178,7 +180,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
       </section>
 
       {/* ── Governance ─────────────────────────────────────────────────── */}
-      <section className="py-8 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+      <section className="px-4 sm:px-6 lg:px-8 py-8 sm:py-16 bg-gray-50 border-t border-gray-200">
         <div className="max-w-xs sm:max-w-3xl mx-auto flex flex-col gap-6 text-center">
           <div className="mb-4">
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
@@ -191,35 +193,20 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <p className="text-left sm:text-lg text-gray-600 leading-relaxed whitespace-pre-line">
             {t("governance.finance")}
           </p>
-        </div>
-        <div className="mt-12 max-w-xs sm:max-w-3xl mx-auto text-xl sm:text-2xl font-bold text-gray-900 mb-4">
-          <p>Downloads</p>
-          <div className="mt-8 flex flex-col gap-8 text-lg font-normal">
-            <a
+          <div className="mt-9 border-t border-gray-200 text-left pt-6">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-gray-500">
+              Downloads
+            </h3>
+            <div className="flex flex-col gap-3">
+              <DownloadItem
               // href="/documents/Policy_Plan_Pharma4Ghana_2026-2029.docx"
-              href="#"
-              download
-              className="flex justify-between items-center border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-2 pr-2"
-            >
-              {t("governance.documents.policyPlan")} - coming soon
-              <ArrowDownToLine />
-            </a>
-            {/* <a
-              // href="/documents"
-              download
-              className="flex justify-between items-center border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-2 pr-2"
-            >
-              {t("governance.documents.annualReport")}
-              <ArrowDownToLine />
-            </a>
-            <a
-              // href="/documents"
-              download
-              className="flex justify-between items-center border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-2 pr-2"
-            >
-              {t("governance.documents.financialStatements")}
-              <ArrowDownToLine />
-            </a> */}
+              >
+                {t("governance.documents.policyPlan")} - coming soon
+              </DownloadItem>
+              {/* <DownloadItem href="/documents/Policy_Plan_Pharma4Ghana_2026-2029.docx">
+                {t("governance.documents.policyPlan")} - coming soon
+              </DownloadItem> */}
+            </div>
           </div>
         </div>
       </section>

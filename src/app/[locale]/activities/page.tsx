@@ -1,9 +1,18 @@
-import { Download, GraduationCap, HandHeart, MonitorPlay, RefreshCw } from "lucide-react";
+import { DownloadItem } from "@/components/download-item";
+import { GraduationCap, HandHeart, MonitorPlay, RefreshCw } from "lucide-react";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Image from "next/image";
 
-const activitySections = [
+type ActivitySection = {
+  key: "grant" | "exchange" | "webinars" | "support";
+  icon: React.ReactNode;
+  accent: string;
+  image: string | null;
+  downloads?: { title: string; href: string }[];
+};
+
+const activitySections: ActivitySection[] = [
   {
     key: "grant" as const,
     icon: <GraduationCap aria-hidden="true" />,
@@ -23,19 +32,12 @@ const activitySections = [
     icon: <MonitorPlay aria-hidden="true" />,
     accent: "bg-ghana-gold/20 text-yellow-600",
     image: null,
-    downloads: [],
   },
   {
     key: "support" as const,
     icon: <HandHeart aria-hidden="true" />,
     accent: "bg-ghana-red/10 text-ghana-red",
     image: "/images/posts/books.jpeg",
-    downloads: [
-      {
-        key: "policyPlan" as const,
-        href: "/documents/Policy_Plan_Pharma4Ghana_2026-2029.docx",
-      },
-    ],
   },
 ];
 
@@ -125,24 +127,16 @@ export default async function ActivitiesPage({ params }: { params: Promise<{ loc
                     ) : null}
                   </div>
 
-                  {section.downloads.length ? (
-                    <div className="mt-9 border-t border-gray-200 pt-6">
+                  {section.downloads?.length ? (
+                    <div className="mt-4 pt-6">
                       <h3 className="mb-3 text-sm font-semibold uppercase tracking-[0.15em] text-gray-500">
                         {t("downloadsLabel")}
                       </h3>
                       <div className="flex flex-col gap-3">
                         {section.downloads.map((download) => (
-                          <a
-                            key={download.href}
-                            href={download.href}
-                            download
-                            className="flex min-w-0 items-center justify-between gap-3 rounded-md border border-gray-200 bg-white px-4 py-3 font-semibold text-gray-800 transition-colors hover:border-ghana-green hover:text-ghana-green"
-                          >
-                            <span className="min-w-0 wrap-break-word">
-                              {t(`downloads.${download.key}`)}
-                            </span>
-                            <Download className="size-5 shrink-0" aria-hidden="true" />
-                          </a>
+                          <DownloadItem key={download.href} href={download.href}>
+                            {t(`downloads.${download.title}`)}
+                          </DownloadItem>
                         ))}
                       </div>
                     </div>

@@ -35,7 +35,6 @@ export default async function GhanaPage({ params }: { params: Promise<{ locale: 
           alt={t("hero.imageAlt")}
           fill
           preload
-          priority
           className="object-cover object-right sm:object-center"
           sizes="100vw"
         />
@@ -53,14 +52,15 @@ export default async function GhanaPage({ params }: { params: Promise<{ locale: 
         </div>
       </section>
 
-      <section className="bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-8 bg-white border-b border-gray-200 ">
         <div className="mx-auto grid max-w-6xl gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-start">
           <div>
-            <div className="mb-4 flex items-center gap-3">
-              <div className="h-0.5 w-8 bg-ghana-gold" />
-              <p className="text-sm font-semibold uppercase tracking-wider text-ghana-green">
+            <div className="inline-flex items-center gap-2 mb-4">
+              <div className="w-8 h-0.5 bg-ghana-red" />
+              <span className="text-ghana-green text-sm font-semibold uppercase tracking-wider">
                 {t("intro.eyebrow")}
-              </p>
+              </span>
+              <div className="w-8 h-0.5 bg-ghana-gold" />
             </div>
             <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl">{t("intro.title")}</h2>
             <div className="mt-6 space-y-5 text-lg leading-8 text-gray-600">
