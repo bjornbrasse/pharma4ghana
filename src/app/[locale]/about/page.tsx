@@ -196,11 +196,12 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           <p>Downloads</p>
           <div className="mt-8 flex flex-col gap-8 text-lg font-normal">
             <a
-              href="/documents/Policy_Plan_Pharma4Ghana_2026-2029.docx"
+              // href="/documents/Policy_Plan_Pharma4Ghana_2026-2029.docx"
+              href="#"
               download
               className="flex justify-between items-center border-b border-gray-900 hover:border-ghana-red hover:text-ghana-red cursor-pointer pb-2 pr-2"
             >
-              {t("governance.documents.policyPlan")}
+              {t("governance.documents.policyPlan")} - coming soon
               <ArrowDownToLine />
             </a>
             {/* <a
