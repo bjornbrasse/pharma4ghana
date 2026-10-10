@@ -154,31 +154,39 @@
       "items": {
         "director": {
           "label": "Meet the director",
-          "title": "Leadership rooted in local needs",
-          "body": "The institute's director connects educational ambition with the realities of healthcare in Ghana. By listening to students and teachers, the school can invest in the skills, materials and opportunities that matter most.",
-          "testimonial": "For the director, Pharma4Ghana is a committed partner that listens first and helps turn shared plans into lasting progress.",
-          "imageAlt": "Green landscape in Ghana"
+          "title": "Dr. Charles Allotey",
+          "body": "As director and founder of HAI, dr. Charles Allotey is committed to increasing access to practical and scientific education, thereby strengthening healthcare in Ghana. His ambition is to offer more programs and train more people who can support the healthcare system. Although the need for well-trained healthcare professionals is great, obtaining sufficient resources and facilities for practical education remains a significant challenge.",
+          "testimonial": "Pharma4Ghana is a unique initiative, precisely because it originated from the experiences of people who encountered the Ghanaian healthcare system during their own studies. It is important that this involvement continues and that the collaboration is maintained.",
+          "imageAlt": "Portrait of Dr. Charles Allotey"
         },
-        "teacher": {
-          "label": "Meet a teacher",
-          "title": "Knowledge made practical",
-          "body": "Teachers help students translate pharmaceutical theory into confident daily practice. Current reference materials, practical exercises and contact with fellow professionals strengthen both their lessons and the wider learning environment.",
-          "testimonial": "For teachers, Pharma4Ghana creates access to resources and professional exchange that can be used directly in the classroom.",
-          "imageAlt": "Pharmaceutical reference books and study materials"
+        "administrator": {
+          "label": "Meet the staff member",
+          "title": "Roselyn Owusu",
+          "body": "Roselyn Owusu works as an administrative staff member at HAI. Her goal is to create the most optimal environment for students, teachers and everyone involved. She particularly values the interaction between students and teachers, not only during lessons but also beyond. This forms her ambition to make HAI one of the best educational institutions in Ghana. At the same time, the financial dependence on tuition fees poses a major challenge for her work. As a result, she must handle the available resources very carefully to create the best possible learning environment.",
+          "testimonial": "Pharma4Ghana is a very valuable and interesting initiative that helps students alleviate financial pressure in a supportive way. This makes students more motivated and gives them more space to focus on their studies.",
+          "imageAlt": "Portrait of Roselyn Owusu"
         },
         "student": {
           "label": "Meet a student",
-          "title": "Talent with a clear purpose",
-          "body": "Students choose pharmaceutical care because they want to make a concrete difference in their communities. Their training demands perseverance, practical experience and access to resources that are not always within reach.",
-          "testimonial": "For students, Pharma4Ghana means an opportunity to continue learning and move toward a meaningful role in healthcare.",
-          "imageAlt": "Graduating students celebrating together in Ghana"
+          "title": "Danie",
+          "body": "Danie is a first-year Pharmacy Technician student and chose HAI because the school is known for practical education provided by qualified teachers. In his environment, he has seen many people misuse medicines and suffer from conditions that could have been prevented. He wants to contribute by advising people properly, dispensing medicines safely, and thereby saving lives. He looks forward to learning about the preparation of medicines and advising patients.",
+          "testimonial": "Pharma4Ghana stands for hope for Ghana. It contributes to the development of high-quality pharmaceutical care in Ghana.",
+          "imageAlt": "Portrait of Danie",
+          "imageCaption": "Danie with exchange students Jasmijn and Jasmijn"
         },
         "exchangeStudents": {
           "label": "Meet the exchange students",
-          "title": "Learning across borders",
-          "body": "Exchange students bring different professional perspectives into one learning environment. By observing, asking questions and working together, students from Ghana and the Netherlands gain insight that no textbook can provide on its own.",
-          "testimonial": "For exchange students, Pharma4Ghana makes mutual learning possible through relationships built on curiosity, equality and respect.",
-          "imageAlt": "The Pharma4Ghana team together in Ghana"
+          "title": "Jasmijn & Jasmijn",
+          "body": "The exchange at HAI has given Jasmijn and Jasmijn the opportunity to actively contribute to the development of HAI and its education. They believe that good education forms the basis for quality healthcare and are therefore grateful to be able to contribute to this project. What particularly inspires them is the passion and involvement of the students, teachers, and the director. At the same time, they see that the limited availability of resources poses a challenge in providing education.",
+          "testimonial": "Pharma4Ghana provides enormous support for HAI and is a valuable opportunity to exchange knowledge and experiences with passionate fellow students and teachers. This way, everyone learns from each other.",
+          "imageAlt": "Jasmijn & Jasmijn in front of HAI classroom"
+        },
+        "student2": {
+          "label": "Meet a student",
+          "title": "Roy",
+          "body": "Roy is a first-year Pharmacy Technician student and chose this study after his mother was prescribed the wrong medication at the pharmacy. This had major consequences for her health and the family's financial situation. This inspired him to develop into a well-trained healthcare professional to help others and his mother. He is happy with this opportunity at HAI, where he is in an environment with people who share the same interests as him and where everyone can learn from each other. He experiences pressure from the many exams and the large amount of study material, but also from the financial burden of tuition fees.",
+          "testimonial": "Roy sees Pharma4Ghana as a valuable initiative that helps improve pharmaceutical education in Ghana and also provides motivated young people with financial challenges the opportunity to realize their dreams.",
+          "imageAlt": "Students in HAI shirt"
         }
       }
     }

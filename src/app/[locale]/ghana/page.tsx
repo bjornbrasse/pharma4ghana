@@ -4,11 +4,43 @@ import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 
 const profiles = [
-  { key: "director" as const, image: "/taking the large.jpg" },
-  { key: "teacher" as const, image: "/images/posts/books.jpeg" },
-  { key: "student" as const, image: "/images/posts/graduated_students_2026.jpeg" },
-  { key: "exchangeStudents" as const, image: "/group.jpg" },
+  {
+    key: "director" as const,
+    image: "/images/portraits/charles_allotey_portrait.jpg",
+    imagePosition: "object-[center_35%]",
+    wideTestimonial: false,
+  },
+  {
+    key: "administrator" as const,
+    image: "/images/portraits/roselyn_owusu_portrait.jpg",
+    imagePosition: "object-center",
+    wideTestimonial: true,
+  },
+  {
+    key: "student" as const,
+    image: "/images/portraits/jasmijn_jasmijn_danie.jpg",
+    imagePosition: "object-[center_25%]",
+    wideTestimonial: false,
+  },
+  {
+    key: "exchangeStudents" as const,
+    image: "/images/Jasmijn_en_Jasmijn_voor_klas_HAI.jpg",
+    imagePosition: "object-[center_25%]",
+    wideTestimonial: false,
+  },
+  {
+    key: "student2" as const,
+    image: "/images/students_HAI-shirt_Aburi_2026.jpg",
+    imagePosition: "object-[center_25%]",
+    wideTestimonial: true,
+  },
 ];
+
+const testimonialBorderColors = [
+  "border-ghana-gold",
+  "border-ghana-red",
+  "border-ghana-green",
+] as const;
 
 export async function generateMetadata({
   params,
@@ -104,19 +136,24 @@ export default async function GhanaPage({ params }: { params: Promise<{ locale: 
             {profiles.map((profile, index) => (
               <article
                 key={profile.key}
-                className="grid gap-8 py-12 first:pt-0 last:pb-0 md:grid-cols-2 md:items-center md:gap-12"
+                className="grid gap-8 py-12 first:pt-0 last:pb-0 md:grid-cols-2 md:items-start md:gap-12"
               >
-                <div
-                  className={`relative aspect-4/3 overflow-hidden rounded-lg bg-gray-200 ${index % 2 ? "md:order-2" : ""}`}
-                >
-                  <Image
-                    src={profile.image}
-                    alt={t(`profiles.items.${profile.key}.imageAlt`)}
-                    fill
-                    className="object-cover object-center"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                  />
-                </div>
+                <figure className={index % 2 ? "md:order-2" : ""}>
+                  <div className="relative aspect-4/3 overflow-hidden rounded-xl bg-gray-200 shadow-2xl">
+                    <Image
+                      src={profile.image}
+                      alt={t(`profiles.items.${profile.key}.imageAlt`)}
+                      fill
+                      className={`object-cover ${profile.imagePosition} `}
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  </div>
+                  {profile.key === "student" && (
+                    <figcaption className="mt-3 text-sm text-gray-500">
+                      {t("profiles.items.student.imageCaption")}
+                    </figcaption>
+                  )}
+                </figure>
 
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.18em] text-ghana-green">
@@ -125,13 +162,30 @@ export default async function GhanaPage({ params }: { params: Promise<{ locale: 
                   <h3 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl">
                     {t(`profiles.items.${profile.key}.title`)}
                   </h3>
-                  <p className="mt-5 text-base leading-8 text-gray-600 sm:text-lg">
+                  <p
+                    className="mt-5 text-base leading-8 text-gray-600 sm:text-lg"
+                    style={{ whiteSpace: "pre-line" }}
+                  >
                     {t(`profiles.items.${profile.key}.body`)}
                   </p>
-                  <p className="mt-6 border-l-4 border-ghana-gold pl-5 text-lg font-semibold leading-8 text-gray-900">
+                  {!profile.wideTestimonial && (
+                    <p
+                      className={`mt-10 border-l-4 pl-5 text-lg font-semibold italic leading-8 text-gray-700 ${testimonialBorderColors[index % testimonialBorderColors.length]}`}
+                      style={{ whiteSpace: "pre-line" }}
+                    >
+                      {t(`profiles.items.${profile.key}.testimonial`)}
+                    </p>
+                  )}
+                </div>
+
+                {profile.wideTestimonial && (
+                  <p
+                    className={`border-l-4 pl-5 text-lg font-semibold italic leading-8 text-gray-700 md:order-3 md:col-span-2 ${testimonialBorderColors[index % testimonialBorderColors.length]}`}
+                    style={{ whiteSpace: "pre-line" }}
+                  >
                     {t(`profiles.items.${profile.key}.testimonial`)}
                   </p>
-                </div>
+                )}
               </article>
             ))}
           </div>

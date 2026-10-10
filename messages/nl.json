@@ -154,31 +154,39 @@
       "items": {
         "director": {
           "label": "Maak kennis met de directeur",
-          "title": "Leiderschap vanuit lokale behoeften",
-          "body": "De directeur van het instituut verbindt onderwijsambities met de dagelijkse realiteit van de gezondheidszorg in Ghana. Door naar studenten en docenten te luisteren, kan de school investeren in de vaardigheden, materialen en kansen die het belangrijkst zijn.",
-          "testimonial": "Voor de directeur is Pharma4Ghana een betrokken partner die eerst luistert en gezamenlijke plannen helpt omzetten in blijvende vooruitgang.",
-          "imageAlt": "Groen landschap in Ghana"
+          "title": "Dr. Charles Allotey",
+          "body": "Als directeur en oprichter van de HAI zet Dr. Charles Allotey zich in om de toegang tot praktijkgericht en wetenschappelijk onderwijs te vergroten en zo de gezondheidszorg in Ghana te versterken. Zijn ambitie is om meer opleidingen aan te bieden en meer mensen op te leiden die het zorgsysteem kunnen ondersteunen.\nHoewel de behoefte aan goed opgeleide zorgprofessionals groot is, vormt het verkrijgen van voldoende middelen en faciliteiten voor praktijkgericht onderwijs een belangrijke uitdaging.",
+          "testimonial": "Pharma4Ghana is een bijzonder initiatief, juist omdat de organisatie is ontstaan vanuit ervaringen van mensen die tijdens hun eigen studie hebben kennisgemaakt met de Ghanese gezondheidszorg. Het is belangrijk dat deze betrokkenheid blijft bestaan en dat de samenwerking wordt voortgezet",
+          "imageAlt": "Portret van Dr. Charles Allotey"
         },
-        "teacher": {
-          "label": "Maak kennis met een docent",
-          "title": "Kennis praktisch toepasbaar maken",
-          "body": "Docenten helpen studenten farmaceutische theorie te vertalen naar zelfverzekerd dagelijks handelen. Actuele vakliteratuur, praktische oefeningen en contact met collega-professionals versterken zowel hun lessen als de bredere leeromgeving.",
-          "testimonial": "Voor docenten biedt Pharma4Ghana toegang tot middelen en professionele uitwisseling die direct in de les kunnen worden ingezet.",
-          "imageAlt": "Farmaceutische naslagwerken en studiematerialen"
+        "administrator": {
+          "label": "Maak kennis met de medewerker",
+          "title": "Roselyn Owusu",
+          "body": "Roselyn Owusu is werkzaam als administratief medewerker aan de HAI. Haar doel is om de meest optimale omgeving te creëren voor studenten, docenten en iedereen die daarbij betrokken is. Zij waardeert in het bijzonder de interactie tussen studenten en docenten, niet alleen tijdens de lessen, maar ook daarbuiten. Dit vormt haar ambitie om de HAI tot de beste onderwijs instituten van Ghana te laten behoren. Tegelijkertijd vormt de financiële afhankelijkheid van collegegeld een grote uitdaging voor haar werk. Hierdoor dient zij erg zorgvuldig om te gaan met de beschikbare middelen om de best mogelijke leeromgeving te creëren.",
+          "testimonial": "Pharma4Ghana is een erg waardevol en interessant initiatief dat studenten op een ondersteunende manier helpt om de financiële druk te verlichten. Hierdoor worden studenten gemotiveerder en krijgen ze meer ruimte om zich op hun opleiding te richten.",
+          "imageAlt": "Portret van Roselyn Owusu"
         },
         "student": {
           "label": "Maak kennis met een student",
-          "title": "Talent met een duidelijk doel",
-          "body": "Studenten kiezen voor farmaceutische zorg omdat ze een concreet verschil willen maken in hun gemeenschap. Hun opleiding vraagt doorzettingsvermogen, praktijkervaring en toegang tot middelen die niet altijd binnen bereik liggen.",
-          "testimonial": "Voor studenten betekent Pharma4Ghana de kans om door te leren en toe te werken naar een betekenisvolle rol in de gezondheidszorg.",
-          "imageAlt": "Afgestudeerde studenten vieren samen hun diploma in Ghana"
+          "title": "Danie",
+          "body": "Danie is eerstejaarsstudent Pharmacy Technician en heeft voor de HAI gekozen, omdat de school bekend staat om praktijkgericht onderwijs gegeven door gekwalificeerde docenten. In zijn omgeving heeft hij veel mensen gezien die medicijnen verkeerd gebruiken en lijden aan aandoeningen die voorkomen hadden kunnen worden. Hij wil graag bijdragen door mensen goed te adviseren, medicijnen veilig te verstrekken en daarmee levens te redden. Hij kijkt er naar uit om te leren over de bereiding van medicijnen en het adviseren van patiënten.",
+          "testimonial": "Pharma4Ghana staat voor hoop voor Ghana. Het draagt bij aan het ontwikkelen van hoogwaardige farmaceutische zorg in Ghana.",
+          "imageAlt": "Portret van Danie",
+          "imageCaption": "Danie met uitwisselingsstudenten Jasmijn en Jasmijn"
         },
         "exchangeStudents": {
           "label": "Maak kennis met de uitwisselingsstudenten",
-          "title": "Leren over grenzen heen",
-          "body": "Uitwisselingsstudenten brengen verschillende professionele perspectieven samen in één leeromgeving. Door te observeren, vragen te stellen en samen te werken, doen studenten uit Ghana en Nederland inzichten op die geen enkel studieboek op zichzelf kan bieden.",
-          "testimonial": "Voor uitwisselingsstudenten maakt Pharma4Ghana wederzijds leren mogelijk via relaties die zijn gebouwd op nieuwsgierigheid, gelijkwaardigheid en respect.",
-          "imageAlt": "Het team van Pharma4Ghana samen in Ghana"
+          "title": "Jasmijn & Jasmijn",
+          "body": "De uitwisseling aan de HAI heeft Jasmijn en Jasmijn de kans geboden om actief mee te denken over de ontwikkeling van de HAI en het onderwijs. Zij geloven dat goed onderwijs de basis vormt voor kwalitatieve gezondheidszorg en zijn daarom dankbaar dat zij aan dit project mogen bijdragen. Wat hen vooral inspireert, is de passie en betrokkenheid van zowel de studenten, de docenten als de directeur. Tegelijkertijd zien zij dat de beperkte beschikbaarheid van middelen een uitdaging vormt binnen het geven van onderwijs.",
+          "testimonial": "Pharma4Ghana vormt een enorme steun voor de HAI én een waardevolle kans om eigen kennis en ervaringen uit te wisselen met gepassioneerde medestudenten -en docenten. Zo leert iedereen van elkaar.",
+          "imageAlt": "Jasmijn & Jasmijn voor klas HAI"
+        },
+        "student2": {
+          "label": "Maak kennis met een student",
+          "title": "Roy",
+          "body": "Roy is eerstejaarsstudent Pharmacy Technician maakte de keuze om deze studie te volgen nadat zijn moeder verkeerde medicatie kreeg voorgeschreven in de apotheek. Dit had grote gevolgen voor haar gezondheid en de financiële situatie van het gezin. Dit inspireerde hem om zich te ontwikkelen tot een goed opgeleide zorgverlener om zo anderen en zijn moeder te helpen. Hij is blij met deze kans aan de HAI waar hij zich bevindt in een omgeving met mensen met dezelfde interesses als hij en waar iedereen van elkaar kan leren. Hij ervaart druk door de vele tentamens en de grote hoeveelheid aan studiemateriaal, maar ook door de financiële lasten van het collegegeld.",
+          "testimonial": "Roy ziet Pharma4Ghana als een waardevol initiatief dat helpt om het farmaceutisch onderwijs in Ghana te verbeteren en daarnaast gemotiveerde jongeren met financiële uitdagingen kansen biedt om hun dromen waar te maken.",
+          "imageAlt": "Studenten in HAI-shirt"
         }
       }
     }
