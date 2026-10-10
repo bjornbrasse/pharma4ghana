@@ -210,6 +210,23 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
           </div>
         </div>
       </section>
+
+      <section className="overflow-hidden border-t border-gray-200 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+        <div className="mx-auto w-full max-w-6xl px-1 py-4 sm:px-6 lg:w-[62.5%]">
+          <figure className="rotate-[-0.35deg] border border-gray-300 bg-white p-2 shadow-2xl sm:p-4">
+            <div className="border border-gray-200 bg-gray-100 p-1">
+              <Image
+                src="/images/p4g_group.jpg"
+                alt={t("groupPhoto.imageAlt")}
+                width={2718}
+                height={1515}
+                className="h-auto w-full"
+                sizes="(min-width: 1280px) 720px, (min-width: 1024px) 62.5vw, calc(100vw - 2rem)"
+              />
+            </div>
+          </figure>
+        </div>
+      </section>
     </>
   );
 }

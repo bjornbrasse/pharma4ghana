@@ -122,6 +122,9 @@
         "financialStatements": "Financial Statements",
         "policyPlan": "Policy Plan"
       }
+    },
+    "groupPhoto": {
+      "imageAlt": "The Pharma4Ghana group together in Ghana"
     }
   },
   "ghana": {
@@ -150,7 +153,7 @@
     "profiles": {
       "eyebrow": "People and perspectives",
       "title": "Meet the people",
-      "subtitle": "Four perspectives on education, collaboration and the opportunities we want to build together.",
+      "subtitle": "Perspectives on education, collaboration and the opportunities we want to build together.",
       "items": {
         "director": {
           "label": "Meet the director",
