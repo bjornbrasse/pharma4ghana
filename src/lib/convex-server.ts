@@ -27,6 +27,8 @@ type NewsletterArgs = {
 };
 
 export type SubscriptionSyncInput = {
+  stripeEventId: string;
+  stripeEventCreatedAt: number;
   stripeCustomerId: string;
   email: string;
   name?: string;
@@ -35,9 +37,12 @@ export type SubscriptionSyncInput = {
   stripeSubscriptionId: string;
   subscriptionStatus: string;
   cancelAtPeriodEnd: boolean;
-  purpose?: string;
-  amount?: number;
-  currency?: string;
+  purpose: string;
+  amount: number;
+  currency: string;
+  stripePriceId: string;
+  stripeProductId: string;
+  quantity: number;
 };
 
 export type PaidDonationInput = {

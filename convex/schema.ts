@@ -38,6 +38,26 @@ const schema = defineSchema({
     .index("by_stripe_customer", ["stripeCustomerId"])
     .index("by_stripe_subscription", ["stripeSubscriptionId"]),
 
+  donationSubscription: defineTable({
+    donorId: v.id("donor"),
+    stripeSubscriptionId: v.string(),
+    stripeEventId: v.string(),
+    lastStripeEventCreatedAt: v.number(),
+    status: v.string(),
+    cancelAtPeriodEnd: v.boolean(),
+    purpose: v.string(),
+    amount: v.number(),
+    currency: v.string(),
+    stripePriceId: v.string(),
+    stripeProductId: v.optional(v.string()),
+    quantity: v.number(),
+    validFrom: v.number(),
+    validTo: v.optional(v.number()),
+    createdAt: v.number(),
+  })
+    .index("by_stripe_event", ["stripeEventId"])
+    .index("by_donor_and_valid_to", ["donorId", "validTo"]),
+
   donation: defineTable({
     donorId: v.id("donor"),
     stripeEventId: v.string(),

@@ -8,6 +8,7 @@ import {
   syncDonorSubscription,
 } from "@/lib/convex-server";
 import { getStripeClient } from "@/lib/stripe";
+import { getDonationPurposeForProduct } from "@/lib/donation-options";
 
 function getId(value: { id: string } | string | null) {
   return typeof value === "string" ? value : value?.id;
@@ -49,7 +50,14 @@ async function getSubscription(stripeSubscriptionId: string) {
   return getStripeClient().subscriptions.retrieve(stripeSubscriptionId);
 }
 
-async function syncSubscription(subscription: Stripe.Subscription) {
+async function syncSubscription(event: Stripe.Event, subscription: Stripe.Subscription) {
+  if (subscription.metadata.source !== "donation-page") {
+    console.info("Skipped non-donation subscription webhook.", {
+      eventId: event.id,
+      subscriptionId: subscription.id,
+    });
+    return;
+  }
   const stripeCustomerId = getId(subscription.customer);
 
   if (!stripeCustomerId) {
@@ -57,18 +65,38 @@ async function syncSubscription(subscription: Stripe.Subscription) {
   }
 
   const customer = await getCustomer(stripeCustomerId);
-  const price = subscription.items.data[0]?.price;
+  const [item] = subscription.items.data;
+  const price = item?.price;
+  const quantity = item?.quantity ?? 1;
+  if (
+    subscription.items.data.length !== 1 ||
+    !price ||
+    price.unit_amount === null ||
+    price.recurring?.interval !== "month" ||
+    price.recurring.interval_count !== 1
+  ) {
+    throw new Error(`Subscription ${subscription.id} has an unsupported monthly donation price.`);
+  }
+  const stripeProductId = getId(price.product);
+  if (!stripeProductId) {
+    throw new Error(`Subscription ${subscription.id} has no Stripe product.`);
+  }
 
   await syncDonorSubscription({
+    stripeEventId: event.id,
+    stripeEventCreatedAt: event.created * 1000,
     stripeCustomerId,
     ...customer,
     locale: getLocale(subscription.metadata.locale),
     stripeSubscriptionId: subscription.id,
     subscriptionStatus: subscription.status,
     cancelAtPeriodEnd: subscription.cancel_at_period_end,
-    purpose: subscription.metadata.purpose,
-    amount: price?.unit_amount ?? undefined,
-    currency: price?.currency,
+    purpose: getDonationPurposeForProduct(stripeProductId, subscription.metadata.purpose),
+    amount: price.unit_amount * quantity,
+    currency: price.currency,
+    stripePriceId: price.id,
+    stripeProductId,
+    quantity,
   });
 }
 
@@ -90,7 +118,7 @@ async function processCheckoutSession(event: Stripe.Event, session: Stripe.Check
       throw new Error(`Checkout Session ${session.id} has no subscription.`);
     }
 
-    await syncSubscription(await getSubscription(stripeSubscriptionId));
+    await syncSubscription(event, await getSubscription(stripeSubscriptionId));
     return;
   }
 
@@ -146,6 +174,10 @@ async function processPaidInvoice(event: Stripe.Event, invoice: Stripe.Invoice) 
     (payment) => payment.status === "paid",
   );
   const paymentIntentId = getId(invoicePayment?.payment.payment_intent ?? null);
+  if (subscription.metadata.source !== "donation-page") {
+    return;
+  }
+  await syncSubscription(event, subscription);
 
   await recordPaidDonation({
     stripeEventId: event.id,
@@ -193,6 +225,7 @@ async function processRefund(refund: Stripe.Refund) {
 }
 
 export async function processStripeEvent(event: Stripe.Event) {
+  console.log("🚀 ~ processStripeEvent ~ type:", event.type);
   switch (event.type) {
     case "checkout.session.completed":
     case "checkout.session.async_payment_succeeded":
@@ -207,14 +240,18 @@ export async function processStripeEvent(event: Stripe.Event) {
       );
 
       if (subscriptionId) {
-        await syncSubscription(await getSubscription(subscriptionId));
+        await syncSubscription(event, await getSubscription(subscriptionId));
       }
       break;
     }
     case "customer.subscription.created":
     case "customer.subscription.updated":
+      await syncSubscription(event, await getSubscription(event.data.object.id));
+      break;
+
     case "customer.subscription.deleted":
-      await syncSubscription(event.data.object);
+      // Fetch current Stripe state so delayed events cannot restore an old amount.
+      await syncSubscription(event, await getSubscription(event.data.object.id));
       break;
     case "refund.created":
       await processRefund(event.data.object);

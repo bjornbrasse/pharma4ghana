@@ -32,6 +32,7 @@ export const recordPaid = mutation({
     currency: v.string(),
     paidAt: v.number(),
   },
+  returns: v.id("donation"),
   handler: async (ctx, args) => {
     assertSyncSecret(args.syncSecret);
 
@@ -84,12 +85,6 @@ export const recordPaid = mutation({
     const donorId = await upsertDonor(ctx, {
       contactId,
       stripeCustomerId: args.stripeCustomerId,
-      stripeSubscriptionId: args.stripeSubscriptionId,
-      subscriptionStatus: args.subscriptionStatus,
-      cancelAtPeriodEnd: args.cancelAtPeriodEnd,
-      currentPurpose: args.frequency === "monthly" ? args.purpose : undefined,
-      currentAmount: args.frequency === "monthly" ? args.amount : undefined,
-      currency: args.currency,
     });
     const now = Date.now();
 
@@ -120,6 +115,7 @@ export const recordRefund = mutation({
     stripePaymentIntentId: v.string(),
     refundedAmount: v.number(),
   },
+  returns: v.union(v.id("donation"), v.null()),
   handler: async (ctx, args) => {
     assertSyncSecret(args.syncSecret);
 

@@ -32,6 +32,8 @@ export default defineConfig({
         NEXT_PUBLIC_DONATIONS_ENABLED: "true",
         NEXT_DIST_DIR: ".next-playwright",
         STRIPE_SECRET_KEY: "sk_test_playwright",
+        STRIPE_CUSTOMER_PORTAL_URL:
+          "https://billing.stripe.com/p/login/test_eVqcN7aWnfZU0Ew8tPaR200",
         STRIPE_API_BASE: `http://127.0.0.1:${stripePort}`,
       },
     },

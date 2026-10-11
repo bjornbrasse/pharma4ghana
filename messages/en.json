@@ -355,7 +355,8 @@
       },
       "processing": "Redirecting to Stripe...",
       "validation": "Enter a whole amount between €5 and €1,000.",
-      "genericError": "We couldn't start the checkout. Please try again."
+      "genericError": "We couldn't start the checkout. Please try again.",
+      "popupBlocked": "Allow new tabs in your browser, then try again to continue to payment."
     },
     "options": {
       "materials": {
@@ -445,6 +446,12 @@
     }
   },
   "footer": {
+    "subscription": {
+      "title": "Manage subscription",
+      "description": "Manage your monthly donation, update your payment details or cancel your subscription securely via Stripe.",
+      "link": "Manage subscription",
+      "loginHint": "Sign in using the email address you used for your donation."
+    },
     "tagline": "Empowering the next generation of pharmacists and healthcare professionals in Ghana.",
     "quickLinks": "Quick Links",
     "contactUs": "Contact Us",

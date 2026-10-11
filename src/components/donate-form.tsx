@@ -25,7 +25,7 @@ const OPTIONS = [
   {
     key: "computer",
     amount: donationOptions.computer.amount,
-    image: "/images/computer_AI.png",
+    image: "/images/computer_AI2.png",
     icon: Laptop,
   },
   {
@@ -60,6 +60,10 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
     selection === "custom"
       ? "custom"
       : (OPTIONS.find((option) => option.amount === selection)?.key ?? null);
+  const shouldPulse =
+    enabled &&
+    !isPending &&
+    donationSchema.safeParse({ amount: selectedAmount, frequency, locale, purpose }).success;
 
   function selectFrequency(nextFrequency: Frequency) {
     setFrequency(nextFrequency);
@@ -109,6 +113,14 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
       return;
     }
 
+    // Open during the click gesture, before awaiting the checkout request.
+    const checkoutTab = window.open("about:blank", "_blank");
+    if (!checkoutTab) {
+      setError(t("form.popupBlocked"));
+      return;
+    }
+    checkoutTab.opener = null;
+
     startTransition(async () => {
       try {
         const response = await fetch("/api/donations/checkout", {
@@ -125,8 +137,12 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
           throw new Error(data.error || t("form.genericError"));
         }
 
-        window.location.assign(data.url);
+        if (checkoutTab.closed) {
+          throw new Error("The checkout tab was closed.");
+        }
+        checkoutTab.location.replace(data.url);
       } catch {
+        checkoutTab.close();
         setError(t("form.genericError"));
       }
     });
@@ -135,9 +151,17 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
   return (
     <form onSubmit={handleSubmit} noValidate>
       <div
-        className="grid gap-1 rounded-2xl border border-gray-200 bg-gray-50 p-1 sm:grid-cols-2"
+        className="relative grid grid-cols-2 gap-1 rounded-2xl border border-gray-200 bg-gray-50 p-1"
         aria-label={t("frequency.label")}
       >
+        <span
+          aria-hidden="true"
+          data-testid="donation-frequency-highlight"
+          className="pointer-events-none absolute inset-y-1 left-1 w-[calc((100%-0.75rem)/2)] rounded-xl bg-ghana-green shadow-sm transition-transform duration-300 ease-in-out motion-reduce:transition-none"
+          style={{
+            transform: frequency === "once" ? "translateX(calc(100% + 0.25rem))" : "translateX(0)",
+          }}
+        />
         {(["monthly", "once"] as const).map((value) => {
           const active = frequency === value;
           const Icon = value === "monthly" ? CalendarDays : Heart;
@@ -148,17 +172,17 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
               type="button"
               onClick={() => selectFrequency(value)}
               className={[
-                "flex items-center justify-center gap-3 rounded-xl px-4 py-3 text-left transition-colors",
-                active
-                  ? "bg-ghana-green text-white shadow-sm"
-                  : "text-slate-600 hover:bg-white hover:text-ghana-green",
+                "relative flex items-center justify-center gap-2 rounded-xl border-0 bg-transparent px-2 py-3 text-left transition-colors duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ghana-green motion-reduce:transition-none sm:gap-3 sm:px-4",
+                active ? "text-white" : "cursor-pointer text-slate-600 hover:text-ghana-green",
               ].join(" ")}
               aria-pressed={active}
             >
               <Icon className="size-6 shrink-0" aria-hidden="true" />
               <span>
                 <span className="block text-sm font-bold">{t(`frequency.${value}.title`)}</span>
-                <span className={`block text-xs ${active ? "text-green-100" : "text-slate-500"}`}>
+                <span
+                  className={`block text-xs transition-colors duration-300 motion-reduce:transition-none ${active ? "text-green-100" : "text-slate-500"}`}
+                >
                   {t(`frequency.${value}.subtitle`)}
                 </span>
               </span>
@@ -326,7 +350,12 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
       <button
         type="submit"
         disabled={selection === null || !enabled || isPending}
-        className="mx-auto mt-5 flex w-full max-w-sm items-center justify-center gap-3 rounded-full bg-ghana-green px-6 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-ghana-green-dark disabled:cursor-not-allowed disabled:bg-gray-400"
+        className={[
+          "mx-auto mt-5 flex w-full max-w-sm items-center justify-center gap-3 rounded-full bg-ghana-green px-6 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-ghana-green-dark disabled:cursor-not-allowed disabled:bg-gray-400 hover:cursor-pointer",
+          shouldPulse
+            ? "motion-safe:animate-donation-pulse hover:animate-none focus-visible:animate-none"
+            : "",
+        ].join(" ")}
       >
         <Heart className="size-5" aria-hidden="true" />
         {getSubmitLabel()}

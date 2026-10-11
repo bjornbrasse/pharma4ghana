@@ -9,6 +9,7 @@ interface FooterProps {
 export default async function Footer({ locale }: FooterProps) {
   const t = await getTranslations({ locale, namespace: "footer" });
   const nav = await getTranslations({ locale, namespace: "nav" });
+  const portalUrl = process.env.STRIPE_CUSTOMER_PORTAL_URL;
 
   return (
     <footer className="bg-ghana-green text-white">
@@ -168,6 +169,17 @@ export default async function Footer({ locale }: FooterProps) {
         {/* Bottom bar */}
         <div className="mt-10 pt-6 border-t border-ghana-green-light flex flex-col sm:flex-row justify-between items-center gap-2">
           <p className="text-green-200 text-xs">{t("copyright")}</p>
+          {portalUrl && (
+            <a
+              href={portalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              title={t("subscription.loginHint")}
+              className="self-end shrink-0 rounded-lg border border-ghana-gold px-4 py-2 text-sm font-semibold text-ghana-gold hover:bg-ghana-gold hover:text-ghana-green transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ghana-gold sm:self-auto"
+            >
+              {t("subscription.link")}
+            </a>
+          )}
           {/* <p className="text-green-300 text-xs">{t("nonprofit")}</p> */}
         </div>
       </div>

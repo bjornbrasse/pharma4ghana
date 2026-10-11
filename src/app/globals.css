@@ -8,6 +8,17 @@
   --color-ghana-gold-dark: #f0c813;
   --color-ghana-red: #ce1126;
   --font-sans: var(--font-geist-sans);
+  --animate-donation-pulse: donation-pulse 2.4s ease-in-out infinite;
+
+  @keyframes donation-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.025);
+    }
+  }
 }
 
 :root {

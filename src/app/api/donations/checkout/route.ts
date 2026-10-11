@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { donationOptions } from "@/lib/donation-options";
 import { donationSchema } from "@/lib/donation-schema";
 import { paymentFunctionAvailable } from "@/lib/payment-config";
 import { getStripeClient } from "@/lib/stripe";
@@ -59,13 +60,17 @@ export async function POST(request: NextRequest) {
           price_data: {
             currency: "eur",
             unit_amount: Math.round(amount * 100),
-            product_data: {
-              name: productName,
-              description:
-                locale === "nl"
-                  ? "Steun voor farmaceutisch onderwijs, leermiddelen en mentorschap in Ghana."
-                  : "Support for pharmacy education, learning materials, and mentorship in Ghana.",
-            },
+            ...(recurring
+              ? { product: donationOptions[purpose].stripeProductId }
+              : {
+                  product_data: {
+                    name: productName,
+                    description:
+                      locale === "nl"
+                        ? "Steun voor farmaceutisch onderwijs, leermiddelen en mentorschap in Ghana."
+                        : "Support for pharmacy education, learning materials, and mentorship in Ghana.",
+                  },
+                }),
             ...(recurring ? { recurring: { interval: "month" as const } } : {}),
           },
         },

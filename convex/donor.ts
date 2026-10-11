@@ -14,6 +14,8 @@ const address = v.object({
 export const syncSubscription = mutation({
   args: {
     syncSecret: v.string(),
+    stripeEventId: v.string(),
+    stripeEventCreatedAt: v.number(),
     stripeCustomerId: v.string(),
     email: v.string(),
     name: v.optional(v.string()),
@@ -22,10 +24,14 @@ export const syncSubscription = mutation({
     stripeSubscriptionId: v.string(),
     subscriptionStatus: v.string(),
     cancelAtPeriodEnd: v.boolean(),
-    purpose: v.optional(v.string()),
-    amount: v.optional(v.number()),
-    currency: v.optional(v.string()),
+    purpose: v.string(),
+    amount: v.number(),
+    currency: v.string(),
+    stripePriceId: v.string(),
+    stripeProductId: v.string(),
+    quantity: v.number(),
   },
+  returns: v.id("donor"),
   handler: async (ctx, args) => {
     assertSyncSecret(args.syncSecret);
 
@@ -37,15 +43,73 @@ export const syncSubscription = mutation({
       source: "stripe",
     });
 
-    return upsertDonor(ctx, {
+    const donorId = await upsertDonor(ctx, {
       contactId,
       stripeCustomerId: args.stripeCustomerId,
-      stripeSubscriptionId: args.stripeSubscriptionId,
-      subscriptionStatus: args.subscriptionStatus,
-      cancelAtPeriodEnd: args.cancelAtPeriodEnd,
-      currentPurpose: args.purpose,
-      currentAmount: args.amount,
-      currency: args.currency,
     });
+    const duplicate = await ctx.db
+      .query("donationSubscription")
+      .withIndex("by_stripe_event", (q) => q.eq("stripeEventId", args.stripeEventId))
+      .unique();
+    if (duplicate) {
+      return donorId;
+    }
+    const current = await ctx.db
+      .query("donationSubscription")
+      .withIndex("by_donor_and_valid_to", (q) => q.eq("donorId", donorId).eq("validTo", undefined))
+      .unique();
+    if (current && args.stripeEventCreatedAt < current.lastStripeEventCreatedAt) {
+      return donorId;
+    }
+    const state = {
+      stripeSubscriptionId: args.stripeSubscriptionId,
+      status: args.subscriptionStatus,
+      cancelAtPeriodEnd: args.cancelAtPeriodEnd,
+      purpose: args.purpose,
+      amount: args.amount,
+      currency: args.currency.toLowerCase(),
+      stripePriceId: args.stripePriceId,
+      stripeProductId: args.stripeProductId,
+      quantity: args.quantity,
+    };
+    const changed =
+      !current ||
+      current.stripeSubscriptionId !== state.stripeSubscriptionId ||
+      current.status !== state.status ||
+      current.cancelAtPeriodEnd !== state.cancelAtPeriodEnd ||
+      current.purpose !== state.purpose ||
+      current.amount !== state.amount ||
+      current.currency !== state.currency ||
+      current.stripePriceId !== state.stripePriceId ||
+      current.stripeProductId !== state.stripeProductId ||
+      current.quantity !== state.quantity;
+
+    if (changed) {
+      if (current) {
+        await ctx.db.patch(current._id, { validTo: args.stripeEventCreatedAt });
+      }
+      await ctx.db.insert("donationSubscription", {
+        donorId,
+        ...state,
+        stripeEventId: args.stripeEventId,
+        lastStripeEventCreatedAt: args.stripeEventCreatedAt,
+        validFrom: args.stripeEventCreatedAt,
+        createdAt: Date.now(),
+      });
+    } else {
+      await ctx.db.patch(current._id, {
+        lastStripeEventCreatedAt: args.stripeEventCreatedAt,
+      });
+    }
+    await ctx.db.patch(donorId, {
+      stripeSubscriptionId: state.stripeSubscriptionId,
+      subscriptionStatus: state.status,
+      cancelAtPeriodEnd: state.cancelAtPeriodEnd,
+      currentPurpose: state.purpose,
+      currentAmount: state.amount,
+      currency: state.currency,
+      updatedAt: Date.now(),
+    });
+    return donorId;
   },
 });

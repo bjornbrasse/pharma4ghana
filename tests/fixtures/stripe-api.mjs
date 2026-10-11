@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
 
 const port = 4100;
+let lastCheckoutRequest = null;
 
 function checkoutSession(id, paymentStatus) {
   return {
@@ -37,7 +38,7 @@ function checkoutSession(id, paymentStatus) {
   };
 }
 
-const server = createServer((request, response) => {
+const server = createServer(async (request, response) => {
   const url = new URL(request.url ?? "/", `http://${request.headers.host}`);
 
   if (request.method === "GET" && url.pathname === "/health") {
@@ -46,6 +47,11 @@ const server = createServer((request, response) => {
   }
 
   if (request.method === "POST" && url.pathname === "/v1/checkout/sessions") {
+    let body = "";
+    for await (const chunk of request) {
+      body += chunk.toString();
+    }
+    lastCheckoutRequest = Object.fromEntries(new URLSearchParams(body));
     const session = checkoutSession("cs_test_paid", "paid");
     response.writeHead(200, { "Content-Type": "application/json" });
     response.end(
@@ -54,6 +60,12 @@ const server = createServer((request, response) => {
         url: "http://127.0.0.1:3100/en/donate/success?session_id=cs_test_paid",
       }),
     );
+    return;
+  }
+
+  if (request.method === "GET" && url.pathname === "/checkout-request") {
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(JSON.stringify(lastCheckoutRequest));
     return;
   }
 

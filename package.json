@@ -40,6 +40,7 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
+    "convex-test": "^0.0.41",
     "@biomejs/biome": "2.5.14",
     "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4",

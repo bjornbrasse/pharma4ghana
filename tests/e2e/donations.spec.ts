@@ -1,17 +1,26 @@
 import { expect, test, type Page } from "@playwright/test";
 import { donationPages } from "../donation-ctas";
 
+test.beforeEach(async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+});
+
 async function completeCheckout(page: Page) {
   await page.goto("/en/donate");
   await page.getByText("Study materials", { exact: true }).click();
+  const popup = page.waitForEvent("popup");
   await page.getByRole("button", { name: "Continue with € 10 per month" }).click();
 
+  await expect(page).toHaveURL(/\/en\/donate$/);
+  page = await popup;
   await expect(page).toHaveURL(/\/en\/donate\/success\?session_id=cs_test_paid$/);
+  expect(await page.evaluate(() => window.opener === null)).toBe(true);
   await expect(page.getByRole("heading", { level: 2, name: "Donation receipt" })).toBeVisible();
   await expect(page.getByText("€20.00")).toBeVisible();
   await expect(page.getByText("Test Donor")).toBeVisible();
   await expect(page.getByText("RSIN number")).toBeVisible();
   await expect(page.getByText("Pharma4Ghana - supporting pharmacy education")).toBeVisible();
+  return page;
 }
 
 test("does not show the unavailable notice when donations are available", async ({ page }) => {
@@ -27,6 +36,62 @@ test("does not show the unavailable notice when donations are available", async 
 });
 
 test.describe("donation checkout", () => {
+  test("reports blocked checkout tabs without requesting a session", async ({ page }) => {
+    await page.addInitScript(() => {
+      window.open = () => null;
+    });
+    let requested = false;
+    await page.route("**/api/donations/checkout", async (route) => {
+      requested = true;
+      await route.abort();
+    });
+    await page.goto("/en/donate");
+    await page.getByText("Study materials", { exact: true }).click();
+    await page.getByRole("button", { name: "Continue with € 10 per month" }).click();
+    await expect(page.locator("form").getByRole("alert")).toHaveText(
+      "Allow new tabs in your browser, then try again to continue to payment.",
+    );
+    expect(requested).toBe(false);
+  });
+
+  test("closes the blank tab and reports checkout failures", async ({ page }) => {
+    await page.route("**/api/donations/checkout", (route) =>
+      route.fulfill({ status: 500, json: { error: "Checkout failed" } }),
+    );
+    await page.goto("/en/donate");
+    await page.getByText("Study materials", { exact: true }).click();
+    const popup = page.waitForEvent("popup");
+    await page.getByRole("button", { name: "Continue with € 10 per month" }).click();
+    const checkoutTab = await popup;
+    await expect.poll(() => checkoutTab.isClosed()).toBe(true);
+    await expect(page.locator("form").getByRole("alert")).toHaveText(
+      "We couldn't start the checkout. Please try again.",
+    );
+    await expect(page).toHaveURL(/\/en\/donate$/);
+  });
+
+  test("pulses the continue button only for valid amounts and respects reduced motion", async ({
+    page,
+  }) => {
+    await page.emulateMedia({ reducedMotion: "no-preference" });
+    await page.goto("/en/donate");
+    const submit = page.locator('button[type="submit"]');
+    await expect(submit).toHaveCSS("animation-name", "none");
+    await page.getByText("Study materials", { exact: true }).click();
+    await expect(submit).toHaveCSS("animation-name", "donation-pulse");
+    await submit.hover({ force: true });
+    await expect(submit).toHaveCSS("animation-name", "none");
+    await page.getByText("Choose your own amount", { exact: true }).click();
+    const custom = page.getByLabel("Custom donation amount");
+    await expect(submit).toHaveCSS("animation-name", "none");
+    await custom.fill("4");
+    await expect(submit).toHaveCSS("animation-name", "none");
+    await custom.fill("73");
+    await expect(submit).toHaveCSS("animation-name", "donation-pulse");
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await expect(submit).toHaveCSS("animation-name", "none");
+  });
+
   test("opens the donation route in development", async ({ page }) => {
     await page.goto("/en/donate");
 
@@ -64,8 +129,40 @@ test.describe("donation checkout", () => {
     await expect(page.getByRole("button", { name: "Select a donation amount" })).toBeVisible();
   });
 
+  test("slides the frequency highlight right and back on desktop and mobile", async ({ page }) => {
+    await page.goto("/en/donate");
+    const monthly = page.getByRole("button", { name: /Monthly support/ });
+    const once = page.getByRole("button", { name: /One-time donation/ });
+    const highlight = page.getByTestId("donation-frequency-highlight");
+    for (const width of [1280, 390]) {
+      await page.setViewportSize({ width, height: 900 });
+      for (const button of [monthly, once, monthly]) {
+        await button.hover();
+        await expect(button).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
+        await expect(button).toHaveCSS("border-top-width", "0px");
+        await button.click();
+        await expect(button).toHaveAttribute("aria-pressed", "true");
+        await expect
+          .poll(async () => {
+            const buttonBox = await button.boundingBox();
+            const highlightBox = await highlight.boundingBox();
+            if (!buttonBox || !highlightBox) {
+              return Number.POSITIVE_INFINITY;
+            }
+            return (
+              Math.abs(buttonBox.x - highlightBox.x) +
+              Math.abs(buttonBox.width - highlightBox.width)
+            );
+          })
+          .toBeLessThan(2);
+      }
+    }
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await expect(highlight).toHaveCSS("transition-property", "none");
+  });
+
   test("does not warn after the user downloads the receipt", async ({ page }) => {
-    await completeCheckout(page);
+    page = await completeCheckout(page);
 
     const download = page.waitForEvent("download");
     await page.getByRole("link", { name: "Download PDF" }).click();
@@ -80,7 +177,7 @@ test.describe("donation checkout", () => {
   });
 
   test("warns before leaving when the receipt was not downloaded", async ({ page }) => {
-    await completeCheckout(page);
+    page = await completeCheckout(page);
 
     await page.getByRole("link", { name: "Back to home" }).click();
 
@@ -92,7 +189,7 @@ test.describe("donation checkout", () => {
   });
 
   test.skip("downloads the receipt from the leave warning", async ({ page }) => {
-    await completeCheckout(page);
+    page = await completeCheckout(page);
 
     await page.getByRole("link", { name: "Back to home" }).click();
     await expect(
@@ -179,6 +276,43 @@ test.describe("receipt protection", () => {
     });
 
     expect(response.status()).toBe(400);
+  });
+
+  test("uses the option-specific Stripe product only for monthly donations", async ({
+    request,
+  }) => {
+    for (const { purpose, amount, product } of [
+      { purpose: "materials", amount: 10, product: "prod_VQD6H1KreEXuxe" },
+      { purpose: "computer", amount: 25, product: "prod_VQD8ppvD8w0QDA" },
+      { purpose: "student", amount: 40, product: "prod_VQDANH8xfnZjUt" },
+      { purpose: "custom", amount: 73, product: "prod_VQ7q4uWIuTJeNR" },
+    ]) {
+      for (const frequency of ["monthly", "once"]) {
+        const response = await request.post("/api/donations/checkout", {
+          data: { purpose, amount, frequency, locale: "en" },
+        });
+        expect(response.status()).toBe(200);
+        const fixtureResponse = await request.get("http://127.0.0.1:4100/checkout-request");
+        expect(fixtureResponse.status()).toBe(200);
+        const checkout = await fixtureResponse.json();
+        expect(checkout["line_items[0][price_data][unit_amount]"]).toBe(String(amount * 100));
+        expect(checkout["metadata[purpose]"]).toBe(purpose);
+        if (frequency === "monthly") {
+          expect(checkout["mode"]).toBe("subscription");
+          expect(checkout["line_items[0][price_data][product]"]).toBe(product);
+          expect(checkout["line_items[0][price_data][recurring][interval]"]).toBe("month");
+          expect(checkout["line_items[0][price_data][product_data][name]"]).toBeUndefined();
+          expect(checkout["subscription_data[metadata][purpose]"]).toBe(purpose);
+        } else {
+          expect(checkout["mode"]).toBe("payment");
+          expect(checkout["line_items[0][price_data][product]"]).toBeUndefined();
+          expect(checkout["line_items[0][price_data][product_data][name]"]).toBe(
+            "Donation to Pharma4Ghana",
+          );
+          expect(checkout["line_items[0][price_data][recurring][interval]"]).toBeUndefined();
+        }
+      }
+    }
   });
 
   test("rejects unsigned Stripe webhooks", async ({ request }) => {
