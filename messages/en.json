@@ -308,9 +308,9 @@
       "title": "Donation Receipt"
     },
     "hero": {
-      "header": "Make a Difference Today",
-      "title": "Support a Student in Ghana",
-      "subtitle": "Every donation helps fund scholarships, learning materials, and mentorship for future pharmacists and healthcare professionals."
+      "header": "Together we make a difference",
+      "title": "Small support. A brighter future.",
+      "subtitle": "Your monthly donation helps pharmacy students in Ghana get the education, resources, and opportunities they need."
     },
     "status": {
       "successTitle": "Thank you for your support",
@@ -319,36 +319,82 @@
       "cancelBody": "No payment was made. You can review the amount and try again whenever you are ready."
     },
     "panel": {
-      "title": "Choose your donation",
-      "subtitle": "Secure checkout powered by Stripe. Card and local payment methods such as iDEAL depend on what is enabled on the Stripe account.",
-      "secureTitle": "Secure payment",
-      "secureBody": "Stripe hosts the checkout page, handles payment details securely, and sends you the final confirmation.",
       "notConfigured": "Stripe is not configured yet. Add STRIPE_SECRET_KEY to enable live checkout from this page."
+    },
+    "frequency": {
+      "label": "Donation frequency",
+      "monthly": {
+        "title": "Monthly support",
+        "subtitle": "Sustainable impact, month after month"
+      },
+      "once": {
+        "title": "One-time donation",
+        "subtitle": "Make a direct contribution"
+      }
     },
     "form": {
       "presetLabel": "Select an amount",
-      "customLabel": "Or enter a custom amount",
-      "customPlaceholder": "Other amount in EUR",
-      "submit": "Continue to secure checkout",
+      "heading": {
+        "monthly": "What can your monthly support provide?",
+        "once": "What can your donation provide?"
+      },
+      "subtitle": "Choose an amount and see what it can help fund for one student.",
+      "customLabel": "Custom donation amount",
+      "perMonth": "per month",
+      "oneTime": "one time",
+      "perYear": "≈ € {amount} per year",
+      "directImpact": "direct contribution",
+      "otherAmount": "Other amount",
+      "customRange": "€5 to €1,000",
+      "customPlaceholder": "5 – 1,000",
+      "submit": {
+        "monthly": "Continue with € {amount} per month",
+        "once": "Continue with a € {amount} donation",
+        "selectAmount": "Select a donation amount",
+        "enterAmount": "Enter your donation amount"
+      },
       "processing": "Redirecting to Stripe...",
-      "validation": "Enter an amount between €5 and €10,000.",
+      "validation": "Enter a whole amount between €5 and €1,000.",
       "genericError": "We couldn't start the checkout. Please try again."
     },
-    "impact": {
-      "title": "What your gift supports",
-      "items": {
-        "scholarships": {
-          "title": "Scholarships",
-          "body": "Helps cover tuition costs for talented pharmacy and health science students in Ghana."
-        },
-        "materials": {
-          "title": "Study materials",
-          "body": "Funds textbooks, lab tools, and digital learning resources that students can actually use."
-        },
-        "mentorship": {
-          "title": "Mentorship",
-          "body": "Supports practical guidance from pharmacists and healthcare professionals in Ghana and the Netherlands."
-        }
+    "options": {
+      "materials": {
+        "title": "Study materials",
+        "body": "Provides essential textbooks and learning materials."
+      },
+      "computer": {
+        "title": "A computer",
+        "body": "Gives a student access to online learning and research."
+      },
+      "student": {
+        "title": "Support a student",
+        "body": "Helps cover the annual education costs of one student."
+      },
+      "custom": {
+        "title": "Choose your own amount",
+        "body": "Every contribution, large or small, makes a difference."
+      }
+    },
+    "security": {
+      "cancel": "You can cancel at any time",
+      "stripe": "Secure payment via Stripe"
+    },
+    "trust": {
+      "education": {
+        "title": "Better education",
+        "body": "Students gain practical skills and knowledge."
+      },
+      "healthcare": {
+        "title": "Stronger healthcare",
+        "body": "Well-trained technicians support healthier communities."
+      },
+      "impact": {
+        "title": "Lasting impact",
+        "body": "Your support creates opportunities for generations."
+      },
+      "transparent": {
+        "title": "Transparent and trusted",
+        "body": "Pharma4Ghana is a registered foundation."
       }
     },
     "successPage": {
@@ -396,11 +442,6 @@
         "donate": "Make another donation",
         "receipt": "Download receipt"
       }
-    },
-    "trust": {
-      "title": "Why Stripe in Next.js",
-      "body": "Stripe is the cleaner choice here: strong TypeScript support, a simple server-side Checkout flow, and a well-tested integration model for Next.js route handlers.",
-      "methods": "If you later want a more Netherlands-first payment stack, Mollie is still a valid option. For this app, Stripe is the faster and lower-risk integration."
     }
   },
   "footer": {

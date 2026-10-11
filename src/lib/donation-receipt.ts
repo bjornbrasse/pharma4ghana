@@ -84,10 +84,13 @@ export async function getDonationReceipt(
   }
 
   const session = await getStripeClient().checkout.sessions.retrieve(sessionId, {
-    expand: ["payment_intent"],
+    expand: ["payment_intent", "invoice"],
   });
 
-  if (session.mode !== "payment" || session.metadata?.source !== "donation-page") {
+  if (
+    (session.mode !== "payment" && session.mode !== "subscription") ||
+    session.metadata?.source !== "donation-page"
+  ) {
     throw new DonationReceiptError("Invalid donation session", 400);
   }
 
@@ -99,10 +102,16 @@ export async function getDonationReceipt(
     throw new DonationReceiptError("Invalid donation amount", 400);
   }
 
-  const paymentIntentId =
+  const directPaymentIntentId =
     typeof session.payment_intent === "string"
       ? session.payment_intent
       : session.payment_intent?.id;
+  const invoice = typeof session.invoice === "object" ? session.invoice : null;
+  const invoicePaymentIntent = invoice?.payments?.data.find((payment) => payment.status === "paid")
+    ?.payment.payment_intent;
+  const subscriptionPaymentIntentId =
+    typeof invoicePaymentIntent === "string" ? invoicePaymentIntent : invoicePaymentIntent?.id;
+  const paymentIntentId = directPaymentIntentId ?? subscriptionPaymentIntentId ?? invoice?.id;
 
   if (!paymentIntentId) {
     throw new DonationReceiptError("Missing payment reference", 409);

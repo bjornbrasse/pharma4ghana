@@ -308,9 +308,9 @@
       "title": "Donatiebewijs"
     },
     "hero": {
-      "header": "Maak vandaag het verschil",
-      "title": "Steun een student in Ghana",
-      "subtitle": "Elke donatie helpt studiebeurzen, leermiddelen en mentorschap te financieren voor de volgende generatie apothekers en zorgprofessionals."
+      "header": "Samen maken we het verschil",
+      "title": "Kleine steun. Een mooiere toekomst.",
+      "subtitle": "Uw maandelijkse donatie geeft studenten farmacie in Ghana het onderwijs, de middelen en de kansen die zij nodig hebben."
     },
     "status": {
       "successTitle": "Dank voor uw steun",
@@ -319,36 +319,82 @@
       "cancelBody": "Er is geen betaling uitgevoerd. U kunt het bedrag aanpassen en opnieuw proberen wanneer u wilt."
     },
     "panel": {
-      "title": "Kies uw donatie",
-      "subtitle": "Veilige checkout via Stripe. Kaarten en lokale betaalmethoden zoals iDEAL hangen af van wat op het Stripe-account is ingeschakeld.",
-      "secureTitle": "Veilige betaling",
-      "secureBody": "Stripe host de checkout-pagina, verwerkt de betaalgegevens veilig en verstuurt de uiteindelijke bevestiging.",
       "notConfigured": "Stripe is nog niet geconfigureerd. Voeg STRIPE_SECRET_KEY toe om live checkout op deze pagina te activeren."
+    },
+    "frequency": {
+      "label": "Donatiefrequentie",
+      "monthly": {
+        "title": "Maandelijkse steun",
+        "subtitle": "Duurzame impact, maand na maand"
+      },
+      "once": {
+        "title": "Eenmalige donatie",
+        "subtitle": "Maak direct het verschil"
+      }
     },
     "form": {
       "presetLabel": "Kies een bedrag",
-      "customLabel": "Of voer een eigen bedrag in",
-      "customPlaceholder": "Ander bedrag in EUR",
-      "submit": "Ga verder naar veilige checkout",
+      "heading": {
+        "monthly": "Wat kan uw maandelijkse steun betekenen?",
+        "once": "Wat kan uw donatie betekenen?"
+      },
+      "subtitle": "Kies een bedrag en ontdek wat dit voor één student kan financieren.",
+      "customLabel": "Eigen donatiebedrag",
+      "perMonth": "per maand",
+      "oneTime": "eenmalig",
+      "perYear": "≈ € {amount} per jaar",
+      "directImpact": "directe bijdrage",
+      "otherAmount": "Ander bedrag",
+      "customRange": "€5 tot €1.000",
+      "customPlaceholder": "5 – 1.000",
+      "submit": {
+        "monthly": "Ga verder met € {amount} per maand",
+        "once": "Ga verder met een donatie van € {amount}",
+        "selectAmount": "Kies een donatiebedrag",
+        "enterAmount": "Vul uw donatiebedrag in"
+      },
       "processing": "Doorsturen naar Stripe...",
-      "validation": "Voer een bedrag in tussen €5 en €10.000.",
+      "validation": "Voer een heel bedrag in tussen €5 en €1.000.",
       "genericError": "De checkout kon niet worden gestart. Probeer het opnieuw."
     },
-    "impact": {
-      "title": "Wat uw gift mogelijk maakt",
-      "items": {
-        "scholarships": {
-          "title": "Studiebeurzen",
-          "body": "Helpt collegegeld te betalen voor getalenteerde studenten farmacie en gezondheidswetenschappen in Ghana."
-        },
-        "materials": {
-          "title": "Leermiddelen",
-          "body": "Financiert studieboeken, labmiddelen en digitale leermaterialen die studenten direct kunnen gebruiken."
-        },
-        "mentorship": {
-          "title": "Mentorschap",
-          "body": "Ondersteunt praktische begeleiding door apothekers en zorgprofessionals in Ghana en Nederland."
-        }
+    "options": {
+      "materials": {
+        "title": "Studiematerialen",
+        "body": "Voor essentiële studieboeken en leermiddelen."
+      },
+      "computer": {
+        "title": "Een computer",
+        "body": "Geeft een student toegang tot online leren en onderzoek."
+      },
+      "student": {
+        "title": "Steun een student",
+        "body": "Draagt bij aan de jaarlijkse opleidingskosten van een student."
+      },
+      "custom": {
+        "title": "Kies uw eigen bedrag",
+        "body": "Elke bijdrage, groot of klein, maakt verschil."
+      }
+    },
+    "security": {
+      "cancel": "U kunt op elk moment opzeggen",
+      "stripe": "Veilige betaling via Stripe"
+    },
+    "trust": {
+      "education": {
+        "title": "Beter onderwijs",
+        "body": "Studenten ontwikkelen praktische vaardigheden en kennis."
+      },
+      "healthcare": {
+        "title": "Sterkere gezondheidszorg",
+        "body": "Goed opgeleide technici ondersteunen gezondere gemeenschappen."
+      },
+      "impact": {
+        "title": "Blijvende impact",
+        "body": "Uw steun creëert kansen voor generaties."
+      },
+      "transparent": {
+        "title": "Transparant en vertrouwd",
+        "body": "Pharma4Ghana is een geregistreerde stichting."
       }
     },
     "successPage": {
@@ -396,11 +442,6 @@
         "donate": "Nog een donatie doen",
         "receipt": "Download bewijs"
       }
-    },
-    "trust": {
-      "title": "Waarom Stripe in Next.js",
-      "body": "Stripe is hier de pragmatische keuze: sterke TypeScript-ondersteuning, een eenvoudige server-side Checkout-flow en een goed bewezen integratiemodel voor Next.js route handlers.",
-      "methods": "Als u later een meer Nederland-gerichte betaalstack wilt, blijft Mollie een goede optie. Voor deze app is Stripe de snellere en minder risicovolle integratie."
     }
   },
   "footer": {

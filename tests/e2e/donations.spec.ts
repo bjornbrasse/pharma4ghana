@@ -3,7 +3,8 @@ import { donationPages } from "../donation-ctas";
 
 async function completeCheckout(page: Page) {
   await page.goto("/en/donate");
-  await page.getByRole("button", { name: "Continue to secure checkout" }).click();
+  await page.getByText("Study materials", { exact: true }).click();
+  await page.getByRole("button", { name: "Continue with € 10 per month" }).click();
 
   await expect(page).toHaveURL(/\/en\/donate\/success\?session_id=cs_test_paid$/);
   await expect(page.getByRole("heading", { level: 2, name: "Donation receipt" })).toBeVisible();
@@ -31,18 +32,34 @@ test.describe("donation checkout", () => {
 
     await expect(page).toHaveURL(/\/en\/donate$/);
     await expect(
-      page.getByRole("heading", { level: 1, name: "Support a Student in Ghana" }),
+      page.getByRole("heading", { level: 1, name: "Small support. A brighter future." }),
     ).toBeVisible();
-    await expect(page.getByRole("button", { name: "Continue to secure checkout" })).toBeEnabled();
+    await expect(page.getByRole("button", { name: "Select a donation amount" })).toBeEnabled();
   });
 
-  test.skip("rejects an amount outside the allowed range", async ({ page }) => {
+  test("uses €1 steps and rejects a custom amount outside the allowed range", async ({ page }) => {
     await page.goto("/en/donate");
-    await page.getByLabel("Or enter a custom amount").fill("4");
-    await page.getByRole("button", { name: "Continue to secure checkout" }).click();
+    await page.getByText("Choose your own amount", { exact: true }).click();
+    const customAmount = page.getByLabel("Custom donation amount");
 
-    await expect(page.getByText("Enter an amount between €5 and €10,000.")).toBeVisible();
+    await expect(customAmount).toHaveValue("");
+    await expect(customAmount).toHaveAttribute("placeholder", "5 – 1,000");
+    await customAmount.fill("5");
+    await customAmount.press("ArrowUp");
+    await expect(customAmount).toHaveValue("6");
+    await customAmount.fill("4");
+    await page.getByRole("button", { name: "Continue with € 4 per month" }).click();
+
+    await expect(page.getByText("Enter a whole amount between €5 and €1,000.")).toBeVisible();
     await expect(page).toHaveURL(/\/en\/donate$/);
+  });
+
+  test("switches between monthly and one-time donations", async ({ page }) => {
+    await page.goto("/en/donate");
+    await page.getByRole("button", { name: /One-time donation/ }).click();
+
+    await expect(page.getByText("What can your donation provide?")).toBeVisible();
+    await expect(page.getByRole("button", { name: "Select a donation amount" })).toBeVisible();
   });
 
   test("does not warn after the user downloads the receipt", async ({ page }) => {
@@ -114,13 +131,15 @@ test.describe("receipt protection", () => {
   });
 
   test("rejects invalid checkout amounts at the API boundary", async ({ request }) => {
-    const response = await request.post("/api/donations/checkout", {
-      data: { amount: 4, locale: "en" },
-    });
+    for (const amount of [4, 5.5, 1001]) {
+      const response = await request.post("/api/donations/checkout", {
+        data: { amount, frequency: "once", locale: "en" },
+      });
 
-    expect(response.status()).toBe(400);
-    await expect(response.json()).resolves.toEqual({
-      error: "Donation amount must be between 5 and 10,000 EUR.",
-    });
+      expect(response.status()).toBe(400);
+      await expect(response.json()).resolves.toEqual({
+        error: "Invalid donation. Amount must be a whole number between 5 and 1,000 EUR.",
+      });
+    }
   });
 });

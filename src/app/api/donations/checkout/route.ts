@@ -1,22 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
+import { donationSchema } from "@/lib/donation-schema";
 import { paymentFunctionAvailable } from "@/lib/payment-config";
 import { getStripeClient } from "@/lib/stripe";
 
 export const runtime = "nodejs";
 
-const ALLOWED_DONATION_AMOUNTS = [5, 10, 20, 30, 50] as const;
-type DonationAmount = (typeof ALLOWED_DONATION_AMOUNTS)[number];
-
-const DONATION_PRICE_ENV_BY_AMOUNT: Record<DonationAmount, string> = {
-  5: "STRIPE_PRICE_DONATION_5_EUR",
-  10: "STRIPE_PRICE_DONATION_10_EUR",
-  20: "STRIPE_PRICE_DONATION_20_EUR",
-  30: "STRIPE_PRICE_DONATION_30_EUR",
-  50: "STRIPE_PRICE_DONATION_50_EUR",
-};
-
-function isDonationAmount(amount: number): amount is DonationAmount {
-  return ALLOWED_DONATION_AMOUNTS.includes(amount as DonationAmount);
+function invalidDonationResponse() {
+  return NextResponse.json(
+    { error: "Invalid donation. Amount must be a whole number between 5 and 1,000 EUR." },
+    { status: 400 },
+  );
 }
 
 export async function POST(request: NextRequest) {
@@ -25,78 +18,61 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const body = (await request.json()) as {
-      amount?: unknown;
-      locale?: unknown;
-    };
+    let body: unknown;
 
-    const amount = typeof body.amount === "number" ? body.amount : Number.NaN;
-    const locale = body.locale === "nl" ? "nl" : "en";
-
-    if (!Number.isFinite(amount) || amount < 5 || amount > 10000) {
-      return NextResponse.json(
-        { error: "Donation amount must be between 5 and 10,000 EUR." },
-        { status: 400 },
-      );
+    try {
+      body = await request.json();
+    } catch {
+      return invalidDonationResponse();
     }
 
+    const parsedDonation = donationSchema.safeParse(body);
+
+    if (!parsedDonation.success) {
+      return invalidDonationResponse();
+    }
+
+    const { amount, frequency, locale } = parsedDonation.data;
     const stripe = getStripeClient();
     const origin = request.nextUrl.origin;
-    let lineItem:
-      | { quantity: number; price: string }
-      | {
-          quantity: number;
-          price_data: {
-            currency: "eur";
-            unit_amount: number;
-            product_data: {
-              name: string;
-              description: string;
-            };
-          };
-        };
-
-    if (isDonationAmount(amount)) {
-      const priceEnv = DONATION_PRICE_ENV_BY_AMOUNT[amount];
-      const priceId = process.env[priceEnv];
-
-      if (!priceId) {
-        console.error(`Missing ${priceEnv} for donation amount ${amount} EUR.`);
-
-        return NextResponse.json(
-          { error: "Stripe donation prices are not configured correctly." },
-          { status: 500 },
-        );
-      }
-
-      lineItem = { quantity: 1, price: priceId };
-    } else {
-      lineItem = {
-        quantity: 1,
-        price_data: {
-          currency: "eur",
-          unit_amount: Math.round(amount * 100),
-          product_data: {
-            name: locale === "nl" ? "Donatie aan Pharma4Ghana" : "Donation to Pharma4Ghana",
-            description:
-              locale === "nl"
-                ? "Een eenmalige bijdrage aan studiebeurzen, materialen en mentorschap in Ghana."
-                : "A one-time contribution to scholarships, study materials, and mentorship in Ghana.",
-          },
-        },
-      };
-    }
+    const recurring = frequency === "monthly";
+    const productName =
+      locale === "nl"
+        ? recurring
+          ? "Maandelijkse steun aan Pharma4Ghana"
+          : "Donatie aan Pharma4Ghana"
+        : recurring
+          ? "Monthly support for Pharma4Ghana"
+          : "Donation to Pharma4Ghana";
 
     const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      submit_type: "donate",
+      mode: recurring ? "subscription" : "payment",
+      ...(!recurring
+        ? { submit_type: "donate" as const, customer_creation: "always" as const }
+        : {}),
       billing_address_collection: "required",
-      customer_creation: "always",
       success_url: `${origin}/${locale}/donate/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${origin}/${locale}/donate?status=cancel`,
-      line_items: [lineItem],
+      line_items: [
+        {
+          quantity: 1,
+          price_data: {
+            currency: "eur",
+            unit_amount: Math.round(amount * 100),
+            product_data: {
+              name: productName,
+              description:
+                locale === "nl"
+                  ? "Steun voor farmaceutisch onderwijs, leermiddelen en mentorschap in Ghana."
+                  : "Support for pharmacy education, learning materials, and mentorship in Ghana.",
+            },
+            ...(recurring ? { recurring: { interval: "month" as const } } : {}),
+          },
+        },
+      ],
       metadata: {
         amount_eur: amount.toFixed(2),
+        frequency,
         locale,
         source: "donation-page",
       },
