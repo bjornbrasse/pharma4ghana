@@ -13,7 +13,7 @@ function invalidDonationResponse() {
 }
 
 export async function POST(request: NextRequest) {
-  if (process.env.NODE_ENV === "production" || !paymentFunctionAvailable) {
+  if (!paymentFunctionAvailable) {
     return NextResponse.json({ error: "Donations are temporarily unavailable." }, { status: 503 });
   }
 
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
       return invalidDonationResponse();
     }
 
-    const { amount, frequency, locale } = parsedDonation.data;
+    const { amount, frequency, locale, purpose } = parsedDonation.data;
     const stripe = getStripeClient();
     const origin = request.nextUrl.origin;
     const recurring = frequency === "monthly";
@@ -74,8 +74,20 @@ export async function POST(request: NextRequest) {
         amount_eur: amount.toFixed(2),
         frequency,
         locale,
+        purpose,
         source: "donation-page",
       },
+      ...(recurring
+        ? {
+            subscription_data: {
+              metadata: {
+                locale,
+                purpose,
+                source: "donation-page",
+              },
+            },
+          }
+        : {}),
       payment_method_types: ["ideal", "card"],
       custom_text: {
         // terms_of_service_acceptance: {

@@ -12,25 +12,26 @@ import {
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { type SubmitEventHandler, useState, useTransition } from "react";
+import { donationOptions, type DonationPurpose } from "@/lib/donation-options";
 import { donationSchema, type DonationInput } from "@/lib/donation-schema";
 
 const OPTIONS = [
   {
     key: "materials",
-    amount: 10,
+    amount: donationOptions.materials.amount,
     image: "/images/posts/books.jpeg",
     icon: BookOpen,
   },
   {
     key: "computer",
-    amount: 20,
-    image: "/images/Jasmijn_en_Jasmijn_voor_klas_HAI.jpg",
+    amount: donationOptions.computer.amount,
+    image: "/images/computer_AI.png",
     icon: Laptop,
   },
   {
     key: "student",
-    amount: 40,
-    image: "/images/posts/graduated_students_2026.jpeg",
+    amount: donationOptions.student.amount,
+    image: "/images/pharm_tech_student_AI.png",
     icon: GraduationCap,
   },
 ] as const;
@@ -55,6 +56,10 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
     selection === "custom" ? Number(customAmount) : selection === null ? Number.NaN : selection;
   const periodLabel = frequency === "monthly" ? t("form.perMonth") : t("form.oneTime");
   const submitAmount = Number.isFinite(selectedAmount) ? selectedAmount : 0;
+  const purpose: DonationPurpose | null =
+    selection === "custom"
+      ? "custom"
+      : (OPTIONS.find((option) => option.amount === selection)?.key ?? null);
 
   function selectFrequency(nextFrequency: Frequency) {
     setFrequency(nextFrequency);
@@ -89,11 +94,15 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
     event.preventDefault();
     setError(null);
 
+    console.log("🚀 ~ handleSubmit ~ selectedAmount:", selectedAmount);
+
     const parsedDonation = donationSchema.safeParse({
       amount: selectedAmount,
       frequency,
       locale,
+      purpose,
     });
+    console.log("🚀 ~ handleSubmit ~ parsedDonation:", parsedDonation);
 
     if (!parsedDonation.success) {
       setError(t("form.validation"));
@@ -194,13 +203,15 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
                   alt=""
                   fill
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 220px"
-                  className="object-cover"
+                  className={
+                    key === "student" ? "object-cover object-[center_15%]" : "object-cover"
+                  }
                 />
                 <span className="absolute bottom-2 left-2 grid size-9 place-items-center rounded-full bg-emerald-50 text-ghana-green shadow-sm">
                   <Icon className="size-5" aria-hidden="true" />
                 </span>
                 {selected ? (
-                  <span className="absolute right-2 top-2 grid size-7 place-items-center rounded-full bg-ghana-green text-sm font-bold text-white ring-2 ring-white">
+                  <span className="absolute right-1 top-1 grid size-7 place-items-center rounded-full bg-ghana-green text-sm font-bold text-white ring-2 ring-white">
                     ✓
                   </span>
                 ) : null}
@@ -246,7 +257,7 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
             onChange={() => selectAmount("custom")}
             className="sr-only"
           />
-          <div className="relative grid h-28 place-items-center overflow-hidden rounded-xl bg-linear-to-br from-emerald-50 via-white to-amber-50 sm:h-32 lg:h-28">
+          <div className="relative grid h-28 place-items-center overflow-hidden rounded-xl bg-linear-to-br from-emerald-200 via-lime-100 to-amber-200 sm:h-32 lg:h-28">
             <span className="grid size-14 place-items-center rounded-full bg-white text-ghana-green shadow-sm ring-1 ring-emerald-100">
               <HandHeart className="size-8" strokeWidth={1.7} aria-hidden="true" />
             </span>
@@ -314,7 +325,7 @@ export default function DonateForm({ locale, enabled }: DonateFormProps) {
 
       <button
         type="submit"
-        disabled={!enabled || isPending}
+        disabled={selection === null || !enabled || isPending}
         className="mx-auto mt-5 flex w-full max-w-sm items-center justify-center gap-3 rounded-full bg-ghana-green px-6 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-ghana-green-dark disabled:cursor-not-allowed disabled:bg-gray-400"
       >
         <Heart className="size-5" aria-hidden="true" />

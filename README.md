@@ -16,6 +16,12 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+`npm run dev` starts Convex development and the Next.js development server together.
+Convex prepares its deployment and generated types before starting Next.js, then watches for
+backend changes while Next.js runs. Use `npm run dev:next` to start only Next.js, or
+`npm run convex:dev` to start only Convex. The Playwright development suite uses `dev:next`
+so it does not start a Convex watcher.
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
@@ -45,27 +51,76 @@ Copy the environment template before testing payments:
 cp .env.example .env.local
 ```
 
-Configure a Stripe test secret and one Stripe Price ID for every preset amount. Keep donations
-disabled until those values have been verified:
+Configure Stripe, Convex, and a shared server-to-Convex secret. Keep donations disabled until those
+values have been verified:
 
 ```bash
 STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=whsec_your_stripe_webhook_secret
+NEXT_PUBLIC_CONVEX_URL=https://your-deployment.convex.cloud
+CONVEX_SYNC_SECRET=generate_a_long_random_secret
 NEXT_PUBLIC_DONATIONS_ENABLED=false
 ```
 
 Set `NEXT_PUBLIC_DONATIONS_ENABLED=true` only when the Stripe and receipt configuration is ready.
-Successful Checkout Sessions are retrieved directly from Stripe, so this flow does not require a
-database. The receipt page and PDF are available only when Stripe reports the donation as paid.
+The receipt page and PDF are available only when Stripe reports the donation as paid.
 In development, the donation page remains accessible when donations are disabled so the interface
 can be reviewed; checkout remains disabled. In production, the disabled donation page redirects to
 the localized home page and the checkout API returns `503`.
 
+## Convex donor management
+
+Create or connect a Convex deployment:
+
+```bash
+npm run convex:dev
+```
+
+The Convex schema contains exactly four application tables:
+
+- `contact`: normalized identities shared by contact, newsletter, and donor records.
+- `donor`: Stripe customer and current monthly-subscription information.
+- `donation`: successful payments and refund state, deduplicated by Stripe identifiers.
+- `newsletterSubscriber`: newsletter consent state linked to a contact.
+
+Set the same randomly generated `CONVEX_SYNC_SECRET` in the Next.js environment and the Convex
+deployment:
+
+```bash
+npx convex env set CONVEX_SYNC_SECRET your_long_random_secret
+```
+
+The contact form and Turnstile-protected newsletter endpoint write through server-only Convex
+mutations. Newsletter records start with `pending` status so a future double-opt-in confirmation
+flow can activate them without treating an unconfirmed request as consent.
+
+### Stripe webhook
+
+Configure Stripe to send these events to `/api/stripe/webhook`:
+
+- `checkout.session.completed`
+- `checkout.session.async_payment_succeeded`
+- `invoice.paid`
+- `invoice.payment_failed`
+- `customer.subscription.created`
+- `customer.subscription.updated`
+- `customer.subscription.deleted`
+- `refund.created`
+
+For local testing with the Stripe CLI:
+
+```bash
+stripe listen --forward-to localhost:3000/api/stripe/webhook
+```
+
+Copy the CLI's `whsec_...` value to `STRIPE_WEBHOOK_SECRET`. Checkout and subscription events
+upsert the contact and donor, `invoice.paid` records each received monthly donation, and refund
+events update the original donation instead of deleting financial history.
+
 ## Testing payments
 
-Use **Vitest** for unit tests around amount validation, environment configuration, and paid-session
-receipt mapping. Use **Playwright** for the localized donation form, redirect, receipt page, and PDF
-download. Run the end-to-end flow against Stripe test mode; use the Stripe CLI when webhook-driven
-fulfilment is added later.
+Use **Playwright** for the localized donation form, redirect, receipt page, webhook boundary, and PDF
+download. Use the Stripe CLI for signed webhook testing against Stripe test mode.
 
 The Playwright suites use an isolated Next.js output directory and a local Stripe API fixture:
 

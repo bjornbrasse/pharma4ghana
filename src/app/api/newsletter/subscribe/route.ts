@@ -1,13 +1,38 @@
+import { z } from "zod";
+import { subscribeToNewsletter } from "@/lib/convex-server";
+
 type TurnstileResponse = {
   success: boolean;
   "error-codes"?: string[];
 };
 
-export async function POST(request: Request) {
-  const { email, turnstileToken } = await request.json();
+const subscribeSchema = z.object({
+  email: z.email(),
+  locale: z.enum(["en", "nl"]),
+  turnstileToken: z.string().min(1),
+});
 
-  if (typeof email !== "string" || typeof turnstileToken !== "string") {
+export async function POST(request: Request) {
+  let body: unknown;
+
+  try {
+    body = await request.json();
+  } catch {
     return Response.json({ success: false }, { status: 400 });
+  }
+
+  const parsedSubscription = subscribeSchema.safeParse(body);
+
+  if (!parsedSubscription.success) {
+    return Response.json({ success: false }, { status: 400 });
+  }
+
+  const { email, locale, turnstileToken } = parsedSubscription.data;
+  const turnstileSecret = process.env.TURNSTILE_SECRET_KEY;
+
+  if (!turnstileSecret) {
+    console.error("Missing TURNSTILE_SECRET_KEY.");
+    return Response.json({ success: false }, { status: 503 });
   }
 
   // Verify Turnstile BEFORE writing to Convex or sending email.
@@ -19,7 +44,7 @@ export async function POST(request: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        secret: process.env.TURNSTILE_SECRET_KEY,
+        secret: turnstileSecret,
         response: turnstileToken,
       }),
     },
@@ -33,11 +58,12 @@ export async function POST(request: Request) {
 
   const normalizedEmail = email.trim().toLowerCase();
 
-  // TODO:
-  // 1. Validate email properly
-  // 2. Check whether subscriber already exists
-  // 3. Add/update pending subscription in Convex
-  // 4. Send double-opt-in confirmation email
+  try {
+    await subscribeToNewsletter({ email: normalizedEmail, locale });
+  } catch (error) {
+    console.error("Failed to store newsletter subscription.", error);
+    return Response.json({ success: false }, { status: 500 });
+  }
 
   return Response.json({ success: true });
 }

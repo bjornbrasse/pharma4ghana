@@ -1,6 +1,8 @@
 "use server";
 
+import { z } from "zod";
 import { transporter } from "@/lib/email";
+import { upsertContact } from "@/lib/convex-server";
 
 export type ContactFormState = {
   status: "idle" | "success" | "error";
@@ -13,6 +15,14 @@ type MailerError = Error & {
   responseCode?: number;
 };
 
+const contactFormSchema = z.object({
+  name: z.string().trim().min(1).max(200),
+  email: z.email(),
+  subject: z.string().trim().min(1).max(300),
+  message: z.string().trim().min(1).max(10_000),
+  locale: z.enum(["en", "nl"]),
+});
+
 function getTextField(formData: FormData, key: string) {
   const value = formData.get(key);
   return typeof value === "string" ? value.trim() : "";
@@ -22,15 +32,19 @@ export async function submitContactForm(
   _previousState: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
-  const name = getTextField(formData, "name");
-  const email = getTextField(formData, "email");
-  const subject = getTextField(formData, "subject");
-  const message = getTextField(formData, "message");
+  const parsedForm = contactFormSchema.safeParse({
+    name: getTextField(formData, "name"),
+    email: getTextField(formData, "email").toLowerCase(),
+    subject: getTextField(formData, "subject"),
+    message: getTextField(formData, "message"),
+    locale: getTextField(formData, "locale"),
+  });
 
-  if (!name || !email || !subject || !message) {
+  if (!parsedForm.success) {
     return { status: "error" };
   }
 
+  const { name, email, subject, message, locale } = parsedForm.data;
   const from = process.env.CONTACT_FORM_FROM;
   const to = process.env.CONTACT_FORM_TO;
 
@@ -55,6 +69,8 @@ export async function submitContactForm(
   }
 
   try {
+    await upsertContact({ email, name, locale });
+
     console.info("[contact-form] Attempting to send email", {
       from,
       to,

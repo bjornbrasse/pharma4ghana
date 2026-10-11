@@ -1,6 +1,7 @@
 "use client";
 
 import Script from "next/script";
+import { useLocale } from "next-intl";
 import { SubmitEvent, useRef, useState } from "react";
 
 declare global {
@@ -23,6 +24,7 @@ declare global {
 }
 
 export function NewsletterForm() {
+  const locale = useLocale();
   const [email, setEmail] = useState("");
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -65,6 +67,7 @@ export function NewsletterForm() {
         },
         body: JSON.stringify({
           email,
+          locale,
           turnstileToken,
         }),
       });

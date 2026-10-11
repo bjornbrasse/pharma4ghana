@@ -25,7 +25,7 @@ export default defineConfig({
       reuseExistingServer: !process.env.CI,
     },
     {
-      command: `npm run dev -- --hostname 127.0.0.1 --port ${appPort}`,
+      command: `npm run dev:next -- --hostname 127.0.0.1 --port ${appPort}`,
       url: `http://127.0.0.1:${appPort}/en/donate`,
       reuseExistingServer: !process.env.CI,
       env: {

@@ -34,7 +34,9 @@ test.describe("donation checkout", () => {
     await expect(
       page.getByRole("heading", { level: 1, name: "Small support. A brighter future." }),
     ).toBeVisible();
-    await expect(page.getByRole("button", { name: "Select a donation amount" })).toBeEnabled();
+    await expect(page.getByRole("button", { name: "Select a donation amount" })).toBeDisabled();
+    await page.getByText("Study materials", { exact: true }).click();
+    await expect(page.getByRole("button", { name: "Continue with € 10 per month" })).toBeEnabled();
   });
 
   test("uses €1 steps and rejects a custom amount outside the allowed range", async ({ page }) => {
@@ -133,7 +135,7 @@ test.describe("receipt protection", () => {
   test("rejects invalid checkout amounts at the API boundary", async ({ request }) => {
     for (const amount of [4, 5.5, 1001]) {
       const response = await request.post("/api/donations/checkout", {
-        data: { amount, frequency: "once", locale: "en" },
+        data: { amount, frequency: "once", locale: "en", purpose: "custom" },
       });
 
       expect(response.status()).toBe(400);
@@ -141,5 +143,50 @@ test.describe("receipt protection", () => {
         error: "Invalid donation. Amount must be a whole number between 5 and 1,000 EUR.",
       });
     }
+  });
+
+  test("accepts the €25 computer card for both donation frequencies", async ({ page }) => {
+    for (const frequency of ["monthly", "once"] as const) {
+      await page.goto("/en/donate");
+
+      if (frequency === "once") {
+        await page.getByRole("button", { name: /One-time donation/ }).click();
+      }
+
+      await page.getByText("A computer", { exact: true }).click();
+      const checkoutResponse = page.waitForResponse(
+        (response) =>
+          response.url().endsWith("/api/donations/checkout") &&
+          response.request().method() === "POST",
+      );
+
+      await page
+        .getByRole("button", {
+          name:
+            frequency === "monthly"
+              ? "Continue with € 25 per month"
+              : "Continue with a € 25 donation",
+        })
+        .click();
+
+      expect((await checkoutResponse).status()).toBe(200);
+    }
+  });
+
+  test("rejects a manipulated fixed donation amount", async ({ request }) => {
+    const response = await request.post("/api/donations/checkout", {
+      data: { amount: 999, frequency: "monthly", locale: "en", purpose: "materials" },
+    });
+
+    expect(response.status()).toBe(400);
+  });
+
+  test("rejects unsigned Stripe webhooks", async ({ request }) => {
+    const response = await request.post("/api/stripe/webhook", {
+      data: { id: "evt_unsigned" },
+    });
+
+    expect(response.status()).toBe(400);
+    expect(await response.text()).toBe("Missing Stripe signature.");
   });
 });

@@ -11,7 +11,7 @@ const initialState: ContactFormState = {
   status: "idle",
 };
 
-export default function ContactForm() {
+export default function ContactForm({ locale }: { locale: string }) {
   const t = useTranslations("contact.form");
   const [state, formAction, isPending] = useActionState(
     submitContactForm,
@@ -41,6 +41,7 @@ export default function ContactForm() {
 
   return (
     <form action={formAction} className="space-y-5">
+      <input type="hidden" name="locale" value={locale} />
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1.5">
