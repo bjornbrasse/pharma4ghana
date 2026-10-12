@@ -1,4 +1,3 @@
-import type { Id } from "./_generated/dataModel";
 import type { MutationCtx } from "./_generated/server";
 type Locale = "en" | "nl";
 type Source = "contact" | "newsletter" | "stripe";
@@ -46,55 +45,6 @@ export async function upsertContact(ctx: MutationCtx, input: ContactInput) {
     ...(input.address ? { address: input.address } : {}),
     firstSource: input.source,
     lastSource: input.source,
-    createdAt: now,
-    updatedAt: now,
-  });
-}
-
-interface DonorInput {
-  contactId: Id<"contact">;
-  stripeCustomerId: string;
-  stripeSubscriptionId?: string;
-  subscriptionStatus?: string;
-  cancelAtPeriodEnd?: boolean;
-  currentPurpose?: string;
-  currentAmount?: number;
-  currency?: string;
-}
-
-export async function upsertDonor(ctx: MutationCtx, input: DonorInput) {
-  const existingDonor = await ctx.db
-    .query("donor")
-    .withIndex("by_stripe_customer", (query) =>
-      query.eq("stripeCustomerId", input.stripeCustomerId),
-    )
-    .unique();
-  const now = Date.now();
-  const subscriptionFields = {
-    ...(input.stripeSubscriptionId ? { stripeSubscriptionId: input.stripeSubscriptionId } : {}),
-    ...(input.subscriptionStatus ? { subscriptionStatus: input.subscriptionStatus } : {}),
-    ...(input.cancelAtPeriodEnd !== undefined
-      ? { cancelAtPeriodEnd: input.cancelAtPeriodEnd }
-      : {}),
-    ...(input.currentPurpose ? { currentPurpose: input.currentPurpose } : {}),
-    ...(input.currentAmount !== undefined ? { currentAmount: input.currentAmount } : {}),
-    ...(input.currency ? { currency: input.currency } : {}),
-  };
-
-  if (existingDonor) {
-    await ctx.db.patch(existingDonor._id, {
-      contactId: input.contactId,
-      ...subscriptionFields,
-      updatedAt: now,
-    });
-
-    return existingDonor._id;
-  }
-
-  return ctx.db.insert("donor", {
-    contactId: input.contactId,
-    stripeCustomerId: input.stripeCustomerId,
-    ...subscriptionFields,
     createdAt: now,
     updatedAt: now,
   });

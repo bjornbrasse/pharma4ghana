@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    await processStripeEvent(event);
+    // await processStripeEvent(event);
     return NextResponse.json({ received: true });
   } catch (error) {
     console.error("Failed to process Stripe webhook.", error);

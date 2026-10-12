@@ -1,7 +1,7 @@
 import { v } from "convex/values";
 import { mutation } from "./_generated/server";
 import { assertSyncSecret } from "./auth";
-import { upsertContact, upsertDonor } from "./model";
+import { upsertContact } from "./model";
 
 const address = v.object({
   line1: v.optional(v.string()),
@@ -15,14 +15,10 @@ export const recordPaid = mutation({
   args: {
     syncSecret: v.string(),
     stripeEventId: v.string(),
-    stripeCustomerId: v.string(),
     email: v.string(),
     name: v.optional(v.string()),
     locale: v.optional(v.union(v.literal("en"), v.literal("nl"))),
     address: v.optional(address),
-    stripeSubscriptionId: v.optional(v.string()),
-    subscriptionStatus: v.optional(v.string()),
-    cancelAtPeriodEnd: v.optional(v.boolean()),
     stripePaymentIntentId: v.optional(v.string()),
     stripeInvoiceId: v.optional(v.string()),
     stripeCheckoutSessionId: v.optional(v.string()),
@@ -82,14 +78,11 @@ export const recordPaid = mutation({
       address: args.address,
       source: "stripe",
     });
-    const donorId = await upsertDonor(ctx, {
-      contactId,
-      stripeCustomerId: args.stripeCustomerId,
-    });
+
     const now = Date.now();
 
     return ctx.db.insert("donation", {
-      donorId,
+      contactId,
       stripeEventId: args.stripeEventId,
       ...(args.stripePaymentIntentId ? { stripePaymentIntentId: args.stripePaymentIntentId } : {}),
       ...(args.stripeInvoiceId ? { stripeInvoiceId: args.stripeInvoiceId } : {}),

@@ -5,7 +5,7 @@ import {
   type ContactAddress,
   recordDonationRefund,
   recordPaidDonation,
-  syncDonorSubscription,
+  syncContactSubscription,
 } from "@/lib/convex-server";
 import { getStripeClient } from "@/lib/stripe";
 import { getDonationPurposeForProduct } from "@/lib/donation-options";
@@ -82,10 +82,9 @@ async function syncSubscription(event: Stripe.Event, subscription: Stripe.Subscr
     throw new Error(`Subscription ${subscription.id} has no Stripe product.`);
   }
 
-  await syncDonorSubscription({
+  await syncContactSubscription({
     stripeEventId: event.id,
     stripeEventCreatedAt: event.created * 1000,
-    stripeCustomerId,
     ...customer,
     locale: getLocale(subscription.metadata.locale),
     stripeSubscriptionId: subscription.id,
@@ -136,7 +135,6 @@ async function processCheckoutSession(event: Stripe.Event, session: Stripe.Check
 
   await recordPaidDonation({
     stripeEventId: event.id,
-    stripeCustomerId,
     email,
     name: session.customer_details?.name ?? undefined,
     address: getAddress(session.customer_details?.address),
@@ -181,12 +179,8 @@ async function processPaidInvoice(event: Stripe.Event, invoice: Stripe.Invoice) 
 
   await recordPaidDonation({
     stripeEventId: event.id,
-    stripeCustomerId,
     ...customer,
     locale: getLocale(subscription.metadata.locale),
-    stripeSubscriptionId: subscription.id,
-    subscriptionStatus: subscription.status,
-    cancelAtPeriodEnd: subscription.cancel_at_period_end,
     stripePaymentIntentId: paymentIntentId,
     stripeInvoiceId: invoice.id,
     purpose:

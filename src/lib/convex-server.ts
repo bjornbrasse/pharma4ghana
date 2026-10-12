@@ -29,7 +29,6 @@ type NewsletterArgs = {
 export type SubscriptionSyncInput = {
   stripeEventId: string;
   stripeEventCreatedAt: number;
-  stripeCustomerId: string;
   email: string;
   name?: string;
   locale?: Locale;
@@ -47,14 +46,10 @@ export type SubscriptionSyncInput = {
 
 export type PaidDonationInput = {
   stripeEventId: string;
-  stripeCustomerId: string;
   email: string;
   name?: string;
   locale?: Locale;
   address?: ContactAddress;
-  stripeSubscriptionId?: string;
-  subscriptionStatus?: string;
-  cancelAtPeriodEnd?: boolean;
   stripePaymentIntentId?: string;
   stripeInvoiceId?: string;
   stripeCheckoutSessionId?: string;
@@ -105,9 +100,12 @@ export async function subscribeToNewsletter(input: Omit<NewsletterArgs, "syncSec
   });
 }
 
-export async function syncDonorSubscription(input: SubscriptionSyncInput) {
+export async function syncContactSubscription(input: SubscriptionSyncInput) {
   const { url, syncSecret } = getConvexConfig();
-  return getConvexClient(url).mutation(api.donor.syncSubscription, { ...input, syncSecret });
+  return getConvexClient(url).mutation(api.contactSubscription.syncSubscription, {
+    ...input,
+    syncSecret,
+  });
 }
 
 export async function recordPaidDonation(input: PaidDonationInput) {

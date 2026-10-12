@@ -1,7 +1,7 @@
 import { v } from "convex/values";
 import { mutation } from "./_generated/server";
 import { assertSyncSecret } from "./auth";
-import { upsertContact, upsertDonor } from "./model";
+import { upsertContact } from "./model";
 
 const address = v.object({
   line1: v.optional(v.string()),
@@ -16,7 +16,6 @@ export const syncSubscription = mutation({
     syncSecret: v.string(),
     stripeEventId: v.string(),
     stripeEventCreatedAt: v.number(),
-    stripeCustomerId: v.string(),
     email: v.string(),
     name: v.optional(v.string()),
     locale: v.optional(v.union(v.literal("en"), v.literal("nl"))),
@@ -31,7 +30,7 @@ export const syncSubscription = mutation({
     stripeProductId: v.string(),
     quantity: v.number(),
   },
-  returns: v.id("donor"),
+  returns: v.id("contact"),
   handler: async (ctx, args) => {
     assertSyncSecret(args.syncSecret);
 
@@ -43,23 +42,21 @@ export const syncSubscription = mutation({
       source: "stripe",
     });
 
-    const donorId = await upsertDonor(ctx, {
-      contactId,
-      stripeCustomerId: args.stripeCustomerId,
-    });
     const duplicate = await ctx.db
       .query("donationSubscription")
       .withIndex("by_stripe_event", (q) => q.eq("stripeEventId", args.stripeEventId))
       .unique();
     if (duplicate) {
-      return donorId;
+      return contactId;
     }
     const current = await ctx.db
       .query("donationSubscription")
-      .withIndex("by_donor_and_valid_to", (q) => q.eq("donorId", donorId).eq("validTo", undefined))
+      .withIndex("by_contact_and_valid_to", (q) =>
+        q.eq("contactId", contactId).eq("validTo", undefined),
+      )
       .unique();
     if (current && args.stripeEventCreatedAt < current.lastStripeEventCreatedAt) {
-      return donorId;
+      return contactId;
     }
     const state = {
       stripeSubscriptionId: args.stripeSubscriptionId,
@@ -89,7 +86,7 @@ export const syncSubscription = mutation({
         await ctx.db.patch(current._id, { validTo: args.stripeEventCreatedAt });
       }
       await ctx.db.insert("donationSubscription", {
-        donorId,
+        contactId,
         ...state,
         stripeEventId: args.stripeEventId,
         lastStripeEventCreatedAt: args.stripeEventCreatedAt,
@@ -101,15 +98,6 @@ export const syncSubscription = mutation({
         lastStripeEventCreatedAt: args.stripeEventCreatedAt,
       });
     }
-    await ctx.db.patch(donorId, {
-      stripeSubscriptionId: state.stripeSubscriptionId,
-      subscriptionStatus: state.status,
-      cancelAtPeriodEnd: state.cancelAtPeriodEnd,
-      currentPurpose: state.purpose,
-      currentAmount: state.amount,
-      currency: state.currency,
-      updatedAt: Date.now(),
-    });
-    return donorId;
+    return contactId;
   },
 });

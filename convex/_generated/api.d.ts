@@ -10,10 +10,17 @@
 
 import type * as auth from "../auth.js";
 import type * as contact from "../contact.js";
+import type * as contactSubscription from "../contactSubscription.js";
 import type * as donation from "../donation.js";
-import type * as donor from "../donor.js";
+import type * as email from "../email.js";
+import type * as http from "../http.js";
+import type * as lib_email from "../lib/email.js";
+import type * as lib_emails from "../lib/emails.js";
 import type * as model from "../model.js";
 import type * as newsletterSubscriber from "../newsletterSubscriber.js";
+import type * as stripe from "../stripe.js";
+import type * as stripeEvent from "../stripeEvent.js";
+import type * as stripeEventAction from "../stripeEventAction.js";
 
 import type {
   ApiFromModules,
@@ -24,10 +31,17 @@ import type {
 declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   contact: typeof contact;
+  contactSubscription: typeof contactSubscription;
   donation: typeof donation;
-  donor: typeof donor;
+  email: typeof email;
+  http: typeof http;
+  "lib/email": typeof lib_email;
+  "lib/emails": typeof lib_emails;
   model: typeof model;
   newsletterSubscriber: typeof newsletterSubscriber;
+  stripe: typeof stripe;
+  stripeEvent: typeof stripeEvent;
+  stripeEventAction: typeof stripeEventAction;
 }>;
 
 /**

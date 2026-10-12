@@ -16,7 +16,8 @@
     "test:e2e:production": "playwright test --config playwright.production.config.ts",
     "test:e2e:ui": "playwright test --ui",
     "format": "biome format --write .",
-    "format:check": "biome format ."
+    "format:check": "biome format .",
+    "stripe:listen": "stripe listen --forward-to https://original-gerbil-890.convex.site/stripe/webhook --events checkout.session.completed,checkout.session.async_payment_succeeded,invoice.paid,invoice.payment_failed,customer.subscription.updated,customer.subscription.deleted"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.5.1",

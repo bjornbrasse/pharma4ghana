@@ -22,24 +22,8 @@ const schema = defineSchema({
     updatedAt: v.number(),
   }).index("by_email", ["email"]),
 
-  donor: defineTable({
-    contactId: v.id("contact"),
-    stripeCustomerId: v.string(),
-    stripeSubscriptionId: v.optional(v.string()),
-    subscriptionStatus: v.optional(v.string()),
-    cancelAtPeriodEnd: v.optional(v.boolean()),
-    currentPurpose: v.optional(v.string()),
-    currentAmount: v.optional(v.number()),
-    currency: v.optional(v.string()),
-    createdAt: v.number(),
-    updatedAt: v.number(),
-  })
-    .index("by_contact", ["contactId"])
-    .index("by_stripe_customer", ["stripeCustomerId"])
-    .index("by_stripe_subscription", ["stripeSubscriptionId"]),
-
   donationSubscription: defineTable({
-    donorId: v.id("donor"),
+    contactId: v.id("contact"),
     stripeSubscriptionId: v.string(),
     stripeEventId: v.string(),
     lastStripeEventCreatedAt: v.number(),
@@ -56,10 +40,10 @@ const schema = defineSchema({
     createdAt: v.number(),
   })
     .index("by_stripe_event", ["stripeEventId"])
-    .index("by_donor_and_valid_to", ["donorId", "validTo"]),
+    .index("by_contact_and_valid_to", ["contactId", "validTo"]),
 
   donation: defineTable({
-    donorId: v.id("donor"),
+    contactId: v.id("contact"),
     stripeEventId: v.string(),
     stripePaymentIntentId: v.optional(v.string()),
     stripeInvoiceId: v.optional(v.string()),
@@ -78,7 +62,7 @@ const schema = defineSchema({
     .index("by_payment_intent", ["stripePaymentIntentId"])
     .index("by_invoice", ["stripeInvoiceId"])
     .index("by_checkout_session", ["stripeCheckoutSessionId"])
-    .index("by_donor_paid_at", ["donorId", "paidAt"]),
+    .index("by_contact_paid_at", ["contactId", "paidAt"]),
 
   newsletterSubscriber: defineTable({
     contactId: v.id("contact"),
@@ -89,6 +73,12 @@ const schema = defineSchema({
     createdAt: v.number(),
     updatedAt: v.number(),
   }).index("by_contact", ["contactId"]),
+
+  stripeEvents: defineTable({
+    eventId: v.string(),
+    type: v.string(),
+    processedAt: v.number(),
+  }).index("by_event_id", ["eventId"]),
 });
 
 export default schema;
