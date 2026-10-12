@@ -293,6 +293,8 @@ export const processEvent = internalAction({
       }
       case "customer.subscription.created":
       case "customer.subscription.updated":
+        await syncSubscription(ctx, event, event.data.object);
+        break;
       case "customer.subscription.deleted":
         await syncSubscription(ctx, event, await getSubscription(event.data.object.id));
         break;
