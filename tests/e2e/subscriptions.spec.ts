@@ -5,7 +5,10 @@ import * as serverModule from "../../convex/_generated/server";
 import * as contactSubscriptionModule from "../../convex/contactSubscription";
 import * as donationModule from "../../convex/donation";
 import schema from "../../convex/schema";
-import { getDonationPurposeForProduct } from "../../src/lib/donation-options";
+import {
+  donationOptions,
+  getDonationPurposeForProduct,
+} from "../../src/lib/donation-options";
 
 const modules = {
   "../../convex/_generated/server.ts": async () => serverModule,
@@ -24,7 +27,7 @@ const subscription = {
   amount: 2500,
   currency: "eur",
   stripePriceId: "price_25",
-  stripeProductId: "prod_VQ7q4uWIuTJeNR",
+  stripeProductId: donationOptions.custom.stripeProductId,
   quantity: 1,
 };
 
@@ -38,9 +41,9 @@ test("portal product changes override stale checkout metadata in contact subscri
     ...subscription,
     purpose: "student",
     amount: 4000,
-    stripeProductId: "prod_VQDANH8xfnZjUt",
+    stripeProductId: donationOptions.student.stripeProductId,
   });
-  const product = "prod_VQ7q4uWIuTJeNR";
+  const product = donationOptions.custom.stripeProductId;
   await t.mutation(api.contactSubscription.syncSubscription, {
     ...subscription,
     stripeEventId: "evt_portal_product_change",

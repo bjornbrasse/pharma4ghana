@@ -1,29 +1,43 @@
-export const donationOptions = {
-  materials: {
+export const donationProducts = [
+  {
+    purpose: "materials",
     amount: 10,
     stripeProductId: "prod_VQD6H1KreEXuxe",
   },
-  computer: {
+  {
+    purpose: "computer",
     amount: 25,
     stripeProductId: "prod_VQD8ppvD8w0QDA",
   },
-  student: {
+  {
+    purpose: "student",
     amount: 40,
     stripeProductId: "prod_VQDANH8xfnZjUt",
   },
-  custom: {
+  {
+    purpose: "custom",
     amount: null,
     stripeProductId: "prod_VQ7q4uWIuTJeNR",
   },
-} as const;
+] as const;
 
-export type DonationPurpose = keyof typeof donationOptions;
+export type DonationPurpose = (typeof donationProducts)[number]["purpose"];
+
+type DonationOptions = {
+  [Product in (typeof donationProducts)[number] as Product["purpose"]]: Omit<
+    Product,
+    "purpose"
+  >;
+};
+
+export const donationOptions = Object.fromEntries(
+  donationProducts.map(({ purpose, ...product }) => [purpose, product]),
+) as DonationOptions;
 
 export function getDonationPurposeForProduct(productId: string, originalPurpose?: string) {
-  for (const purpose of ["materials", "computer", "student", "custom"] as const) {
-    if (donationOptions[purpose].stripeProductId === productId) {
-      return purpose;
-    }
-  }
-  return originalPurpose ?? "custom";
+  return (
+    donationProducts.find((product) => product.stripeProductId === productId)?.purpose ??
+    originalPurpose ??
+    "custom"
+  );
 }

@@ -2,6 +2,7 @@
 
 import Stripe from "stripe";
 import { v } from "convex/values";
+import { getDonationPurposeForProduct } from "../src/lib/donation-options";
 import { api, internal } from "./_generated/api";
 import { internalAction, type ActionCtx } from "./_generated/server";
 
@@ -63,17 +64,6 @@ async function getCustomer(stripeCustomerId: string) {
 
 async function getSubscription(stripeSubscriptionId: string) {
   return getStripeClient().subscriptions.retrieve(stripeSubscriptionId);
-}
-
-function getDonationPurposeForProduct(productId: string, originalPurpose?: string) {
-  const purposesByProductId: Record<string, string> = {
-    prod_VQD6H1KreEXuxe: "materials",
-    prod_VQD8ppvD8w0QDA: "computer",
-    prod_VQDANH8xfnZjUt: "student",
-    prod_VQ7q4uWIuTJeNR: "custom",
-  };
-
-  return purposesByProductId[productId] ?? originalPurpose ?? "custom";
 }
 
 async function syncSubscription(

@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { donationProducts } from "../../src/lib/donation-options";
 import { donationPages } from "../donation-ctas";
 
 test.beforeEach(async ({ page }) => {
@@ -281,12 +282,13 @@ test.describe("receipt protection", () => {
   test("uses the option-specific Stripe product only for monthly donations", async ({
     request,
   }) => {
-    for (const { purpose, amount, product } of [
-      { purpose: "materials", amount: 10, product: "prod_VQD6H1KreEXuxe" },
-      { purpose: "computer", amount: 25, product: "prod_VQD8ppvD8w0QDA" },
-      { purpose: "student", amount: 40, product: "prod_VQDANH8xfnZjUt" },
-      { purpose: "custom", amount: 73, product: "prod_VQ7q4uWIuTJeNR" },
-    ]) {
+    for (const { purpose, amount, product } of donationProducts.map(
+      ({ purpose, amount, stripeProductId }) => ({
+        purpose,
+        amount: amount ?? 73,
+        product: stripeProductId,
+      }),
+    )) {
       for (const frequency of ["monthly", "once"]) {
         const response = await request.post("/api/donations/checkout", {
           data: { purpose, amount, frequency, locale: "en" },
