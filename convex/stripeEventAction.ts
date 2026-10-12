@@ -3,7 +3,7 @@
 import Stripe from "stripe";
 import { v } from "convex/values";
 import { getDonationPurposeForProduct } from "../src/lib/donation-options";
-import { api, internal } from "./_generated/api";
+import { internal } from "./_generated/api";
 import { internalAction, type ActionCtx } from "./_generated/server";
 
 function getId(value: { id: string } | string | null) {
@@ -36,16 +36,6 @@ function getStripeClient() {
   }
 
   return new Stripe(secretKey);
-}
-
-function getSyncSecret() {
-  const syncSecret = process.env.CONVEX_SYNC_SECRET;
-
-  if (!syncSecret) {
-    throw new Error("Missing CONVEX_SYNC_SECRET in the Convex deployment.");
-  }
-
-  return syncSecret;
 }
 
 async function getCustomer(stripeCustomerId: string) {
@@ -104,8 +94,7 @@ async function syncSubscription(
     throw new Error(`Subscription ${subscription.id} has no Stripe product.`);
   }
 
-  await ctx.runMutation(api.contactSubscription.syncSubscription, {
-    syncSecret: getSyncSecret(),
+  await ctx.runMutation(internal.contactSubscription.syncSubscription, {
     stripeEventId: event.id,
     stripeEventCreatedAt: event.created * 1000,
     ...customer,
@@ -158,8 +147,7 @@ async function processCheckoutSession(
     throw new Error(`Paid Checkout Session ${session.id} is missing payment details.`);
   }
 
-  await ctx.runMutation(api.donation.recordPaid, {
-    syncSecret: getSyncSecret(),
+  await ctx.runMutation(internal.donation.recordPaid, {
     stripeEventId: event.id,
     email,
     name: session.customer_details?.name ?? undefined,
@@ -204,8 +192,7 @@ async function processPaidInvoice(ctx: ActionCtx, event: Stripe.Event, invoice: 
   const paymentIntentId = getId(invoicePayment?.payment.payment_intent ?? null);
 
   await syncSubscription(ctx, event, subscription);
-  await ctx.runMutation(api.donation.recordPaid, {
-    syncSecret: getSyncSecret(),
+  await ctx.runMutation(internal.donation.recordPaid, {
     stripeEventId: event.id,
     ...customer,
     locale: getLocale(subscription.metadata.locale),
@@ -238,8 +225,7 @@ async function processRefund(ctx: ActionCtx, refund: Stripe.Refund) {
     return;
   }
 
-  await ctx.runMutation(api.donation.recordRefund, {
-    syncSecret: getSyncSecret(),
+  await ctx.runMutation(internal.donation.recordRefund, {
     stripePaymentIntentId: paymentIntentId,
     refundedAmount: charge.amount_refunded,
   });

@@ -1,6 +1,5 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
-import { assertSyncSecret } from "./auth";
+import { internalMutation } from "./_generated/server";
 import { upsertContact } from "./model";
 
 const address = v.object({
@@ -11,9 +10,8 @@ const address = v.object({
   country: v.optional(v.string()),
 });
 
-export const recordPaid = mutation({
+export const recordPaid = internalMutation({
   args: {
-    syncSecret: v.string(),
     stripeEventId: v.string(),
     email: v.string(),
     name: v.optional(v.string()),
@@ -30,8 +28,6 @@ export const recordPaid = mutation({
   },
   returns: v.id("donation"),
   handler: async (ctx, args) => {
-    assertSyncSecret(args.syncSecret);
-
     const existingEvent = await ctx.db
       .query("donation")
       .withIndex("by_stripe_event", (query) => query.eq("stripeEventId", args.stripeEventId))
@@ -102,16 +98,13 @@ export const recordPaid = mutation({
   },
 });
 
-export const recordRefund = mutation({
+export const recordRefund = internalMutation({
   args: {
-    syncSecret: v.string(),
     stripePaymentIntentId: v.string(),
     refundedAmount: v.number(),
   },
   returns: v.union(v.id("donation"), v.null()),
   handler: async (ctx, args) => {
-    assertSyncSecret(args.syncSecret);
-
     const donation = await ctx.db
       .query("donation")
       .withIndex("by_payment_intent", (query) =>

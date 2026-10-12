@@ -3,14 +3,6 @@ import "server-only";
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "../../convex/_generated/api";
 
-export type ContactAddress = {
-  line1?: string;
-  line2?: string;
-  city?: string;
-  postalCode?: string;
-  country?: string;
-};
-
 type Locale = "en" | "nl";
 
 type ContactArgs = {
@@ -24,45 +16,6 @@ type NewsletterArgs = {
   syncSecret: string;
   email: string;
   locale?: Locale;
-};
-
-export type SubscriptionSyncInput = {
-  stripeEventId: string;
-  stripeEventCreatedAt: number;
-  email: string;
-  name?: string;
-  locale?: Locale;
-  address?: ContactAddress;
-  stripeSubscriptionId: string;
-  subscriptionStatus: string;
-  cancelAtPeriodEnd: boolean;
-  purpose: string;
-  amount: number;
-  currency: string;
-  stripePriceId: string;
-  stripeProductId: string;
-  quantity: number;
-};
-
-export type PaidDonationInput = {
-  stripeEventId: string;
-  email: string;
-  name?: string;
-  locale?: Locale;
-  address?: ContactAddress;
-  stripePaymentIntentId?: string;
-  stripeInvoiceId?: string;
-  stripeCheckoutSessionId?: string;
-  purpose: string;
-  frequency: "monthly" | "once";
-  amount: number;
-  currency: string;
-  paidAt: number;
-};
-
-type RefundInput = {
-  stripePaymentIntentId: string;
-  refundedAmount: number;
 };
 
 let convexClient: ConvexHttpClient | undefined;
@@ -98,22 +51,4 @@ export async function subscribeToNewsletter(input: Omit<NewsletterArgs, "syncSec
     ...input,
     syncSecret,
   });
-}
-
-export async function syncContactSubscription(input: SubscriptionSyncInput) {
-  const { url, syncSecret } = getConvexConfig();
-  return getConvexClient(url).mutation(api.contactSubscription.syncSubscription, {
-    ...input,
-    syncSecret,
-  });
-}
-
-export async function recordPaidDonation(input: PaidDonationInput) {
-  const { url, syncSecret } = getConvexConfig();
-  return getConvexClient(url).mutation(api.donation.recordPaid, { ...input, syncSecret });
-}
-
-export async function recordDonationRefund(input: RefundInput) {
-  const { url, syncSecret } = getConvexConfig();
-  return getConvexClient(url).mutation(api.donation.recordRefund, { ...input, syncSecret });
 }

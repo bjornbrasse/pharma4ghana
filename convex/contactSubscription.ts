@@ -1,6 +1,5 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
-import { assertSyncSecret } from "./auth";
+import { internalMutation } from "./_generated/server";
 import { upsertContact } from "./model";
 
 const address = v.object({
@@ -11,9 +10,8 @@ const address = v.object({
   country: v.optional(v.string()),
 });
 
-export const syncSubscription = mutation({
+export const syncSubscription = internalMutation({
   args: {
-    syncSecret: v.string(),
     stripeEventId: v.string(),
     stripeEventCreatedAt: v.number(),
     email: v.string(),
@@ -32,8 +30,6 @@ export const syncSubscription = mutation({
   },
   returns: v.id("contact"),
   handler: async (ctx, args) => {
-    assertSyncSecret(args.syncSecret);
-
     const contactId = await upsertContact(ctx, {
       email: args.email,
       name: args.name,

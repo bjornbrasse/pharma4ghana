@@ -317,12 +317,4 @@ test.describe("receipt protection", () => {
     }
   });
 
-  test("rejects unsigned Stripe webhooks", async ({ request }) => {
-    const response = await request.post("/api/stripe/webhook", {
-      data: { id: "evt_unsigned" },
-    });
-
-    expect(response.status()).toBe(400);
-    expect(await response.text()).toBe("Missing Stripe signature.");
-  });
 });

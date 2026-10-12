@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { convexTest } from "convex-test";
-import { api } from "../../convex/_generated/api";
+import { internal } from "../../convex/_generated/api";
 import * as serverModule from "../../convex/_generated/server";
 import * as contactSubscriptionModule from "../../convex/contactSubscription";
 import * as donationModule from "../../convex/donation";
@@ -16,7 +16,6 @@ const modules = {
   "../../convex/donation.ts": async () => donationModule,
 };
 const subscription = {
-  syncSecret: "subscription-test-secret",
   stripeEventId: "evt_created",
   stripeEventCreatedAt: 1000,
   email: "donor@example.com",
@@ -31,20 +30,16 @@ const subscription = {
   quantity: 1,
 };
 
-test.beforeEach(() => {
-  process.env.CONVEX_SYNC_SECRET = subscription.syncSecret;
-});
-
 test("portal product changes override stale checkout metadata in contact subscription history", async () => {
   const t = convexTest(schema, modules);
-  const contactId = await t.mutation(api.contactSubscription.syncSubscription, {
+  const contactId = await t.mutation(internal.contactSubscription.syncSubscription, {
     ...subscription,
     purpose: "student",
     amount: 4000,
     stripeProductId: donationOptions.student.stripeProductId,
   });
   const product = donationOptions.custom.stripeProductId;
-  await t.mutation(api.contactSubscription.syncSubscription, {
+  await t.mutation(internal.contactSubscription.syncSubscription, {
     ...subscription,
     stripeEventId: "evt_portal_product_change",
     stripeEventCreatedAt: 2000,
@@ -71,7 +66,7 @@ test("portal product changes override stale checkout metadata in contact subscri
 
 test("versions monthly changes, cancellation and replacement without duplicate or stale rows", async () => {
   const t = convexTest(schema, modules);
-  const contactId = await t.mutation(api.contactSubscription.syncSubscription, subscription);
+  const contactId = await t.mutation(internal.contactSubscription.syncSubscription, subscription);
   const changed = {
     ...subscription,
     stripeEventId: "evt_changed",
@@ -79,14 +74,14 @@ test("versions monthly changes, cancellation and replacement without duplicate o
     amount: 4000,
     stripePriceId: "price_40",
   };
-  await t.mutation(api.contactSubscription.syncSubscription, changed);
-  await t.mutation(api.contactSubscription.syncSubscription, changed);
-  await t.mutation(api.contactSubscription.syncSubscription, {
+  await t.mutation(internal.contactSubscription.syncSubscription, changed);
+  await t.mutation(internal.contactSubscription.syncSubscription, changed);
+  await t.mutation(internal.contactSubscription.syncSubscription, {
     ...changed,
     stripeEventId: "evt_unchanged",
     stripeEventCreatedAt: 3000,
   });
-  await t.mutation(api.contactSubscription.syncSubscription, {
+  await t.mutation(internal.contactSubscription.syncSubscription, {
     ...subscription,
     stripeEventId: "evt_delayed",
     stripeEventCreatedAt: 1500,
@@ -107,19 +102,19 @@ test("versions monthly changes, cancellation and replacement without duplicate o
     lastStripeEventCreatedAt: 3000,
   });
 
-  await t.mutation(api.contactSubscription.syncSubscription, {
+  await t.mutation(internal.contactSubscription.syncSubscription, {
     ...changed,
     stripeEventId: "evt_cancel_scheduled",
     stripeEventCreatedAt: 4000,
     cancelAtPeriodEnd: true,
   });
-  await t.mutation(api.contactSubscription.syncSubscription, {
+  await t.mutation(internal.contactSubscription.syncSubscription, {
     ...changed,
     stripeEventId: "evt_canceled",
     stripeEventCreatedAt: 5000,
     subscriptionStatus: "canceled",
   });
-  await t.mutation(api.contactSubscription.syncSubscription, {
+  await t.mutation(internal.contactSubscription.syncSubscription, {
     ...subscription,
     stripeEventId: "evt_replacement",
     stripeEventCreatedAt: 6000,
@@ -143,9 +138,8 @@ test("versions monthly changes, cancellation and replacement without duplicate o
 
 test("invoice payments do not replace the recurring amount or subscription status", async () => {
   const t = convexTest(schema, modules);
-  const contactId = await t.mutation(api.contactSubscription.syncSubscription, subscription);
-  await t.mutation(api.donation.recordPaid, {
-    syncSecret: subscription.syncSecret,
+  const contactId = await t.mutation(internal.contactSubscription.syncSubscription, subscription);
+  await t.mutation(internal.donation.recordPaid, {
     stripeEventId: "evt_prorated_payment",
     email: subscription.email,
     stripeInvoiceId: "in_prorated",
@@ -174,15 +168,4 @@ test("invoice payments do not replace the recurring amount or subscription statu
     status: "active",
   });
   expect(donation).toMatchObject({ contactId, amount: 500 });
-});
-
-test("subscription history cannot be written with an invalid sync secret", async () => {
-  const t = convexTest(schema, modules);
-  await expect(
-    t.mutation(api.contactSubscription.syncSubscription, {
-      ...subscription,
-      syncSecret: "invalid",
-    }),
-  ).rejects.toThrow("Invalid Convex sync secret");
-  expect(await t.run((ctx) => ctx.db.query("donationSubscription").collect())).toHaveLength(0);
 });
