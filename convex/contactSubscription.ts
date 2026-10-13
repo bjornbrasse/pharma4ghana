@@ -1,6 +1,6 @@
 import { v } from "convex/values";
 import { internalMutation } from "./_generated/server";
-import { upsertContact } from "./model";
+import { requireStripeContact } from "./model";
 
 const address = v.object({
   line1: v.optional(v.string()),
@@ -30,12 +30,11 @@ export const syncSubscription = internalMutation({
   },
   returns: v.id("contact"),
   handler: async (ctx, args) => {
-    const contactId = await upsertContact(ctx, {
+    const contactId = await requireStripeContact(ctx, {
       email: args.email,
       name: args.name,
       locale: args.locale,
       address: args.address,
-      source: "stripe",
     });
 
     const duplicate = await ctx.db

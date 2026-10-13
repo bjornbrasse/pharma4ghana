@@ -15,7 +15,23 @@ type ContactArgs = {
 type NewsletterArgs = {
   syncSecret: string;
   email: string;
-  locale?: Locale;
+  locale: Locale;
+  siteUrl: string;
+};
+
+type DonationCheckoutContactArgs = {
+  email: string;
+  name: string;
+  locale: Locale;
+  newsletterOptIn: boolean;
+};
+
+type ContactMessageArgs = {
+  email: string;
+  name: string;
+  subject: string;
+  message: string;
+  locale: Locale;
 };
 
 let convexClient: ConvexHttpClient | undefined;
@@ -47,8 +63,37 @@ export async function upsertContact(input: Omit<ContactArgs, "syncSecret">) {
 
 export async function subscribeToNewsletter(input: Omit<NewsletterArgs, "syncSecret">) {
   const { url, syncSecret } = getConvexConfig();
-  return getConvexClient(url).mutation(api.newsletterSubscriber.subscribe, {
+  return getConvexClient(url).action(api.newsletterSubscription.requestSubscription, {
     ...input,
     syncSecret,
   });
+}
+
+export async function confirmNewsletterSubscription(token: string) {
+  const { url, syncSecret } = getConvexConfig();
+  return getConvexClient(url).action(api.newsletterSubscription.confirm, {
+    syncSecret,
+    token,
+  });
+}
+
+export async function unsubscribeFromNewsletter(token: string) {
+  const { url, syncSecret } = getConvexConfig();
+  return getConvexClient(url).action(api.newsletterSubscription.unsubscribe, {
+    syncSecret,
+    token,
+  });
+}
+
+export async function prepareDonationCheckout(input: DonationCheckoutContactArgs) {
+  const { url, syncSecret } = getConvexConfig();
+  return getConvexClient(url).mutation(api.contact.prepareDonationCheckout, {
+    ...input,
+    syncSecret,
+  });
+}
+
+export async function recordContactMessage(input: ContactMessageArgs) {
+  const { url, syncSecret } = getConvexConfig();
+  return getConvexClient(url).mutation(api.contactMessage.create, { ...input, syncSecret });
 }

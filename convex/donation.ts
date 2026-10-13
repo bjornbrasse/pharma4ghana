@@ -1,6 +1,7 @@
 import { v } from "convex/values";
+import { internal } from "./_generated/api";
 import { internalMutation } from "./_generated/server";
-import { upsertContact } from "./model";
+import { requireStripeContact } from "./model";
 
 const address = v.object({
   line1: v.optional(v.string()),
@@ -67,17 +68,16 @@ export const recordPaid = internalMutation({
       return existingDonation._id;
     }
 
-    const contactId = await upsertContact(ctx, {
+    const contactId = await requireStripeContact(ctx, {
       email: args.email,
       name: args.name,
       locale: args.locale,
       address: args.address,
-      source: "stripe",
     });
 
     const now = Date.now();
 
-    return ctx.db.insert("donation", {
+    const donationId = await ctx.db.insert("donation", {
       contactId,
       stripeEventId: args.stripeEventId,
       ...(args.stripePaymentIntentId ? { stripePaymentIntentId: args.stripePaymentIntentId } : {}),
@@ -95,6 +95,25 @@ export const recordPaid = internalMutation({
       createdAt: now,
       updatedAt: now,
     });
+
+    await ctx.scheduler.runAfter(0, internal.email.sendDonationReceipt, {
+      donationId,
+      email: args.email,
+      name: args.name,
+      locale: args.locale ?? "en",
+      frequency: args.frequency,
+      amount: args.amount,
+      currency: args.currency.toLowerCase(),
+      paidAt: args.paidAt,
+      paymentReference:
+        args.stripePaymentIntentId ??
+        args.stripeInvoiceId ??
+        args.stripeCheckoutSessionId ??
+        args.stripeEventId,
+      subscriptionReference: args.stripeInvoiceId,
+    });
+
+    return donationId;
   },
 });
 

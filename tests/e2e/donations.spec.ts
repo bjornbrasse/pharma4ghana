@@ -2,6 +2,13 @@ import { expect, test, type Page } from "@playwright/test";
 import { donationProducts } from "../../src/lib/donation-options";
 import { donationPages } from "../donation-ctas";
 
+const donorDetails = {
+  donorName: "Test Donor",
+  donorEmail: "donor@example.com",
+  confirmEmail: "donor@example.com",
+  newsletterOptIn: true,
+};
+
 test.beforeEach(async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
 });
@@ -9,8 +16,13 @@ test.beforeEach(async ({ page }) => {
 async function completeCheckout(page: Page) {
   await page.goto("/en/donate");
   await page.getByText("Study materials", { exact: true }).click();
-  const popup = page.waitForEvent("popup");
   await page.getByRole("button", { name: "Continue with € 10 per month" }).click();
+  const dialog = page.getByRole("dialog", { name: "Continue to secure checkout" });
+  await dialog.getByLabel("Name").fill("Test Donor");
+  await dialog.getByLabel("Email address", { exact: true }).fill("donor@example.com");
+  await dialog.getByLabel("Confirm email address").fill("donor@example.com");
+  const popup = page.waitForEvent("popup");
+  await dialog.getByRole("button", { name: "Continue securely with Stripe" }).click();
 
   await expect(page).toHaveURL(/\/en\/donate$/);
   page = await popup;
@@ -49,7 +61,12 @@ test.describe("donation checkout", () => {
     await page.goto("/en/donate");
     await page.getByText("Study materials", { exact: true }).click();
     await page.getByRole("button", { name: "Continue with € 10 per month" }).click();
-    await expect(page.locator("form").getByRole("alert")).toHaveText(
+    const dialog = page.getByRole("dialog", { name: "Continue to secure checkout" });
+    await dialog.getByLabel("Name").fill("Test Donor");
+    await dialog.getByLabel("Email address", { exact: true }).fill("donor@example.com");
+    await dialog.getByLabel("Confirm email address").fill("donor@example.com");
+    await dialog.getByRole("button", { name: "Continue securely with Stripe" }).click();
+    await expect(dialog.getByRole("alert")).toHaveText(
       "Allow new tabs in your browser, then try again to continue to payment.",
     );
     expect(requested).toBe(false);
@@ -61,14 +78,52 @@ test.describe("donation checkout", () => {
     );
     await page.goto("/en/donate");
     await page.getByText("Study materials", { exact: true }).click();
-    const popup = page.waitForEvent("popup");
     await page.getByRole("button", { name: "Continue with € 10 per month" }).click();
+    const dialog = page.getByRole("dialog", { name: "Continue to secure checkout" });
+    await dialog.getByLabel("Name").fill("Test Donor");
+    await dialog.getByLabel("Email address", { exact: true }).fill("donor@example.com");
+    await dialog.getByLabel("Confirm email address").fill("donor@example.com");
+    const popup = page.waitForEvent("popup");
+    await dialog.getByRole("button", { name: "Continue securely with Stripe" }).click();
     const checkoutTab = await popup;
     await expect.poll(() => checkoutTab.isClosed()).toBe(true);
-    await expect(page.locator("form").getByRole("alert")).toHaveText(
+    await expect(dialog.getByRole("alert")).toHaveText(
       "We couldn't start the checkout. Please try again.",
     );
     await expect(page).toHaveURL(/\/en\/donate$/);
+  });
+
+  test("collects donor details and sends newsletter consent to checkout", async ({ page }) => {
+    let checkoutPayload: Record<string, unknown> | undefined;
+    await page.route("**/api/donations/checkout", async (route) => {
+      checkoutPayload = route.request().postDataJSON() as Record<string, unknown>;
+      await route.fulfill({
+        status: 200,
+        json: { url: `${new URL(route.request().url()).origin}/en/donate?status=cancel` },
+      });
+    });
+    await page.goto("/en/donate");
+    await page.getByText("Study materials", { exact: true }).click();
+    await page.getByRole("button", { name: "Continue with € 10 per month" }).click();
+
+    const dialog = page.getByRole("dialog", { name: "Continue to secure checkout" });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByLabel("Keep me informed about Pharma4Ghana")).toBeChecked();
+    await dialog.getByLabel("Name").fill("  Test Donor  ");
+    await dialog.getByLabel("Email address", { exact: true }).fill("Donor@Example.com");
+    await dialog.getByLabel("Confirm email address").fill("donor@example.com");
+    const popup = page.waitForEvent("popup");
+    await dialog.getByRole("button", { name: "Continue securely with Stripe" }).click();
+    await popup;
+
+    await expect
+      .poll(() => checkoutPayload)
+      .toMatchObject({
+        donorName: "Test Donor",
+        donorEmail: "donor@example.com",
+        confirmEmail: "donor@example.com",
+        newsletterOptIn: true,
+      });
   });
 
   test("pulses the continue button only for valid amounts and respects reduced motion", async ({
@@ -98,7 +153,7 @@ test.describe("donation checkout", () => {
 
     await expect(page).toHaveURL(/\/en\/donate$/);
     await expect(
-      page.getByRole("heading", { level: 1, name: "Small support. A brighter future." }),
+      page.getByRole("heading", { level: 1, name: "A small gift, makes a brighter future." }),
     ).toBeVisible();
     await expect(page.getByRole("button", { name: "Select a donation amount" })).toBeDisabled();
     await page.getByText("Study materials", { exact: true }).click();
@@ -233,7 +288,7 @@ test.describe("receipt protection", () => {
   test("rejects invalid checkout amounts at the API boundary", async ({ request }) => {
     for (const amount of [4, 5.5, 1001]) {
       const response = await request.post("/api/donations/checkout", {
-        data: { amount, frequency: "once", locale: "en", purpose: "custom" },
+        data: { amount, frequency: "once", locale: "en", purpose: "custom", ...donorDetails },
       });
 
       expect(response.status()).toBe(400);
@@ -267,13 +322,25 @@ test.describe("receipt protection", () => {
         })
         .click();
 
+      const dialog = page.getByRole("dialog", { name: "Continue to secure checkout" });
+      await dialog.getByLabel("Name").fill(donorDetails.donorName);
+      await dialog.getByLabel("Email address", { exact: true }).fill(donorDetails.donorEmail);
+      await dialog.getByLabel("Confirm email address").fill(donorDetails.confirmEmail);
+      await dialog.getByRole("button", { name: "Continue securely with Stripe" }).click();
+
       expect((await checkoutResponse).status()).toBe(200);
     }
   });
 
   test("rejects a manipulated fixed donation amount", async ({ request }) => {
     const response = await request.post("/api/donations/checkout", {
-      data: { amount: 999, frequency: "monthly", locale: "en", purpose: "materials" },
+      data: {
+        amount: 999,
+        frequency: "monthly",
+        locale: "en",
+        purpose: "materials",
+        ...donorDetails,
+      },
     });
 
     expect(response.status()).toBe(400);
@@ -291,7 +358,7 @@ test.describe("receipt protection", () => {
     )) {
       for (const frequency of ["monthly", "once"]) {
         const response = await request.post("/api/donations/checkout", {
-          data: { purpose, amount, frequency, locale: "en" },
+          data: { purpose, amount, frequency, locale: "en", ...donorDetails },
         });
         expect(response.status()).toBe(200);
         const fixtureResponse = await request.get("http://127.0.0.1:4100/checkout-request");
@@ -299,12 +366,15 @@ test.describe("receipt protection", () => {
         const checkout = await fixtureResponse.json();
         expect(checkout["line_items[0][price_data][unit_amount]"]).toBe(String(amount * 100));
         expect(checkout["metadata[purpose]"]).toBe(purpose);
+        expect(checkout.customer).toBe("cus_test_donor");
+        expect(checkout["metadata[newsletter_opt_in]"]).toBe("true");
         if (frequency === "monthly") {
           expect(checkout["mode"]).toBe("subscription");
           expect(checkout["line_items[0][price_data][product]"]).toBe(product);
           expect(checkout["line_items[0][price_data][recurring][interval]"]).toBe("month");
           expect(checkout["line_items[0][price_data][product_data][name]"]).toBeUndefined();
           expect(checkout["subscription_data[metadata][purpose]"]).toBe(purpose);
+          expect(checkout["subscription_data[metadata][newsletter_opt_in]"]).toBe("true");
         } else {
           expect(checkout["mode"]).toBe("payment");
           expect(checkout["line_items[0][price_data][product]"]).toBeUndefined();
@@ -315,6 +385,13 @@ test.describe("receipt protection", () => {
         }
       }
     }
-  });
 
+    const customerResponse = await request.get("http://127.0.0.1:4100/customer-request");
+    expect(customerResponse.status()).toBe(200);
+    await expect(customerResponse.json()).resolves.toMatchObject({
+      email: donorDetails.donorEmail,
+      name: donorDetails.donorName,
+      "metadata[newsletter_opt_in]": "true",
+    });
+  });
 });

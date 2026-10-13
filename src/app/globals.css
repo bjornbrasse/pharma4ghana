@@ -9,6 +9,7 @@
   --color-ghana-red: #ce1126;
   --font-sans: var(--font-geist-sans);
   --animate-donation-pulse: donation-pulse 2.4s ease-in-out infinite;
+  --animate-help-slide-in: help-slide-in 200ms ease-out;
 
   @keyframes donation-pulse {
     0%,
@@ -17,6 +18,15 @@
     }
     50% {
       transform: scale(1.025);
+    }
+  }
+
+  @keyframes help-slide-in {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
     }
   }
 }

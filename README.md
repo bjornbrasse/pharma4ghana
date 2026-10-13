@@ -130,8 +130,15 @@ npx convex env set CONVEX_SYNC_SECRET your_long_random_secret
 ```
 
 The contact form and Turnstile-protected newsletter endpoint write through server-only Convex
-mutations. Newsletter records start with `pending` status so a future double-opt-in confirmation
-flow can activate them without treating an unconfirmed request as consent.
+functions. Newsletter requests create or refresh a `pending` record and send a localized confirmation
+email containing a cryptographically random, 48-hour token. Convex stores only the SHA-256 token
+hash. Confirmation activates the subscriber, and signed unsubscribe links do not expose email
+addresses. Requests for an active address are idempotent; unsubscribed addresses must confirm again.
+
+Configure `DEV=production`, `SMTP_HOST`, `SMTP_USER`, and `SMTP_PASSWORD` in the Convex deployment
+to use real SMTP; without that switch the shared mail transport uses an Ethereal test account. Set
+`NEWSLETTER_FROM` when the newsletter sender differs from `SMTP_USER`. `NEXT_PUBLIC_SITE_URL` in the
+Next.js environment determines the public confirmation and unsubscribe link origin.
 
 ### Stripe webhook
 

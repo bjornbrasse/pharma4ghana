@@ -53,6 +53,9 @@ export function Markdown({ children }: MarkdownProps) {
           <strong className="font-semibold text-gray-900">{children}</strong>
         ),
         em: ({ children }) => <em>{children}</em>,
+        mark: ({ children }) => (
+          <mark className="bg-ghana-gold/45 px-1 text-gray-900">{children}</mark>
+        ),
         a: ({ href, children }) => {
           if (!href) {
             return <>{children}</>;

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { subscribeToNewsletter } from "@/lib/convex-server";
+import { getSiteUrl } from "@/lib/site-url";
 
 type TurnstileResponse = {
   success: boolean;
@@ -59,7 +60,7 @@ export async function POST(request: Request) {
   const normalizedEmail = email.trim().toLowerCase();
 
   try {
-    await subscribeToNewsletter({ email: normalizedEmail, locale });
+    await subscribeToNewsletter({ email: normalizedEmail, locale, siteUrl: getSiteUrl() });
   } catch (error) {
     console.error("Failed to store newsletter subscription.", error);
     return Response.json({ success: false }, { status: 500 });

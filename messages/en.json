@@ -358,6 +358,20 @@
       "genericError": "We couldn't start the checkout. Please try again.",
       "popupBlocked": "Allow new tabs in your browser, then try again to continue to payment."
     },
+    "checkout": {
+      "eyebrow": "Your details",
+      "title": "Continue to secure checkout",
+      "subtitle": "We use these details to prefill Stripe and send your donation receipt.",
+      "name": "Name",
+      "email": "Email address",
+      "confirmEmail": "Confirm email address",
+      "newsletterLabel": "Keep me informed about Pharma4Ghana",
+      "newsletterDescription": "A few times per year, we send our Friends an update about our progress.",
+      "continue": "Continue securely with Stripe",
+      "close": "Close checkout details",
+      "validation": "Enter your name and a valid email address.",
+      "emailMismatch": "The email addresses do not match."
+    },
     "options": {
       "materials": {
         "title": "Study materials",

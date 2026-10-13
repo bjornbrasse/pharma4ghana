@@ -110,8 +110,10 @@ export function NewsletterForm() {
           </label>
           <input
             id="newsletter-email"
-            type="text"
-            inputMode="decimal"
+            type="email"
+            inputMode="email"
+            autoComplete="email"
+            required
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             // placeholder={t("customPlaceholder")}

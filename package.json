@@ -20,8 +20,12 @@
     "stripe:listen": "stripe listen --forward-to https://original-gerbil-890.convex.site/stripe/webhook --events checkout.session.completed,checkout.session.async_payment_succeeded,invoice.paid,invoice.payment_failed,customer.subscription.updated,customer.subscription.deleted"
   },
   "dependencies": {
+    "@convex-dev/better-auth": "^0.12.5",
+    "@react-email/components": "^1.0.12",
+    "@react-email/render": "^2.1.0",
     "@react-pdf/renderer": "^4.5.1",
     "@stripe/stripe-js": "^9.4.0",
+    "better-auth": "~1.6.15",
     "convex": "^1.46.0",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.23.0",
@@ -41,7 +45,6 @@
     "zod": "^4.6.5"
   },
   "devDependencies": {
-    "convex-test": "^0.0.41",
     "@biomejs/biome": "2.5.14",
     "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4",
@@ -49,6 +52,7 @@
     "@types/nodemailer": "^8.0.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "convex-test": "^0.0.41",
     "eslint": "^9",
     "eslint-config-next": "16.2.3",
     "husky": "^9.1.7",

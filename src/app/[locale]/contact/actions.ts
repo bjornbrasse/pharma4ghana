@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { transporter } from "@/lib/email";
-import { upsertContact } from "@/lib/convex-server";
+import { recordContactMessage } from "@/lib/convex-server";
 
 export type ContactFormState = {
   status: "idle" | "success" | "error";
@@ -69,7 +69,7 @@ export async function submitContactForm(
   }
 
   try {
-    await upsertContact({ email, name, locale });
+    await recordContactMessage({ email, name, subject, message, locale });
 
     console.info("[contact-form] Attempting to send email", {
       from,

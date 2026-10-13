@@ -64,15 +64,38 @@ const schema = defineSchema({
     .index("by_checkout_session", ["stripeCheckoutSessionId"])
     .index("by_contact_paid_at", ["contactId", "paidAt"]),
 
+  contactMessage: defineTable({
+    contactId: v.id("contact"),
+    name: v.string(),
+    email: v.string(),
+    subject: v.string(),
+    message: v.string(),
+    locale,
+    createdAt: v.number(),
+  }),
+
   newsletterSubscriber: defineTable({
     contactId: v.id("contact"),
     status: v.union(v.literal("pending"), v.literal("active"), v.literal("unsubscribed")),
     consentedAt: v.optional(v.number()),
+    confirmationTokenHash: v.optional(v.string()),
+    confirmationExpiresAt: v.optional(v.number()),
     subscribedAt: v.number(),
     unsubscribedAt: v.optional(v.number()),
     createdAt: v.number(),
     updatedAt: v.number(),
-  }).index("by_contact", ["contactId"]),
+  })
+    .index("by_contact", ["contactId"])
+    .index("by_confirmation_token_hash", ["confirmationTokenHash"]),
+
+  newsletter: defineTable({
+    authorId: v.string().optional(),
+    title: v.string(),
+    contentNl: v.optional(v.string()),
+    contentEn: v.optional(v.string()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  }).index("by_updated_at", ["updatedAt"]),
 
   stripeEvents: defineTable({
     eventId: v.string(),

@@ -2,6 +2,7 @@ import { createServer } from "node:http";
 
 const port = 4100;
 let lastCheckoutRequest = null;
+let lastCustomerRequest = null;
 
 function checkoutSession(id, paymentStatus) {
   return {
@@ -63,9 +64,33 @@ const server = createServer(async (request, response) => {
     return;
   }
 
+  if (request.method === "POST" && url.pathname === "/v1/customers") {
+    let body = "";
+    for await (const chunk of request) {
+      body += chunk.toString();
+    }
+    lastCustomerRequest = Object.fromEntries(new URLSearchParams(body));
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(
+      JSON.stringify({
+        id: "cus_test_donor",
+        object: "customer",
+        email: lastCustomerRequest.email,
+        name: lastCustomerRequest.name,
+      }),
+    );
+    return;
+  }
+
   if (request.method === "GET" && url.pathname === "/checkout-request") {
     response.writeHead(200, { "Content-Type": "application/json" });
     response.end(JSON.stringify(lastCheckoutRequest));
+    return;
+  }
+
+  if (request.method === "GET" && url.pathname === "/customer-request") {
+    response.writeHead(200, { "Content-Type": "application/json" });
+    response.end(JSON.stringify(lastCustomerRequest));
     return;
   }
 

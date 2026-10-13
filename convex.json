@@ -1,3 +1,7 @@
 {
-  "functions": "convex/"
+  "$schema": "./node_modules/convex/schemas/convex.schema.json",
+  "functions": "convex/",
+  "node": {
+    "externalPackages": ["@react-email/components", "@react-email/render", "@react-pdf/renderer"]
+  }
 }

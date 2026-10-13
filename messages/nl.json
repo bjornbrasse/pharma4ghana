@@ -358,6 +358,20 @@
       "genericError": "De checkout kon niet worden gestart. Probeer het opnieuw.",
       "popupBlocked": "Sta nieuwe tabbladen toe in uw browser en probeer opnieuw om verder te gaan naar de betaling."
     },
+    "checkout": {
+      "eyebrow": "Uw gegevens",
+      "title": "Ga verder naar veilig betalen",
+      "subtitle": "Wij gebruiken deze gegevens om Stripe vooraf in te vullen en uw donatiebewijs te versturen.",
+      "name": "Naam",
+      "email": "E-mailadres",
+      "confirmEmail": "Bevestig e-mailadres",
+      "newsletterLabel": "Houd mij op de hoogte van Pharma4Ghana",
+      "newsletterDescription": "Een paar keer per jaar informeren wij onze Vrienden over onze voortgang.",
+      "continue": "Ga veilig verder met Stripe",
+      "close": "Sluit betaalgegevens",
+      "validation": "Vul uw naam en een geldig e-mailadres in.",
+      "emailMismatch": "De e-mailadressen komen niet overeen."
+    },
     "options": {
       "materials": {
         "title": "Studiematerialen",
