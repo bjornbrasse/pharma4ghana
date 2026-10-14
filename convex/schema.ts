@@ -97,6 +97,47 @@ const schema = defineSchema({
     updatedAt: v.number(),
   }).index("by_updated_at", ["updatedAt"]),
 
+  image: defineTable({
+    authorId: v.string(),
+    originalName: v.string(),
+    imageAlt: v.optional(v.string()),
+    variants: v.array(
+      v.object({
+        purpose: v.union(v.literal("thumbnail"), v.literal("email"), v.literal("blog")),
+        storageId: v.id("_storage"),
+        width: v.number(),
+        height: v.number(),
+        bytes: v.number(),
+        mimeType: v.string(),
+      }),
+    ),
+    createdAt: v.number(),
+  }).index("by_created_at", ["createdAt"]),
+
+  message: defineTable({
+    authorId: v.string(),
+    title: v.string(),
+    contentNl: v.string(),
+    contentEn: v.string(),
+    externalLinks: v.optional(
+      v.array(
+        v.object({
+          label: v.string(),
+          href: v.string(),
+        }),
+      ),
+    ),
+    hashtags: v.optional(v.array(v.string())),
+    imageId: v.optional(v.id("image")),
+    image: v.optional(v.string()),
+    imageClasses: v.optional(v.string()),
+    publishedAt: v.number(),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index("by_author_and_updated_at", ["authorId", "updatedAt"])
+    .index("by_updated_at", ["updatedAt"]),
+
   stripeEvents: defineTable({
     eventId: v.string(),
     type: v.string(),

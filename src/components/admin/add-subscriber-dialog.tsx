@@ -3,7 +3,7 @@
 import { useAction } from "convex/react";
 import { Plus, X } from "lucide-react";
 import { type FormEvent, useEffect, useRef, useState } from "react";
-import { api } from "../../../convex/_generated/api";
+import { api } from "@convex/_generated/api";
 
 export default function AddSubscriberDialog() {
   const addSubscriber = useAction(api.newsletterSubscription.addSubscriber);

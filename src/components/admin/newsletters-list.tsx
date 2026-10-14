@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { api } from "../../../convex/_generated/api";
+import { api } from "@convex/_generated/api";
 import {
   EmptyRow,
   formatDateTime,

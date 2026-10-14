@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { Plus } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import DonateCtaBanner from "@/components/donate-cta-banner";
+import { isAuthenticated } from "@/lib/auth-server";
 import { AppLocale, formatMessageDate, getLocalizedMessagePosts } from "@/lib/messages";
 import { Link } from "@/i18n/navigation";
 import { getAbsoluteSiteUrl } from "@/lib/site-url";
@@ -51,6 +53,7 @@ export default async function MessagesPage({ params }: { params: Promise<{ local
   const t = await getTranslations({ locale, namespace: "messagesPage" });
   const appLocale: AppLocale = locale === "nl" ? "nl" : "en";
   const posts = getLocalizedMessagePosts(appLocale);
+  const showNewButton = await isAuthenticated();
 
   return (
     <>
@@ -68,8 +71,18 @@ export default async function MessagesPage({ params }: { params: Promise<{ local
 
       <section className="py-10 sm:py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="mx-auto max-w-5xl space-y-10">
-          <div className="space-y-2">
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-base leading-8 text-gray-600 sm:text-lg">{t("intro")}</p>
+            {showNewButton ? (
+              <Link
+                href="/messages/new"
+                locale={locale}
+                className="inline-flex shrink-0 items-center gap-2 rounded-md bg-ghana-green px-4 py-2.5 text-sm font-semibold text-white hover:bg-ghana-green-dark"
+              >
+                <Plus aria-hidden="true" className="size-4" />
+                {t("new")}
+              </Link>
+            ) : null}
           </div>
 
           <div className="space-y-5">

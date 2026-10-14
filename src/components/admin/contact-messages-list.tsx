@@ -1,6 +1,6 @@
 "use client";
 
-import { api } from "../../../convex/_generated/api";
+import { api } from "@convex/_generated/api";
 import { formatDateTime, PaginationFooter, useAdminPaginatedQuery } from "./admin-ui";
 
 export default function ContactMessagesList() {

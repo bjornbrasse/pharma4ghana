@@ -14,6 +14,20 @@ export function remarkDirectives() {
     });
 
     visit(tree, "leafDirective", (node) => {
+      if (node.name === "image") {
+        const imageId = node.children[0]?.type === "text" ? node.children[0].value : undefined;
+        if (!imageId) return;
+
+        const data = node.data ?? (node.data = {});
+        data.hName = "div";
+        data.hProperties = {
+          ...data.hProperties,
+          "data-component": "image",
+          "data-image-id": imageId,
+        };
+        return;
+      }
+
       if (node.name !== "blog" || typeof node.attributes?.slug !== "string") {
         return;
       }

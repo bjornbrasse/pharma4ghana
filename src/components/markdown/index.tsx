@@ -7,6 +7,7 @@ import Image from "next/image";
 import remarkDirective from "remark-directive";
 import { remarkDirectives } from "@/components/markdown/remark-directives";
 import { Achievements, DonationBlock } from "@/components/markdown/directive-containers";
+import ConvexImage from "@/components/markdown/convex-image";
 
 type MarkdownProps = {
   children: string;
@@ -25,6 +26,10 @@ export function Markdown({ children }: MarkdownProps) {
           }
           if (component === "donation") {
             return <DonationBlock>{children}</DonationBlock>;
+          }
+          if (component === "image") {
+            const imageId = node?.properties?.["data-image-id"];
+            return typeof imageId === "string" ? <ConvexImage imageId={imageId} /> : null;
           }
 
           return <div {...props}>{children}</div>;

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/admin/admin-ui";
 import NewsletterEditor from "@/components/admin/newsletter-editor";
-import type { Id } from "../../../../../../convex/_generated/dataModel";
+import type { Id } from "@convex/_generated/dataModel";
 
 export const metadata: Metadata = { title: "Nieuwsbrief bewerken" };
 

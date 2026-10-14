@@ -2,12 +2,13 @@
 
 import { useConvexAuth, useMutation, useQuery } from "convex/react";
 import matter from "gray-matter";
-import { CircleHelp, Eye, X } from "lucide-react";
+import { Eye, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { api } from "../../../convex/_generated/api";
-import type { Id } from "../../../convex/_generated/dataModel";
+import { api } from "@convex/_generated/api";
+import type { Id } from "@convex/_generated/dataModel";
+import MarkdownHelpSidebar from "./markdown-help-sidebar";
 
 const NEWSLETTER_TEMPLATE_NL = `---
 title: Naamloze nieuwsbrief
@@ -67,8 +68,6 @@ export default function NewsletterEditor({ newsletterId }: { newsletterId?: Id<"
   const loadedNewsletterId = useRef<Id<"newsletter"> | null>(null);
   const previewTriggerRef = useRef<HTMLButtonElement | null>(null);
   const previewCloseButtonRef = useRef<HTMLButtonElement | null>(null);
-  const helpTriggerRef = useRef<HTMLButtonElement | null>(null);
-  const helpCloseButtonRef = useRef<HTMLButtonElement | null>(null);
   const [contentNl, setContentNl] = useState(NEWSLETTER_TEMPLATE_NL);
   const [contentEn, setContentEn] = useState(NEWSLETTER_TEMPLATE_EN);
   const [preview, setPreview] = useState<{
@@ -77,7 +76,6 @@ export default function NewsletterEditor({ newsletterId }: { newsletterId?: Id<"
   } | null>(null);
   const [previewLocale, setPreviewLocale] = useState<"nl" | "en">("nl");
   const [previewLoading, setPreviewLoading] = useState(false);
-  const [helpOpen, setHelpOpen] = useState(false);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -97,6 +95,7 @@ export default function NewsletterEditor({ newsletterId }: { newsletterId?: Id<"
       return;
     }
 
+    const previewTrigger = previewTriggerRef.current;
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     previewCloseButtonRef.current?.focus();
@@ -111,32 +110,9 @@ export default function NewsletterEditor({ newsletterId }: { newsletterId?: Id<"
     return () => {
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", closeOnEscape);
-      previewTriggerRef.current?.focus();
+      previewTrigger?.focus();
     };
   }, [preview]);
-
-  useEffect(() => {
-    if (!helpOpen) {
-      return;
-    }
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    helpCloseButtonRef.current?.focus();
-
-    function closeOnEscape(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        setHelpOpen(false);
-      }
-    }
-
-    window.addEventListener("keydown", closeOnEscape);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", closeOnEscape);
-      helpTriggerRef.current?.focus();
-    };
-  }, [helpOpen]);
 
   function parseBothLocales() {
     const nl = parseNewsletter(contentNl);
@@ -152,7 +128,6 @@ export default function NewsletterEditor({ newsletterId }: { newsletterId?: Id<"
   async function showPreview() {
     setMessage(null);
     setError(null);
-    setHelpOpen(false);
 
     try {
       parseBothLocales();
@@ -298,20 +273,7 @@ export default function NewsletterEditor({ newsletterId }: { newsletterId?: Id<"
           <Eye aria-hidden="true" className="size-4" />
           {previewLoading ? "Voorbeeld laden…" : "Voorbeeld"}
         </button>
-        <button
-          ref={helpTriggerRef}
-          type="button"
-          onClick={() => {
-            setPreview(null);
-            setHelpOpen(true);
-          }}
-          aria-expanded={helpOpen}
-          aria-controls="markdown-help-panel"
-          className="inline-flex items-center gap-2 rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 hover:border-ghana-green hover:text-ghana-green"
-        >
-          <CircleHelp aria-hidden="true" className="size-4" />
-          Help
-        </button>
+        <MarkdownHelpSidebar mode="newsletter" />
         <Link
           href="/admin/newsletters"
           className="rounded-md border border-gray-300 bg-white px-5 py-2.5 text-sm font-semibold text-gray-700 hover:border-ghana-green hover:text-ghana-green"
@@ -387,117 +349,6 @@ export default function NewsletterEditor({ newsletterId }: { newsletterId?: Id<"
               )}
             </div>
           </section>
-        </div>
-      ) : null}
-      {helpOpen ? (
-        <div
-          className="fixed inset-0 z-50 bg-black/40"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget) {
-              setHelpOpen(false);
-            }
-          }}
-        >
-          <aside
-            id="markdown-help-panel"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="markdown-help-title"
-            className="animate-help-slide-in absolute inset-y-0 right-0 flex w-full max-w-lg flex-col bg-white shadow-2xl"
-          >
-            <header className="flex shrink-0 items-center justify-between border-b border-gray-200 px-5 py-4">
-              <div>
-                <h2 id="markdown-help-title" className="text-lg font-semibold text-gray-900">
-                  Markdown-hulp
-                </h2>
-                <p className="mt-1 text-sm text-gray-500">
-                  Snelle voorbeelden voor de nieuwsbrief.
-                </p>
-              </div>
-              <button
-                ref={helpCloseButtonRef}
-                type="button"
-                onClick={() => setHelpOpen(false)}
-                aria-label="Markdown-hulp sluiten"
-                title="Sluiten"
-                className="grid size-9 place-items-center rounded-md text-gray-500 hover:bg-gray-100 hover:text-gray-900"
-              >
-                <X aria-hidden="true" className="size-5" />
-              </button>
-            </header>
-            <div className="flex-1 space-y-7 overflow-y-auto px-5 py-6 text-sm text-gray-700">
-              <section>
-                <h3 className="font-semibold text-gray-900">YAML-frontmatter</h3>
-                <p className="mt-1 text-gray-500">
-                  Plaats dit blok bovenaan. Alleen de Nederlandse titel verschijnt in het overzicht.
-                </p>
-                <pre className="mt-3 overflow-x-auto bg-gray-950 p-4 text-xs leading-6 text-gray-100">
-                  <code>{`---
-title: Oktober nieuwsbrief
-subject: Nieuws uit Ghana
-previewText: Lees onze laatste update
----`}</code>
-                </pre>
-              </section>
-              <section>
-                <h3 className="font-semibold text-gray-900">Koppen</h3>
-                <pre className="mt-3 overflow-x-auto bg-gray-950 p-4 text-xs leading-6 text-gray-100">
-                  <code>{`# Hoofdtitel
-## Tussenkop
-### Kleine kop`}</code>
-                </pre>
-              </section>
-              <section>
-                <h3 className="font-semibold text-gray-900">Tekstmarkeringen</h3>
-                <div className="mt-3 space-y-3">
-                  <div>
-                    <p className="font-medium text-gray-900">Vet</p>
-                    <code className="mt-1 block bg-gray-100 px-3 py-2">**vetgedrukte tekst**</code>
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">Cursief</p>
-                    <code className="mt-1 block bg-gray-100 px-3 py-2">*cursieve tekst*</code>
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">Onderstreept</p>
-                    <code className="mt-1 block bg-gray-100 px-3 py-2">
-                      ++onderstreepte tekst++
-                    </code>
-                  </div>
-                  <div>
-                    <p className="font-medium text-gray-900">Gemarkeerd</p>
-                    <code className="mt-1 block bg-gray-100 px-3 py-2">
-                      :highlight[gemarkeerde tekst]
-                    </code>
-                  </div>
-                </div>
-              </section>
-              <section>
-                <h3 className="font-semibold text-gray-900">Lijsten</h3>
-                <pre className="mt-3 overflow-x-auto bg-gray-950 p-4 text-xs leading-6 text-gray-100">
-                  <code>{`- Eerste punt
-- Tweede punt
-
-1. Eerste stap
-2. Tweede stap`}</code>
-                </pre>
-              </section>
-              <section>
-                <h3 className="font-semibold text-gray-900">Links en afbeeldingen</h3>
-                <pre className="mt-3 overflow-x-auto bg-gray-950 p-4 text-xs leading-6 text-gray-100">
-                  <code>{`[Lees meer](https://pharma4ghana.com)
-
-![Beschrijving](/images/voorbeeld.jpg)`}</code>
-                </pre>
-              </section>
-              <section>
-                <h3 className="font-semibold text-gray-900">Blogbericht invoegen</h3>
-                <pre className="mt-3 overflow-x-auto bg-gray-950 p-4 text-xs leading-6 text-gray-100">
-                  <code>{`::blog{slug="educational-grant-first-round"}`}</code>
-                </pre>
-              </section>
-            </div>
-          </aside>
         </div>
       ) : null}
     </div>

@@ -255,6 +255,9 @@
       "subtitle": "Short reflections from our work, such as from our partners and the students we support in Ghana."
     },
     "intro": "This page collects our latest messages in one place. We publish short updates whenever there is something concrete to share from the classroom, the partnership, or the students we support.",
+    "new": "New message",
+    "newTitle": "New message",
+    "newDescription": "Write the Dutch and English versions side by side in Markdown.",
     "publishedOn": "Published",
     "readMore": "Read article",
     "back": "Back to all messages",
